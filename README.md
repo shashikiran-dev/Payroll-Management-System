@@ -1,7 +1,3 @@
-Great — now I can see your **actual code**, so here is a **100% accurate README based on your project implementation** (not generic). I’ve aligned everything with your `views.py`, `urls.py`, and `models.py`.
-
----
-
 # 💼 Payroll Management System
 
 A **full-stack Payroll & Employee Management System** built using **Django (Frontend & Controller)** and **Flask (Backend APIs)**.
