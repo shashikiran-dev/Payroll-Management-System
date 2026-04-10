@@ -1,0 +1,295 @@
+{% extends 'navAside.html' %}
+{% block title %}<title>Daily Status — Admin</title>{% endblock %}
+{% block content %}
+
+<!-- ══ Holiday Modal ══ -->
+<div class="ps-modal-bg hidden" id="holModal" onclick="if(event.target===this)closeHolModal()">
+  <div class="ps-modal-box">
+    <div class="ps-modal-header">
+      <span class="ps-modal-title">Add Holiday</span>
+      <button class="ps-modal-close" onclick="closeHolModal()">×</button>
+    </div>
+    <form action="{% url 'festival_data' %}" method="post">
+      {% csrf_token %}
+      <div class="ps-field"><label class="ps-label">Festival Date</label>
+        <input type="date" name="festival_date" class="ps-input" required /></div>
+      <div class="ps-field"><label class="ps-label">Festival Name</label>
+        <input type="text" name="festival_name" placeholder="e.g. Diwali" class="ps-input" required /></div>
+      <button type="submit" class="ps-btn-primary" style="width:100%;justify-content:center;margin-top:8px">Save Holiday</button>
+    </form>
+  </div>
+</div>
+
+<div class="ps-page">
+
+  <!-- Sub-topbar -->
+  <div class="ps-sub-topbar">
+    <div class="ps-breadcrumb">
+      <a href="{% url 'search' %}">Home</a>
+      <span class="ps-breadcrumb-sep">›</span>
+      <span class="ps-breadcrumb-cur">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
+        </svg>
+        Daily Status
+      </span>
+    </div>
+    <!-- Tab nav -->
+    <div class="ps-tab-nav">
+      <a href="{% url 'get_Employee_Leaves' %}"     class="ps-tab">Leave Stats</a>
+      <a href="{% url 'get_Employee_Attendance' %}" class="ps-tab">Attendance</a>
+      <a href="{% url 'get_Employee_WFHInfo' %}"    class="ps-tab">WFH</a>
+      <a href="{% url 'AdminStatusInfo' %}"         class="ps-tab active">Daily Status</a>
+    </div>
+  </div>
+
+  <div class="ps-content">
+
+    <!-- Top row: KPI + Search + Action -->
+    <div class="ps-top-row">
+
+      <!-- KPI -->
+      <div class="ps-kpi-card">
+        <span class="ps-kpi-label">Total Employees</span>
+        <div class="ps-kpi-body">
+          <div class="ps-kpi-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
+          <span class="ps-kpi-value">{{Employee_Count}}</span>
+        </div>
+        <span class="ps-kpi-sub">Active workforce</span>
+      </div>
+
+      <!-- Search -->
+      <div class="ps-card" style="flex:1;min-width:280px">
+        <form action="{% url 'AdminStatusInfo' %}" method="post">
+          {% csrf_token %}
+          <div class="ps-card-title">Search Employee Daily Status</div>
+          <div class="ps-field" style="position:relative">
+            <label class="ps-label">Employee Name</label>
+            <div class="ps-search-row">
+              <input id="nameInput" type="text" name="nameInput"
+                value="{{Employee_ID}} {{Employee_Name}}"
+                class="ps-input" placeholder="Type employee name…"
+                oninput="myFunction()" autocomplete="off"
+                onfocus="document.getElementById('myUL').classList.remove('hidden')" />
+              <button type="submit" class="ps-icon-btn" aria-label="Search">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              </button>
+            </div>
+            <ul id="myUL" class="ps-autocomplete hidden">
+              {% for i in All_Names_Ids %}
+              <li class="ps-ac-item" onclick="listname(this)">{{i.Employee_id}} {{i.Employee_Name}}</li>
+              {% endfor %}
+            </ul>
+          </div>
+          <div class="ps-field">
+            <label class="ps-label">Filter by Date <span style="opacity:.5;font-weight:400">(optional)</span></label>
+            <div style="display:flex;align-items:center;gap:10px">
+              <input type="date" name="dateFilter" value="{{date_filter}}" class="ps-input" style="max-width:180px" />
+              {% if date_filter %}<a href="{% url 'AdminStatusInfo' %}" class="ps-clear-link">✕ Clear</a>{% endif %}
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- Add Holiday -->
+      <div>
+        <button onclick="openHolModal()" class="ps-btn-primary">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add Holiday
+        </button>
+      </div>
+    </div>
+
+    <!-- ══ Result info + Per-employee view ══ -->
+    {% if Employee_ID %}
+
+    <div class="ps-result-bar">
+      <div class="ps-result-info">
+        <span>Employee: <strong>{{Employee_Name}}</strong></span>
+        <span class="ps-sep">|</span>
+        <span>ID: <strong>{{Employee_ID}}</strong></span>
+        {% if date_filter %}<span class="ps-sep">|</span><span>Date: <strong style="color:var(--brand)">{{date_filter}}</strong></span>{% endif %}
+        <span class="ps-sep">|</span>
+        <span>Records: <strong style="color:var(--brand)">{{employee_Emp_Status_Info|length}}</strong></span>
+      </div>
+    </div>
+
+    <div class="ps-card" style="padding:0;overflow:hidden">
+      <div style="padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--brand)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+        </svg>
+        <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:var(--text)">
+          Status Records — {{Employee_Name}}
+        </span>
+      </div>
+      <div style="overflow-x:auto">
+        <table class="ps-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Status Update</th>
+              <th>Task</th>
+              <th>Remarks</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for i in employee_Emp_Status_Info %}
+            <tr>
+              <td style="color:var(--muted);white-space:nowrap">{{i.Date}}</td>
+              <td style="max-width:240px">{{i.Status_Update|default:i.Status_Update|default:"—"}}</td>
+              <td style="max-width:240px">{{i.Completed_Task|default:i.Completed_Task|default:"—"}}</td>
+              <td style="color:var(--muted);max-width:200px">{{i.Issues|default:i.Issues|default:"—"}}</td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="4" class="ps-empty">
+                No status records found{% if date_filter %} for {{date_filter}}{% endif %}.
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    {% else %}
+
+    <!-- ══ Default: all employees today ══ -->
+    <div class="ps-card" style="padding:0;overflow:hidden">
+      <div style="padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">
+        <div style="display:flex;align-items:center;gap:8px">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--brand)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+          </svg>
+          <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:var(--text)">
+            Today's Daily Status — All Employees
+          </span>
+        </div>
+        <span style="font-size:11px;color:var(--muted)">{{Daily_Status_Info|length}} record(s)</span>
+      </div>
+      <div style="overflow-x:auto">
+        <table class="ps-table">
+          <thead>
+            <tr>
+              <th>Employee ID</th>
+              <th>Employee Name</th>
+              <th>Date</th>
+              <th>Status Update</th>
+              <th>Task</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for i in Daily_Status_Info %}
+            <tr>
+              <td style="font-family:'Syne',sans-serif;font-weight:700;color:var(--brand)">{{i.Employee_id}}</td>
+              <td style="font-weight:500">{{i.Employee_Name}}</td>
+              <td style="color:var(--muted);white-space:nowrap">{{i.Date}}</td>
+              <td style="max-width:260px">{{i.Status_Update|default:i.Status_Update|default:"—"}}</td>
+              <td style="max-width:260px;color:var(--muted)">{{i.Completed_Task|default:i.Complted_Task|default:"—"}}</td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="5" class="ps-empty">
+                Search for an employee above to view their daily status updates.
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    {% endif %}
+
+  </div><!-- /ps-content -->
+</div><!-- /ps-page -->
+
+<style>
+:root{--brand:#1e40af;--brand-light:#3b82f6;--brand-dark:#1e3a8a;--surface:#fff;--surface2:#e8eef7;--border:rgba(30,64,175,0.14);--text:#0c1a2e;--muted:#476080;--sidebar-w:240px;--topbar-h:58px;}
+body{overflow-x:hidden;overflow-y:auto;}
+.ps-page{margin-left:0;margin-top:0;min-height:calc(100vh - var(--topbar-h));display:flex;flex-direction:column;}
+.ps-sub-topbar{position:sticky;top:0;z-index:20;background:rgba(255,255,255,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 28px;height:44px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+.ps-breadcrumb{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);}
+.ps-breadcrumb a{color:var(--muted);text-decoration:none;}
+.ps-breadcrumb a:hover{color:var(--brand);}
+.ps-breadcrumb-sep{opacity:.4;}
+.ps-breadcrumb-cur{display:flex;align-items:center;gap:6px;color:var(--brand);font-weight:600;font-size:12px;}
+.ps-tab-nav{display:flex;gap:2px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:3px;flex-wrap:wrap;}
+.ps-tab{font-size:12px;font-weight:500;color:var(--muted);text-decoration:none;padding:5px 14px;border-radius:7px;transition:background .15s,color .15s;white-space:nowrap;}
+.ps-tab:hover{background:#dbeafe;color:var(--brand);}
+.ps-tab.active{background:white;color:var(--brand);font-weight:600;box-shadow:0 1px 4px rgba(30,64,175,0.12);}
+.ps-content{padding:24px 28px;display:flex;flex-direction:column;gap:20px;}
+.ps-top-row{display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start;}
+.ps-kpi-card{background:rgba(255,255,255,0.88);backdrop-filter:blur(16px);border:1px solid var(--border);border-radius:14px;padding:20px 22px;min-width:160px;flex-shrink:0;box-shadow:0 4px 24px rgba(30,64,175,0.07);display:flex;flex-direction:column;gap:6px;}
+.ps-kpi-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);}
+.ps-kpi-body{display:flex;align-items:center;gap:12px;}
+.ps-kpi-icon{width:44px;height:44px;border-radius:12px;flex-shrink:0;background:linear-gradient(135deg,var(--brand-dark),var(--brand-light));display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(30,64,175,0.3);}
+.ps-kpi-value{font-family:'Syne',sans-serif;font-size:36px;font-weight:800;color:var(--text);line-height:1;}
+.ps-kpi-sub{font-size:11px;color:var(--brand);font-weight:500;}
+.ps-card{background:rgba(255,255,255,0.88);backdrop-filter:blur(16px);border:1px solid var(--border);border-radius:14px;padding:20px 22px;box-shadow:0 4px 24px rgba(30,64,175,0.07);}
+.ps-card-title{font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:var(--text);margin-bottom:14px;}
+.ps-field{margin-bottom:12px;}
+.ps-field:last-child{margin-bottom:0;}
+.ps-label{display:block;font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:5px;}
+.ps-input{width:100%;background:var(--surface2);border:1.5px solid var(--border);border-radius:9px;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--text);padding:8px 12px;outline:none;transition:border-color .2s,box-shadow .2s;box-sizing:border-box;}
+.ps-input:focus{border-color:var(--brand-light);box-shadow:0 0 0 3px rgba(59,130,246,0.1);}
+.ps-search-row{display:flex;align-items:center;gap:8px;}
+.ps-search-row .ps-input{flex:1;}
+.ps-icon-btn{width:38px;height:38px;flex-shrink:0;background:linear-gradient(135deg,var(--brand-dark),var(--brand-light));border:none;border-radius:9px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:white;box-shadow:0 3px 10px rgba(30,64,175,0.3);transition:transform .15s;}
+.ps-icon-btn:hover{transform:translateY(-1px);}
+.ps-clear-link{font-size:12px;color:#dc2626;text-decoration:none;flex-shrink:0;}
+.ps-autocomplete{position:absolute;top:calc(100% + 4px);left:0;right:0;background:white;border:1px solid var(--border);border-radius:10px;box-shadow:0 8px 24px rgba(30,64,175,0.12);max-height:180px;overflow-y:auto;z-index:50;}
+.ps-ac-item{padding:8px 14px;font-size:13px;cursor:pointer;transition:background .1s;color:var(--text);}
+.ps-ac-item:hover{background:#eff6ff;color:var(--brand);}
+.ps-btn-primary{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,var(--brand-dark),var(--brand-light));color:white;font-family:'Syne',sans-serif;font-size:13px;font-weight:600;border:none;border-radius:9px;padding:9px 18px;cursor:pointer;box-shadow:0 3px 12px rgba(30,64,175,0.3);text-decoration:none;transition:transform .15s,box-shadow .15s;}
+.ps-btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(30,64,175,0.4);}
+.ps-result-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+.ps-result-info{display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap;background:rgba(255,255,255,0.88);border:1px solid var(--border);border-radius:10px;padding:8px 16px;font-size:12px;color:var(--muted);}
+.ps-sep{opacity:.3;}
+.ps-table{width:100%;border-collapse:collapse;font-size:13px;}
+.ps-table thead tr{background:var(--surface2);}
+.ps-table thead th{padding:11px 16px;text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);border-bottom:1px solid var(--border);white-space:nowrap;}
+.ps-table tbody tr{border-bottom:1px solid rgba(30,64,175,0.06);transition:background .12s;}
+.ps-table tbody tr:hover{background:#f0f6ff;}
+.ps-table tbody td{padding:11px 16px;color:var(--text);vertical-align:middle;}
+.ps-empty{text-align:center!important;padding:48px 16px!important;color:var(--muted);font-size:13px;}
+/* Modal */
+.ps-modal-bg{position:fixed;inset:0;background:rgba(14,30,58,0.45);backdrop-filter:blur(4px);z-index:200;display:flex;align-items:center;justify-content:center;}
+.ps-modal-bg.hidden{display:none;}
+.ps-modal-box{background:rgba(255,255,255,0.96);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:18px;padding:28px 32px;width:380px;max-width:calc(100vw - 40px);box-shadow:0 24px 64px rgba(30,64,175,0.18);animation:psModalIn .3s cubic-bezier(.22,1,.36,1) both;}
+@keyframes psModalIn{from{opacity:0;transform:scale(.95) translateY(12px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.ps-modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
+.ps-modal-title{font-family:'Syne',sans-serif;font-weight:700;font-size:18px;color:var(--text);}
+.ps-modal-close{background:none;border:none;font-size:22px;color:var(--muted);cursor:pointer;line-height:1;padding:0;}
+</style>
+
+<script>
+  // Holiday modal
+  function openHolModal()  { document.getElementById('holModal').classList.remove('hidden'); }
+  function closeHolModal() { document.getElementById('holModal').classList.add('hidden'); }
+
+  // Autocomplete
+  const acInput = document.getElementById('nameInput');
+  const acList  = document.getElementById('myUL');
+  document.addEventListener('click', e => {
+    if (!acInput.contains(e.target) && !acList.contains(e.target)) acList.classList.add('hidden');
+  });
+  function myFunction() {
+    const q = acInput.value.toUpperCase();
+    acList.classList.remove('hidden');
+    acList.querySelectorAll('.ps-ac-item').forEach(li => {
+      li.style.display = li.textContent.toUpperCase().includes(q) ? '' : 'none';
+    });
+  }
+  function listname(el) { acInput.value = el.textContent.trim(); acList.classList.add('hidden'); }
+</script>
+{% endblock %}

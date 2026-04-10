@@ -1,0 +1,564 @@
+query,intent
+Give me last 5 days status of <PERSON>,status_number
+Give me 7 days status of <PERSON>,status_number
+Give me 10 days status of <PERSON>,status_number
+Show last 5 days status of <PERSON>,status_number
+Show 7 days status of <PERSON>,status_number
+Show 10 days status report of <PERSON>,status_number
+Get last 5 days status of <PERSON>,status_number
+Get 6 days work status of <PERSON>,status_number
+Fetch 8 days status report of <PERSON>,status_number
+Display 4 days status of <PERSON>,status_number
+I want last 5 days status of <PERSON>,status_number
+I want 7 days status report of <PERSON>,status_number
+I need 10 days status of <PERSON>,status_number
+I need last 6 days work report of <PERSON>,status_number
+Can you show 5 days status of <PERSON>,status_number
+Can you get last 7 days status of <PERSON>,status_number
+Please give 10 days status of <PERSON>,status_number
+Please show last 8 days work status of <PERSON>,status_number
+Provide 5 days status report of <PERSON>,status_number
+Provide last 7 days update of <PERSON>,status_number
+Show me 5 days status of <PERSON>,status_number
+Show me last 10 days work report of <PERSON>,status_number
+Get me 6 days status details of <PERSON>,status_number
+Display last 5 days status report of <PERSON>,status_number
+Status report of <PERSON> for 5 days,status_number
+Status report of <PERSON> for last 7 days,status_number
+Work status of <PERSON> for 10 days,status_number
+Work update of <PERSON> for last 6 days,status_number
+5 days status of <PERSON>,status_number
+Last 7 days status of <PERSON>,status_number
+10 days work report of <PERSON>,status_number
+<PERSON> last 5 days status,status_number
+<PERSON> 7 days status report,status_number
+<PERSON> 10 days work update,status_number
+Show <PERSON> last 5 days status,status_number
+Get <PERSON> 7 days status report,status_number
+I want <PERSON> 5 days status report,status_number
+Give <PERSON> last 10 days work details,status_number
+How is <PERSON>'s status for 5 days,status_number
+What is the last 7 days status of <PERSON>,status_number
+Show pending work from home requests of <PERSON>,pending_wfh
+Show pending work from home requests of <PERSON>,pending_wfh
+List pending work from home applications of <PERSON>,pending_wfh
+Display <PERSON> pending work from home requests,pending_wfh
+Get pending work from home requests for <PERSON>,pending_wfh
+Check pending work from home status of <PERSON>,pending_wfh
+How many pending work from home requests does <PERSON> have?,pending_wfh
+Show me <PERSON> pending work from home approvals,pending_wfh
+Fetch pending work from home details of <PERSON>,pending_wfh
+Give pending work from home report of <PERSON>,pending_wfh
+Pending work from home requests for <PERSON>,pending_wfh
+What are the pending work from home requests of <PERSON>?,pending_wfh
+List all pending work from home of <PERSON>,pending_wfh
+Show <PERSON> pending work from home records,pending_wfh
+Retrieve pending work from home entries of <PERSON>,pending_wfh
+Is there any pending work from home request for <PERSON>?,pending_wfh
+Display all pending work from home forms of <PERSON>,pending_wfh
+Show outstanding work from home requests of <PERSON>,pending_wfh
+Pending work from home applications of <PERSON>,pending_wfh
+Give me pending work from home details for <PERSON>,pending_wfh
+Show pending work from home requests of <PERSON>,pending_wfh
+Show pending WFH requests of <PERSON>,pending_wfh
+Show pending remote work requests of <PERSON>,pending_wfh
+Show pending home working requests of <PERSON>,pending_wfh
+List pending work from home applications of <PERSON>,pending_wfh
+List pending WFH applications of <PERSON>,pending_wfh
+Check pending remote work status of <PERSON>,pending_wfh
+Display <PERSON> pending home working requests,pending_wfh
+Get pending WFH approvals for <PERSON>,pending_wfh
+Pending remote work requests for <PERSON>,pending_wfh
+Is there any pending WFH request for <PERSON>?,pending_wfh
+Show remote work requests waiting for approval of <PERSON>,pending_wfh
+Show home working requests not yet approved for <PERSON>,pending_wfh
+Show approved work from home requests of <PERSON>,approved_wfh
+Show approved WFH requests of <PERSON>,approved_wfh
+List approved remote work applications of <PERSON>,approved_wfh
+Display approved home working requests of <PERSON>,approved_wfh
+Get approved WFH details for <PERSON>,approved_wfh
+Approved remote work requests for <PERSON>,approved_wfh
+Show WFH requests approved for <PERSON>,approved_wfh
+Check approved home working status of <PERSON>,approved_wfh
+Has <PERSON> got any approved WFH requests?,approved_wfh
+Show approved work from home report of <PERSON>,approved_wfh
+Show rejected work from home requests of <PERSON>,rejected_wfh
+Show rejected WFH requests of <PERSON>,rejected_wfh
+List rejected remote work applications of <PERSON>,rejected_wfh
+Display rejected home working requests of <PERSON>,rejected_wfh
+Get rejected WFH details for <PERSON>,rejected_wfh
+Rejected remote work requests for <PERSON>,rejected_wfh
+Check rejected home working status of <PERSON>,rejected_wfh
+Has <PERSON> any rejected WFH request?,rejected_wfh
+Show declined work from home requests of <PERSON>,rejected_wfh
+Show remote work requests that were not approved for <PERSON>,rejected_wfh
+Show all work from home requests of <PERSON>,all_wfh
+Show all WFH requests of <PERSON>,all_wfh
+List all remote work applications of <PERSON>,all_wfh
+Display all home working requests of <PERSON>,all_wfh
+Get complete WFH history of <PERSON>,all_wfh
+Show entire remote work report of <PERSON>,all_wfh
+Give full home working details of <PERSON>,all_wfh
+Show WFH records of <PERSON>,all_wfh
+Fetch all remote work entries of <PERSON>,all_wfh
+Work from home history of <PERSON>,all_wfh
+Show leave status of <PERSON>,leave_status
+Show leave details of <PERSON>,leave_status
+Check leave balance of <PERSON>,leave_status
+Display leave report of <PERSON>,leave_status
+Get leave summary of <PERSON>,leave_status
+How many leaves does <PERSON> have?,leave_status
+Show leave information of <PERSON>,leave_status
+Leave history of <PERSON>,leave_status
+Give leave balance report of <PERSON>,leave_status
+Show total leaves taken by <PERSON>,leave_status
+Show today attendance of <PERSON>,attendance_today
+Is <PERSON> present today?,attendance_today
+Show today attendance status of <PERSON>,attendance_today
+Display today clock in and clock out of <PERSON>,attendance_today
+Check if <PERSON> logged in today,attendance_today
+Get today working hours of <PERSON>,attendance_today
+Show today's attendance report of <PERSON>,attendance_today
+Has <PERSON> marked attendance today?,attendance_today
+Show today login details of <PERSON>,attendance_today
+Show today office attendance of <PERSON>,attendance_today
+Show leave balance of <PERSON>,leave_balance
+Show <PERSON> leave balance,leave_balance
+Display leave balance of <PERSON>,leave_balance
+Get leave balance of <PERSON>,leave_balance
+Check leave balance of <PERSON>,leave_balance
+What is the leave balance of <PERSON>?,leave_balance
+How many leaves are remaining for <PERSON>?,leave_balance
+How many leaves does <PERSON> have left?,leave_balance
+Remaining leaves of <PERSON>,leave_balance
+Show remaining leave count of <PERSON>,leave_balance
+Give leave balance report of <PERSON>,leave_balance
+Show available leaves for <PERSON>,leave_balance
+Available leave balance of <PERSON>,leave_balance
+Show unused leaves of <PERSON>,leave_balance
+Leave balance details of <PERSON>,leave_balance
+Leave summary of <PERSON>,leave_balance
+Total leaves left for <PERSON>,leave_balance
+Show leave availability of <PERSON>,leave_balance
+Fetch leave balance information of <PERSON>,leave_balance
+Can you show leave balance of <PERSON>?,leave_balance
+I want to check leave balance of <PERSON>,leave_balance
+Please display leave balance for <PERSON>,leave_balance
+Give me leave balance for <PERSON>,leave_balance
+<PERSON> leave balance,leave_balance
+Leave balance <PERSON>,leave_balance
+Show leave history of <PERSON>,leave_history
+Display leave history of <PERSON>,leave_history
+Get leave history for <PERSON>,leave_history
+List leave records of <PERSON>,leave_history
+Show all leave applications of <PERSON>,leave_history
+Give leave history report of <PERSON>,leave_history
+Leave history details of <PERSON>,leave_history
+Show complete leave history of <PERSON>,leave_history
+Fetch leave entries of <PERSON>,leave_history
+Leave record summary of <PERSON>,leave_history
+Show pending leaves of <PERSON>,leave_pending
+Display pending leave requests of <PERSON>,leave_pending
+List pending leave applications of <PERSON>,leave_pending
+Get pending leave status of <PERSON>,leave_pending
+Show leaves waiting for approval for <PERSON>,leave_pending
+Pending leave details of <PERSON>,leave_pending
+Is there any pending leave for <PERSON>?,leave_pending
+Show unapproved leave requests of <PERSON>,leave_pending
+Check pending leave count of <PERSON>,leave_pending
+Pending leave report of <PERSON>,leave_pending
+Show approved leaves of <PERSON>,leave_approved
+Display approved leave requests of <PERSON>,leave_approved
+List approved leave applications of <PERSON>,leave_approved
+Get approved leave status of <PERSON>,leave_approved
+Show leaves approved for <PERSON>,leave_approved
+Approved leave details of <PERSON>,leave_approved
+Has <PERSON> got approved leaves?,leave_approved
+Show confirmed leave requests of <PERSON>,leave_approved
+Check approved leave history of <PERSON>,leave_approved
+Approved leave report of <PERSON>,leave_approved
+Show rejected leaves of <PERSON>,leave_rejected
+Display rejected leave requests of <PERSON>,leave_rejected
+List rejected leave applications of <PERSON>,leave_rejected
+Get rejected leave status of <PERSON>,leave_rejected
+Show declined leave requests of <PERSON>,leave_rejected
+Rejected leave details of <PERSON>,leave_rejected
+Has <PERSON> any rejected leaves?,leave_rejected
+Show leave requests not approved for <PERSON>,leave_rejected
+Check rejected leave history of <PERSON>,leave_rejected
+Rejected leave report of <PERSON>,leave_rejected
+Show last 5 days attendance of <PERSON>,attendance_report_last_n_days
+Show last 10 days attendance of <PERSON>,attendance_report_last_n_days
+Display attendance for last 7 days of <PERSON>,attendance_report_last_n_days
+Get last 3 days attendance report of <PERSON>,attendance_report_last_n_days
+Show attendance history for past 15 days of <PERSON>,attendance_report_last_n_days
+Give attendance report of last 30 days for <PERSON>,attendance_report_last_n_days
+Attendance report for previous 5 days of <PERSON>,attendance_report_last_n_days
+Show past 10 days attendance details of <PERSON>,attendance_report_last_n_days
+Fetch last 20 days attendance of <PERSON>,attendance_report_last_n_days
+Show attendance summary of last 14 days for <PERSON>,attendance_report_last_n_days
+Provide 7 days attendance of all employees,all_attendance_number
+Provide last 7 days attendance of all employees,all_attendance_number
+Show 7 days attendance of all employees,all_attendance_number
+Show last 7 days attendance of all employees,all_attendance_number
+Display 7 days attendance report of all employees,all_attendance_number
+Display attendance for last 7 days of all employees,all_attendance_number
+Give attendance report of past 7 days for all employees,all_attendance_number
+List 7 days attendance details of all employees,all_attendance_number
+Fetch last 7 days attendance of all employees,all_attendance_number
+Get previous 7 days attendance of all employees,all_attendance_number
+Show attendance history for last 7 days of all employees,all_attendance_number
+Give me 7 days attendance summary of all employees,all_attendance_number
+Attendance report of last 7 days for all employees,all_attendance_number
+Show past 7 days attendance data of all employees,all_attendance_number
+Provide attendance details for previous 7 days for all employees,all_attendance_number
+Now add dynamic number variations (VERY IMPORTANT for generalization):
+Provide last 5 days attendance of all employees,all_attendance_number
+Provide last 10 days attendance of all employees,all_attendance_number
+Show last 3 days attendance of all employees,all_attendance_number
+Show past 15 days attendance of all employees,all_attendance_number
+Display attendance for last 30 days of all employees,all_attendance_number
+Give previous 20 days attendance of all employees,all_attendance_number
+Fetch last 14 days attendance of all employees,all_attendance_number
+Attendance report for last 2 days of all employees,all_attendance_number
+Show today status of all employees,all_today_status
+Show status of all employees today,all_today_status
+Display today status of all employees,all_today_status
+Display all employees status for today,all_today_status
+Get today status of all employees,all_today_status
+Give today status report of all employees,all_today_status
+List today status of all employees,all_today_status
+Fetch today status details of all employees,all_today_status
+Provide today status of all employees,all_today_status
+Show current day status of all employees,all_today_status
+Show today's status of all employees,all_today_status
+What is the status of all employees today?,all_today_status
+Give me today's status of all employees,all_today_status
+Show daily status of all employees,all_today_status
+Display daily status report of all employees,all_today_status
+All employees today status,all_today_status
+Today status all employees,all_today_status
+Show attendance status of all employees today,all_today_status
+Show work status of all employees today,all_today_status
+Provide status update for all employees today,all_today_status
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Show yesterday attendance of <PERSON>,yesterday_attendance
+Display yesterday attendance of <PERSON>,yesterday_attendance
+Get yesterday attendance details of <PERSON>,yesterday_attendance
+Give yesterday attendance report of <PERSON>,yesterday_attendance
+Show attendance of <PERSON> for yesterday,yesterday_attendance
+Show <PERSON> attendance yesterday,yesterday_attendance
+Yesterday attendance of <PERSON>,yesterday_attendance
+Fetch yesterday attendance record of <PERSON>,yesterday_attendance
+Provide yesterday attendance information of <PERSON>,yesterday_attendance
+Was <PERSON> present yesterday?,yesterday_attendance
+Did <PERSON> attend office yesterday?,yesterday_attendance
+Check if <PERSON> was present yesterday,yesterday_attendance
+Show yesterday login details of <PERSON>,yesterday_attendance
+Display yesterday clock in and clock out of <PERSON>,yesterday_attendance
+Get yesterday working hours of <PERSON>,yesterday_attendance
+Show previous day attendance of <PERSON>,yesterday_attendance
+Attendance of <PERSON> for previous day,yesterday_attendance
+Show attendance status of <PERSON> yesterday,yesterday_attendance
+Give me attendance details of <PERSON> for yesterday,yesterday_attendance
+Show today announcements,today_announcement
+Show today's announcements,today_announcement
+Display today announcements,today_announcement
+Get today announcements,today_announcement
+Give today announcements,today_announcement
+List today announcements,today_announcement
+Fetch today announcements,today_announcement
+Provide today announcements,today_announcement
+Show announcements for today,today_announcement
+Display announcements for today,today_announcement
+Get announcements of today,today_announcement
+Give me today announcements,today_announcement
+What are today's announcements?,today_announcement
+Any announcements today?,today_announcement
+Show current day announcements,today_announcement
+Display latest announcements for today,today_announcement
+Today announcements,today_announcement
+Today's announcement,today_announcement
+Show today company announcements,today_announcement
+Provide today's announcement details,today_announcement
+Show yesterday leave details of all employees,all_yesterday_leave
+Show yesterday leaves of all employees,all_yesterday_leave
+Display yesterday leave report of all employees,all_yesterday_leave
+Get yesterday leave details for all employees,all_yesterday_leave
+Give yesterday leave summary of all employees,all_yesterday_leave
+List yesterday leave records of all employees,all_yesterday_leave
+Fetch yesterday leave data of all employees,all_yesterday_leave
+Provide yesterday leave information of all employees,all_yesterday_leave
+Show leave details of all employees for yesterday,all_yesterday_leave
+Show all employees leave details yesterday,all_yesterday_leave
+Yesterday leave details of all employees,all_yesterday_leave
+What were the leaves taken yesterday by all employees?,all_yesterday_leave
+Show yesterday leave applications of all employees,all_yesterday_leave
+Display leave status of all employees for yesterday,all_yesterday_leave
+Give me yesterday leave report for all employees,all_yesterday_leave
+Show previous day leave details of all employees,all_yesterday_leave
+Attendance leave details of all employees yesterday,all_yesterday_leave
+Show yesterday approved leaves of all employees,all_yesterday_leave
+Show yesterday leave entries of all employees,all_yesterday_leave
+Provide previous day leave records of all employees,all_yesterday_leave
+Show announcements for all employees,all_announcement
+Show all employee announcements,all_announcement
+Display announcements for all employees,all_announcement
+Get announcements for all employees,all_announcement
+Give announcements for all employees,all_announcement
+List announcements for all employees,all_announcement
+Fetch announcements for all employees,all_announcement
+Provide announcements for all employees,all_announcement
+Show company announcements for all employees,all_announcement
+Display all announcements to employees,all_announcement
+Show employee announcements,all_announcement
+Give me announcements for all employees,all_announcement
+What are the announcements for all employees?,all_announcement
+Any announcements for all employees?,all_announcement
+Show general announcements for all employees,all_announcement
+Display latest announcements for all employees,all_announcement
+All employees announcements,all_announcement
+Announcements for employees,all_announcement
+Show broadcast announcements for all employees,all_announcement
+Provide announcement details for all employees,all_announcement
+Show yesterday status of all employees,all_yesterday_status
+Show status of all employees yesterday,all_yesterday_status
+Display yesterday status of all employees,all_yesterday_status
+Display all employees status for yesterday,all_yesterday_status
+Get yesterday status of all employees,all_yesterday_status
+Give yesterday status report of all employees,all_yesterday_status
+List yesterday status of all employees,all_yesterday_status
+Fetch yesterday status details of all employees,all_yesterday_status
+Provide yesterday status of all employees,all_yesterday_status
+Show previous day status of all employees,all_yesterday_status
+Show all employees status yesterday,all_yesterday_status
+Yesterday status of all employees,all_yesterday_status
+What was the status of all employees yesterday?,all_yesterday_status
+Give me yesterday status of all employees,all_yesterday_status
+Show daily status of all employees for yesterday,all_yesterday_status
+Display yesterday attendance status of all employees,all_yesterday_status
+Show work status of all employees for previous day,all_yesterday_status
+Provide status update of all employees for yesterday,all_yesterday_status
+Show employee status for the previous day,all_yesterday_status
+All employees yesterday status report,all_yesterday_status
+What is leave status of <PERSON>?,leave
+Show leave status of <PERSON>,leave
+Display leave status of <PERSON>,leave
+Get leave status of <PERSON>,leave
+Give leave status report of <PERSON>,leave
+Check leave status of <PERSON>,leave
+Show leave details of <PERSON>,leave
+Display leave information of <PERSON>,leave
+Fetch leave status details of <PERSON>,leave
+Provide leave status for <PERSON>,leave
+Leave status of <PERSON>,leave
+What are the leave details of <PERSON>?,leave
+Show current leave status of <PERSON>,leave
+Give me leave status of <PERSON>,leave
+List leave records of <PERSON>,leave
+Show leave application status of <PERSON>,leave
+Check leave approval status of <PERSON>,leave
+Display leave summary of <PERSON>,leave
+Get leave request status of <PERSON>,leave
+Provide leave update for <PERSON>,leave
+Show today work from home details of all employees,all_today_wfh
+Show today WFH details of all employees,all_today_wfh
+Show today remote work details of all employees,all_today_wfh
+Show today home working details of all employees,all_today_wfh
+Display today work from home report of all employees,all_today_wfh
+Display today WFH report of all employees,all_today_wfh
+Get today remote work details for all employees,all_today_wfh
+Give today home working status of all employees,all_today_wfh
+List today work from home records of all employees,all_today_wfh
+Fetch today WFH entries of all employees,all_today_wfh
+Provide today remote work report of all employees,all_today_wfh
+Show work from home status of all employees today,all_today_wfh
+Show WFH status of all employees today,all_today_wfh
+Show remote work status of all employees today,all_today_wfh
+Today work from home details of all employees,all_today_wfh
+Today WFH details of all employees,all_today_wfh
+What is today work from home status of all employees?,all_today_wfh
+Are any employees working from home today?,all_today_wfh
+Show today's home working list of all employees,all_today_wfh
+Display employees on WFH today,all_today_wfh
+Show announcements,announcement
+Display announcements,announcement
+Get announcements,announcement
+Give announcements,announcement
+List announcements,announcement
+Fetch announcements,announcement
+Provide announcements,announcement
+Show all announcements,announcement
+Display all announcements,announcement
+Get latest announcements,announcement
+Show recent announcements,announcement
+What are the announcements?,announcement
+Any announcements?,announcement
+Give me announcements,announcement
+Show company announcements,announcement
+Display announcement details,announcement
+Show announcement list,announcement
+Provide announcement information,announcement
+Announcements,announcement
+Latest announcements,announcement
+Show yesterday announcements,yesterday_announcement
+Show yesterday announcement,yesterday_announcement
+Display yesterday announcements,yesterday_announcement
+Get yesterday announcements,yesterday_announcement
+Give yesterday announcements,yesterday_announcement
+List yesterday announcements,yesterday_announcement
+Fetch yesterday announcements,yesterday_announcement
+Provide yesterday announcements,yesterday_announcement
+Show announcements for yesterday,yesterday_announcement
+Display announcements for yesterday,yesterday_announcement
+Get announcements of yesterday,yesterday_announcement
+Give me yesterday announcements,yesterday_announcement
+What were yesterday's announcements?,yesterday_announcement
+Any announcements yesterday?,yesterday_announcement
+Show previous day announcements,yesterday_announcement
+Display previous day announcements,yesterday_announcement
+Yesterday announcements,yesterday_announcement
+Yesterday announcement details,yesterday_announcement
+Show company announcements for yesterday,yesterday_announcement
+Provide yesterday announcement report,yesterday_announcement
+What is today leave status of <PERSON>?,today_leave
+Show today leave status of <PERSON>,today_leave
+Display today leave status of <PERSON>,today_leave
+Get today leave details of <PERSON>,today_leave
+Give today leave report of <PERSON>,today_leave
+Check if <PERSON> is on leave today,today_leave
+Is <PERSON> on leave today?,today_leave
+Show leave information of <PERSON> for today,today_leave
+Today leave status of <PERSON>,today_leave
+Fetch today leave record of <PERSON>,today_leave
+Provide today leave details for <PERSON>,today_leave
+Show whether <PERSON> has leave today,today_leave
+Display leave status of <PERSON> today,today_leave
+Give me today leave update of <PERSON>,today_leave
+Has <PERSON> applied leave for today?,today_leave
+Show today's leave entry of <PERSON>,today_leave
+Check today's leave request of <PERSON>,today_leave
+Show leave application status of <PERSON> for today,today_leave
+Is <PERSON> absent today?,today_leave
+Get today's leave summary of <PERSON>,today_leave
+Show pending leave requests of <PERSON>,pending_leave
+Show pending leaves of <PERSON>,pending_leave
+Display pending leave requests of <PERSON>,pending_leave
+Get pending leave details of <PERSON>,pending_leave
+Give pending leave report of <PERSON>,pending_leave
+List pending leave applications of <PERSON>,pending_leave
+Fetch pending leave records of <PERSON>,pending_leave
+Provide pending leave information of <PERSON>,pending_leave
+Pending leave requests of <PERSON>,pending_leave
+Check pending leave status of <PERSON>,pending_leave
+Is there any pending leave for <PERSON>?,pending_leave
+Show leave requests waiting for approval for <PERSON>,pending_leave
+Display unapproved leave requests of <PERSON>,pending_leave
+Get leave applications not yet approved for <PERSON>,pending_leave
+Show leave requests in pending state for <PERSON>,pending_leave
+Give me pending leave details for <PERSON>,pending_leave
+Show outstanding leave requests of <PERSON>,pending_leave
+List leave requests awaiting approval of <PERSON>,pending_leave
+Show leave approval pending for <PERSON>,pending_leave
+Provide pending leave summary of <PERSON>,pending_leave
+Show tomorrow leave details of all employees,all_tomorrow_leave
+Show tomorrow leaves of all employees,all_tomorrow_leave
+Display tomorrow leave report of all employees,all_tomorrow_leave
+Get tomorrow leave details for all employees,all_tomorrow_leave
+Give tomorrow leave summary of all employees,all_tomorrow_leave
+List tomorrow leave records of all employees,all_tomorrow_leave
+Fetch tomorrow leave data of all employees,all_tomorrow_leave
+Provide tomorrow leave information of all employees,all_tomorrow_leave
+Show leave details of all employees for tomorrow,all_tomorrow_leave
+Show all employees leave details tomorrow,all_tomorrow_leave
+Tomorrow leave details of all employees,all_tomorrow_leave
+Which employees are on leave tomorrow?,all_tomorrow_leave
+Who is on leave tomorrow?,all_tomorrow_leave
+Show employees taking leave tomorrow,all_tomorrow_leave
+Display leave status of all employees for tomorrow,all_tomorrow_leave
+Give me tomorrow leave report for all employees,all_tomorrow_leave
+Show next day leave details of all employees,all_tomorrow_leave
+Provide next day leave records of all employees,all_tomorrow_leave
+Show approved leaves for tomorrow for all employees,all_tomorrow_leave
+Show leave schedule for tomorrow of all employees,all_tomorrow_leave
+Show tomorrow work from home details of all employees,all_tomorrow_wfh
+Show tomorrow WFH details of all employees,all_tomorrow_wfh
+Show tomorrow remote work details of all employees,all_tomorrow_wfh
+Show tomorrow home working details of all employees,all_tomorrow_wfh
+Display tomorrow work from home report of all employees,all_tomorrow_wfh
+Display tomorrow WFH report of all employees,all_tomorrow_wfh
+Get tomorrow remote work details for all employees,all_tomorrow_wfh
+Give tomorrow home working status of all employees,all_tomorrow_wfh
+List tomorrow work from home records of all employees,all_tomorrow_wfh
+Fetch tomorrow WFH entries of all employees,all_tomorrow_wfh
+Provide tomorrow remote work report of all employees,all_tomorrow_wfh
+Show work from home status of all employees tomorrow,all_tomorrow_wfh
+Show WFH status of all employees tomorrow,all_tomorrow_wfh
+Show remote work status of all employees tomorrow,all_tomorrow_wfh
+Tomorrow work from home details of all employees,all_tomorrow_wfh
+Tomorrow WFH details of all employees,all_tomorrow_wfh
+What is tomorrow work from home status of all employees?,all_tomorrow_wfh
+Are any employees working from home tomorrow?,all_tomorrow_wfh
+Show tomorrow home working list of all employees,all_tomorrow_wfh
+Display employees on WFH tomorrow,all_tomorrow_wfh
+Show work from home details of all employees,all_wfh
+Show WFH details of all employees,all_wfh
+Show remote work details of all employees,all_wfh
+Show home working details of all employees,all_wfh
+Display work from home report of all employees,all_wfh
+Display WFH report of all employees,all_wfh
+Get remote work details for all employees,all_wfh
+Give home working status of all employees,all_wfh
+List work from home records of all employees,all_wfh
+Fetch WFH entries of all employees,all_wfh
+Provide remote work report of all employees,all_wfh
+Show work from home status of all employees,all_wfh
+Show WFH status of all employees,all_wfh
+Show remote work status of all employees,all_wfh
+Work from home details of all employees,all_wfh
+WFH details of all employees,all_wfh
+What is work from home status of all employees?,all_wfh
+Are any employees working from home?,all_wfh
+Show home working list of all employees,all_wfh
+Display employees on WFH,all_wfh
+What is today attendance of <PERSON>?,today_attendance
+Show today attendance of <PERSON>,today_attendance
+Display today attendance of <PERSON>,today_attendance
+Get today attendance details of <PERSON>,today_attendance
+Give today attendance report of <PERSON>,today_attendance
+Is <PERSON> present today?,today_attendance
+Was <PERSON> present today?,today_attendance
+Check if <PERSON> attended today,today_attendance
+Show attendance of <PERSON> for today,today_attendance
+Today attendance of <PERSON>,today_attendance
+Fetch today attendance record of <PERSON>,today_attendance
+Provide today attendance information of <PERSON>,today_attendance
+Show today login details of <PERSON>,today_attendance
+Display today clock in and clock out of <PERSON>,today_attendance
+Get today working hours of <PERSON>,today_attendance
+Has <PERSON> marked attendance today?,today_attendance
+Show today's attendance status of <PERSON>,today_attendance
+Give me attendance details of <PERSON> for today,today_attendance
+Show whether <PERSON> logged in today,today_attendance
+Get today's attendance summary of <PERSON>,today_attendance
+Show yesterday announcements for all employees,all_yesterday_announcement
+Show yesterday announcement for all employees,all_yesterday_announcement
+Display yesterday announcements for all employees,all_yesterday_announcement
+Get yesterday announcements for all employees,all_yesterday_announcement
+Give yesterday announcements to all employees,all_yesterday_announcement
+List yesterday announcements for all employees,all_yesterday_announcement
+Fetch yesterday announcements for all employees,all_yesterday_announcement
+Provide yesterday announcements for all employees,all_yesterday_announcement
+Show announcements for all employees for yesterday,all_yesterday_announcement
+Display announcements of yesterday for all employees,all_yesterday_announcement
+Yesterday announcements for all employees,all_yesterday_announcement
+What were yesterday announcements for all employees?,all_yesterday_announcement
+Any announcements yesterday for all employees?,all_yesterday_announcement
+Show previous day announcements for all employees,all_yesterday_announcement
+Display previous day announcements for all employees,all_yesterday_announcement
+Give me yesterday announcements report for all employees,all_yesterday_announcement
+Show company announcements yesterday for all employees,all_yesterday_announcement
+Provide yesterday announcement details for all employees,all_yesterday_announcement
+Show broadcast announcements for all employees yesterday,all_yesterday_announcement
+All employees yesterday announcements,all_yesterday_announcement
+ 

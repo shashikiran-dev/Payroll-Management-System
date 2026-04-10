@@ -1,0 +1,1581 @@
+query,intent
+Give me 10 days status of <PERSON>.,status_number
+Show pending work from home requests of <PERSON>.,pending_wfh
+Give me 10 days status of <PERSON>.,status_number
+Show pending work from home requests of <PERSON>.,pending_wfh
+Show leave balance of <PERSON>.,leave_balance
+Show pending leave requests of <PERSON>.,pending_leave
+Provide 7 days attendance of all employees.,all_attendance_number
+Show today status of all employees.,all_today_status
+Give me 5 days status of <PERSON>.,status_number
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Provide 10 days attendance of all employees.,all_attendance_number
+Show today announcements.,today_announcement
+Show leave balance of <PERSON>.,leave_balance
+Show leave balance of <PERSON>.,leave_balance
+give me the leave balance of <PERSON>,leave_balance
+Show leave balance of <PERSON>.,leave_balance
+Show yesterday leave details of all employees.,all_yesterday_leave
+Show announcements for all employees.,all_announcement
+Show yesterday status of all employees.,all_yesterday_status
+What is leave status of <PERSON>?,leave
+Show today work from home details of all employees.,all_today_wfh
+What is work from home status of <PERSON>?,wfh
+Provide 7 days status of all employees.,all_status_number
+Show pending work from home requests of <PERSON>.,pending_wfh
+Show leave balance of <PERSON> ,leave_balance
+What is tomorrow status of <PERSON>?,tomorrow_status
+Show announcements.,announcement
+Show yesterday announcements.,yesterday_announcement
+What is today leave status of <PERSON>?,today_leave
+Show pending work from home requests of <PERSON>.,pending_wfh
+Show pending leave requests of <PERSON>.,pending_leave
+Provide 5 days status of all employees.,all_status_number
+Show pending leave requests of <PERSON>.,pending_leave
+Show pending work from home requests of <PERSON>.,pending_wfh
+give me the leave balance of <PERSON>,leave_balance
+Show leave balance of all employees.,all_leave_balance
+Show tomorrow leave details of all employees.,all_tomorrow_leave
+Give me 10 days status of <PERSON>.,status_number
+What is yesterday leave status of <PERSON>?,yesterday_leave
+Show tomorrow work from home details of all employees.,all_tomorrow_wfh
+Show work from home details of all employees.,all_wfh
+What is today attendance of <PERSON>?,today_attendance
+Show yesterday announcements for all employees.,all_yesterday_announcement
+Show today announcements for all employees.,all_today_announcement
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+What is today work from home status of <PERSON>?,today_wfh
+Show pending leave requests of <PERSON>.,pending_leave
+Give me 10 days status of <PERSON>.,status_number
+Show today leave details of all employees.,all_today_leave
+What is attendance of <PERSON>?,attendance
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Give me 7 days status of <PERSON>.,status_number
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+What is today attendance of <PERSON>?,today_attendance
+Provide 15 days attendance of all employees.,all_attendance_number
+Give me 15 days status of <PERSON>.,status_number
+Give me 10 days status of <PERSON>.,status_number
+What is leave status of <PERSON>?,leave
+Give me 5 days status of <PERSON>.,status_number
+Give me 10 days status of <PERSON>.,status_number
+Show yesterday attendance of all employees.,all_yesterday_attendance
+Show tomorrow announcements for all employees.,all_tomorrow_announcement
+Show tomorrow announcements.,tomorrow_announcement
+What is yesterday work from home status of <PERSON>?,yesterday_wfh
+What is today work from home status of <PERSON>?,today_wfh
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+Show yesterday work from home details of all employees.,all_yesterday_wfh
+Show pending work from home requests of <PERSON>.,pending_wfh
+Give me 15 days status of <PERSON>.,status_number
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+Show leave balance of <PERSON>.,leave_balance
+Show pending leave requests of <PERSON>.,pending_leave
+Give me 5 days status of <PERSON>.,status_number
+What is yesterday status of <PERSON>?,yesterday_status
+Give me 7 days status of <PERSON>.,status_number
+Show leave balance of <PERSON>.,leave_balance
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Show tomorrow status of all employees.,all_tomorrow_status
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+Show leave details of all employees.,all_leave
+What is yesterday leave status of <PERSON>?,yesterday_leave
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Show leave balance of <PERSON>.,leave_balance
+Show pending work from home requests of <PERSON>.,pending_wfh
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Give me 7 days status of <PERSON>.,status_number
+Show pending work from home requests of <PERSON>.,pending_wfh
+Show pending leave requests of <PERSON>.,pending_leave
+Show status of all employees.,all_status
+What is yesterday leave status of <PERSON>?,yesterday_leave
+Show pending leave requests of <PERSON>.,pending_leave
+What is today leave status of <PERSON>?,today_leave
+What is today attendance of <PERSON>?,today_attendance
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+Show attendance of all employees.,all_attendance
+What is yesterday status of <PERSON>?,yesterday_status
+Give me 15 days status of <PERSON>.,status_number
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+Give me 5 days status of <PERSON>.,status_number
+What is today work from home status of <PERSON>?,today_wfh
+What is tomorrow status of <PERSON>?,tomorrow_status
+Provide 5 days attendance of all employees.,all_attendance_number
+Show pending leave requests of <PERSON>.,pending_leave
+What is status of <PERSON>?,status
+Provide 10 days status of all employees.,all_status_number
+What is yesterday leave status of <PERSON>?,yesterday_leave
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+Provide 15 days status of all employees.,all_status_number
+Give me 15 days status of <PERSON>.,status_number
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+What is leave status of <PERSON>?,leave
+What is today work from home status of <PERSON>?,today_wfh
+What is leave status of <PERSON>?,leave
+What is yesterday work from home status of <PERSON>?,yesterday_wfh
+Give me 15 days status of <PERSON>.,status_number
+Give me 7 days status of <PERSON>.,status_number
+What is today leave status of <PERSON>?,today_leave
+What is attendance of <PERSON>?,attendance
+What is work from home status of <PERSON>?,wfh
+What is yesterday work from home status of <PERSON>?,yesterday_wfh
+What is today attendance of <PERSON>?,today_attendance
+Give me 7 days status of <PERSON>.,status_number
+What is work from home status of <PERSON>?,wfh
+What is tomorrow status of <PERSON>?,tomorrow_status
+What is leave status of <PERSON>?,leave
+What is today attendance of <PERSON>?,today_attendance
+Give me 10 days status of <PERSON>.,status_number
+What is work from home status of <PERSON>?,wfh
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+What is attendance of <PERSON>?,attendance
+What is today work from home status of <PERSON>?,today_wfh
+Give me 5 days status of <PERSON>.,status_number
+What is attendance of <PERSON>?,attendance
+What is work from home status of <PERSON>?,wfh
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+What is today attendance of <PERSON>?,today_attendance
+What is attendance of <PERSON>?,attendance
+What is today leave status of <PERSON>?,today_leave
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+Show today attendance of all employees.,all_today_attendance
+What is attendance of <PERSON>?,attendance
+What is today attendance of <PERSON>?,today_attendance
+What is yesterday status of <PERSON>?,yesterday_status
+What is yesterday leave status of <PERSON>?,yesterday_leave
+Show tomorrow attendance of all employees.,all_tomorrow_attendance
+What is today leave status of <PERSON>?,today_leave
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+What is work from home status of <PERSON>?,wfh
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+What is work from home status of <PERSON>?,wfh
+What is today status of <PERSON>?,today_status
+Give me 15 days status of <PERSON>.,status_number
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+What is tomorrow status of <PERSON>?,tomorrow_status
+What is yesterday work from home status of <PERSON>?,yesterday_wfh
+Give me 10 days status of <PERSON>.,status_number
+What is today leave status of <PERSON>?,today_leave
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+What is today work from home status of <PERSON>?,today_wfh
+What is leave status of <PERSON>?,leave
+What is attendance of <PERSON>?,attendance
+What is yesterday leave status of <PERSON>?,yesterday_leave
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Give me 15 days status of <PERSON>.,status_number
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+What is tomorrow status of <PERSON>?,tomorrow_status
+What is today status of <PERSON>?,today_status
+Give me 7 days status of <PERSON>.,status_number
+What is today attendance of <PERSON>?,today_attendance
+What is status of <PERSON>?,status
+Give me 10 days status of <PERSON>.,status_number
+Show pending work from home requests of <PERSON>.,pending_wfh
+Give me 10 days status of <PERSON>.,status_number
+Show pending work from home requests of <PERSON>.,pending_wfh
+Show leave balance of <PERSON>.,leave_balance
+Show pending leave requests of <PERSON>.,pending_leave
+Provide 7 days attendance of all employees.,all_attendance_number
+Show today status of all employees.,all_today_status
+Give me 5 days status of <PERSON>.,status_number
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Provide 10 days attendance of all employees.,all_attendance_number
+Show today announcements.,today_announcement
+Show leave balance of <PERSON>.,leave_balance
+Show leave balance of <PERSON>.,leave_balance
+Show leave balance of <PERSON>.,leave_balance
+Show yesterday leave details of all employees.,all_yesterday_leave
+Show announcements for all employees.,all_announcement
+Show yesterday status of all employees.,all_yesterday_status
+What is leave status of <PERSON>?,leave
+Show today work from home details of all employees.,all_today_wfh
+What is work from home status of <PERSON>?,wfh
+Provide 7 days status of all employees.,all_status_number
+Show pending work from home requests of <PERSON>.,pending_wfh
+Show leave balance of <PERSON> ,leave_balance
+What is tomorrow status of <PERSON>?,tomorrow_status
+Show announcements.,announcement
+Show yesterday announcements.,yesterday_announcement
+What is today leave status of <PERSON>?,today_leave
+Show pending work from home requests of <PERSON>.,pending_wfh
+Show pending leave requests of <PERSON>.,pending_leave
+Provide 5 days status of all employees.,all_status_number
+Show pending leave requests of <PERSON>.,pending_leave
+Show pending work from home requests of <PERSON>.,pending_wfh
+Show leave balance of all employees.,all_leave_balance
+Show tomorrow leave details of all employees.,all_tomorrow_leave
+Give me 10 days status of <PERSON>.,status_number
+What is yesterday leave status of <PERSON>?,yesterday_leave
+Show tomorrow work from home details of all employees.,all_tomorrow_wfh
+Show work from home details of all employees.,all_wfh
+What is today attendance of <PERSON>?,today_attendance
+Show yesterday announcements for all employees.,all_yesterday_announcement
+Show today announcements for all employees.,all_today_announcement
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+What is today work from home status of <PERSON>?,today_wfh
+Show pending leave requests of <PERSON>.,pending_leave
+Give me 10 days status of <PERSON>.,status_number
+Show today leave details of all employees.,all_today_leave
+What is attendance of <PERSON>?,attendance
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Give me 7 days status of <PERSON>.,status_number
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+What is today attendance of <PERSON>?,today_attendance
+Provide 15 days attendance of all employees.,all_attendance_number
+Give me 15 days status of <PERSON>.,status_number
+Give me 10 days status of <PERSON>.,status_number
+What is leave status of <PERSON>?,leave
+Give me 5 days status of <PERSON>.,status_number
+Give me 10 days status of <PERSON>.,status_number
+Show yesterday attendance of all employees.,all_yesterday_attendance
+Show tomorrow announcements for all employees.,all_tomorrow_announcement
+Show tomorrow announcements.,tomorrow_announcement
+What is yesterday work from home status of <PERSON>?,yesterday_wfh
+What is today work from home status of <PERSON>?,today_wfh
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+Show yesterday work from home details of all employees.,all_yesterday_wfh
+Show pending work from home requests of <PERSON>.,pending_wfh
+Give me 15 days status of <PERSON>.,status_number
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+Show leave balance of <PERSON>.,leave_balance
+Show pending leave requests of <PERSON>.,pending_leave
+Give me 5 days status of <PERSON>.,status_number
+What is yesterday status of <PERSON>?,yesterday_status
+Give me 7 days status of <PERSON>.,status_number
+Show leave balance of <PERSON>.,leave_balance
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Show tomorrow status of all employees.,all_tomorrow_status
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+Show leave details of all employees.,all_leave
+What is yesterday leave status of <PERSON>?,yesterday_leave
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Show leave balance of <PERSON>.,leave_balance
+Show pending work from home requests of <PERSON>.,pending_wfh
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Give me 7 days status of <PERSON>.,status_number
+Show pending work from home requests of <PERSON>.,pending_wfh
+Show pending leave requests of <PERSON>.,pending_leave
+Show status of all employees.,all_status
+What is yesterday leave status of <PERSON>?,yesterday_leave
+Show pending leave requests of <PERSON>.,pending_leave
+What is today leave status of <PERSON>?,today_leave
+What is today attendance of <PERSON>?,today_attendance
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+Show attendance of all employees.,all_attendance
+What is yesterday status of <PERSON>?,yesterday_status
+Give me 15 days status of <PERSON>.,status_number
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+Give me 5 days status of <PERSON>.,status_number
+What is today work from home status of <PERSON>?,today_wfh
+What is tomorrow status of <PERSON>?,tomorrow_status
+Provide 5 days attendance of all employees.,all_attendance_number
+Show pending leave requests of <PERSON>.,pending_leave
+What is status of <PERSON>?,status
+Provide 10 days status of all employees.,all_status_number
+What is yesterday leave status of <PERSON>?,yesterday_leave
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+Provide 15 days status of all employees.,all_status_number
+Give me 15 days status of <PERSON>.,status_number
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+What is leave status of <PERSON>?,leave
+What is today work from home status of <PERSON>?,today_wfh
+What is leave status of <PERSON>?,leave
+What is yesterday work from home status of <PERSON>?,yesterday_wfh
+Give me 15 days status of <PERSON>.,status_number
+Give me 7 days status of <PERSON>.,status_number
+What is today leave status of <PERSON>?,today_leave
+What is attendance of <PERSON>?,attendance
+What is work from home status of <PERSON>?,wfh
+What is yesterday work from home status of <PERSON>?,yesterday_wfh
+What is today attendance of <PERSON>?,today_attendance
+Give me 7 days status of <PERSON>.,status_number
+What is work from home status of <PERSON>?,wfh
+What is tomorrow status of <PERSON>?,tomorrow_status
+What is leave status of <PERSON>?,leave
+What is today attendance of <PERSON>?,today_attendance
+Give me 10 days status of <PERSON>.,status_number
+What is work from home status of <PERSON>?,wfh
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+What is attendance of <PERSON>?,attendance
+What is today work from home status of <PERSON>?,today_wfh
+Give me 5 days status of <PERSON>.,status_number
+What is attendance of <PERSON>?,attendance
+What is work from home status of <PERSON>?,wfh
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+What is today attendance of <PERSON>?,today_attendance
+What is attendance of <PERSON>?,attendance
+What is today leave status of <PERSON>?,today_leave
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+Show today attendance of all employees.,all_today_attendance
+What is attendance of <PERSON>?,attendance
+What is today attendance of <PERSON>?,today_attendance
+What is yesterday status of <PERSON>?,yesterday_status
+What is yesterday leave status of <PERSON>?,yesterday_leave
+Show tomorrow attendance of all employees.,all_tomorrow_attendance
+What is today leave status of <PERSON>?,today_leave
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+What is work from home status of <PERSON>?,wfh
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+What is work from home status of <PERSON>?,wfh
+What is today status of <PERSON>?,today_status
+Give me 15 days status of <PERSON>.,status_number
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+What is tomorrow status of <PERSON>?,tomorrow_status
+What is yesterday work from home status of <PERSON>?,yesterday_wfh
+Give me 10 days status of <PERSON>.,status_number
+What is today leave status of <PERSON>?,today_leave
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+What is today work from home status of <PERSON>?,today_wfh
+What is leave status of <PERSON>?,leave
+What is attendance of <PERSON>?,attendance
+What is yesterday leave status of <PERSON>?,yesterday_leave
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Give me 15 days status of <PERSON>.,status_number
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+What is tomorrow status of <PERSON>?,tomorrow_status
+What is today status of <PERSON>?,today_status
+Give me 7 days status of <PERSON>.,status_number
+What is today attendance of <PERSON>?,today_attendance
+What is status of <PERSON>?,status
+Give me 10 days status of <PERSON>.,status_number
+Show pending work from home requests of <PERSON>.,pending_wfh
+Give me 10 days status of <PERSON>.,status_number
+Show pending work from home requests of <PERSON>.,pending_wfh
+Show leave balance of <PERSON>.,leave_balance
+Show pending leave requests of <PERSON>.,pending_leave
+Provide 7 days attendance of all employees.,all_attendance_number
+Show today status of all employees.,all_today_status
+Give me 5 days status of <PERSON>.,status_number
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Provide 10 days attendance of all employees.,all_attendance_number
+Show today announcements.,today_announcement
+Show leave balance of <PERSON>.,leave_balance
+Show leave balance of <PERSON>.,leave_balance
+Show leave balance of <PERSON>.,leave_balance
+Show yesterday leave details of all employees.,all_yesterday_leave
+Show announcements for all employees.,all_announcement
+Show yesterday status of all employees.,all_yesterday_status
+What is leave status of <PERSON>?,leave
+Show today work from home details of all employees.,all_today_wfh
+What is work from home status of <PERSON>?,wfh
+Provide 7 days status of all employees.,all_status_number
+Show pending work from home requests of <PERSON>.,pending_wfh
+Show leave balance of <PERSON> ,leave_balance
+What is tomorrow status of <PERSON>?,tomorrow_status
+Show announcements.,announcement
+Show yesterday announcements.,yesterday_announcement
+What is today leave status of <PERSON>?,today_leave
+Show pending work from home requests of <PERSON>.,pending_wfh
+Show pending leave requests of <PERSON>.,pending_leave
+Provide 5 days status of all employees.,all_status_number
+Show pending leave requests of <PERSON>.,pending_leave
+Show pending work from home requests of <PERSON>.,pending_wfh
+Show leave balance of all employees.,all_leave_balance
+Show tomorrow leave details of all employees.,all_tomorrow_leave
+Give me 10 days status of <PERSON>.,status_number
+What is yesterday leave status of <PERSON>?,yesterday_leave
+Show tomorrow work from home details of all employees.,all_tomorrow_wfh
+Show work from home details of all employees.,all_wfh
+What is today attendance of <PERSON>?,today_attendance
+Show yesterday announcements for all employees.,all_yesterday_announcement
+Show today announcements for all employees.,all_today_announcement
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+What is today work from home status of <PERSON>?,today_wfh
+Show pending leave requests of <PERSON>.,pending_leave
+Give me 10 days status of <PERSON>.,status_number
+Show today leave details of all employees.,all_today_leave
+What is attendance of <PERSON>?,attendance
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Give me 7 days status of <PERSON>.,status_number
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+What is today attendance of <PERSON>?,today_attendance
+Provide 15 days attendance of all employees.,all_attendance_number
+Give me 15 days status of <PERSON>.,status_number
+Give me 10 days status of <PERSON>.,status_number
+What is leave status of <PERSON>?,leave
+Give me 5 days status of <PERSON>.,status_number
+Give me 10 days status of <PERSON>.,status_number
+Show yesterday attendance of all employees.,all_yesterday_attendance
+Show tomorrow announcements for all employees.,all_tomorrow_announcement
+Show tomorrow announcements.,tomorrow_announcement
+What is yesterday work from home status of <PERSON>?,yesterday_wfh
+What is today work from home status of <PERSON>?,today_wfh
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+Show yesterday work from home details of all employees.,all_yesterday_wfh
+Show pending work from home requests of <PERSON>.,pending_wfh
+Give me 15 days status of <PERSON>.,status_number
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+Show leave balance of <PERSON>.,leave_balance
+Show pending leave requests of <PERSON>.,pending_leave
+Give me 5 days status of <PERSON>.,status_number
+What is yesterday status of <PERSON>?,yesterday_status
+Give me 7 days status of <PERSON>.,status_number
+Show leave balance of <PERSON>.,leave_balance
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Show tomorrow status of all employees.,all_tomorrow_status
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+Show leave details of all employees.,all_leave
+What is yesterday leave status of <PERSON>?,yesterday_leave
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Show leave balance of <PERSON>.,leave_balance
+Show pending work from home requests of <PERSON>.,pending_wfh
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Give me 7 days status of <PERSON>.,status_number
+Show pending work from home requests of <PERSON>.,pending_wfh
+Show pending leave requests of <PERSON>.,pending_leave
+Show status of all employees.,all_status
+What is yesterday leave status of <PERSON>?,yesterday_leave
+Show pending leave requests of <PERSON>.,pending_leave
+What is today leave status of <PERSON>?,today_leave
+What is today attendance of <PERSON>?,today_attendance
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+Show attendance of all employees.,all_attendance
+What is yesterday status of <PERSON>?,yesterday_status
+Give me 15 days status of <PERSON>.,status_number
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+Give me 5 days status of <PERSON>.,status_number
+What is today work from home status of <PERSON>?,today_wfh
+What is tomorrow status of <PERSON>?,tomorrow_status
+Provide 5 days attendance of all employees.,all_attendance_number
+Show pending leave requests of <PERSON>.,pending_leave
+What is status of <PERSON>?,status
+Provide 10 days status of all employees.,all_status_number
+What is yesterday leave status of <PERSON>?,yesterday_leave
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+Provide 15 days status of all employees.,all_status_number
+Give me 15 days status of <PERSON>.,status_number
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+What is leave status of <PERSON>?,leave
+What is today work from home status of <PERSON>?,today_wfh
+What is leave status of <PERSON>?,leave
+What is yesterday work from home status of <PERSON>?,yesterday_wfh
+Give me 15 days status of <PERSON>.,status_number
+Give me 7 days status of <PERSON>.,status_number
+What is today leave status of <PERSON>?,today_leave
+What is attendance of <PERSON>?,attendance
+What is work from home status of <PERSON>?,wfh
+What is yesterday work from home status of <PERSON>?,yesterday_wfh
+What is today attendance of <PERSON>?,today_attendance
+Give me 7 days status of <PERSON>.,status_number
+What is work from home status of <PERSON>?,wfh
+What is tomorrow status of <PERSON>?,tomorrow_status
+What is leave status of <PERSON>?,leave
+What is today attendance of <PERSON>?,today_attendance
+Give me 10 days status of <PERSON>.,status_number
+What is work from home status of <PERSON>?,wfh
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+What is attendance of <PERSON>?,attendance
+What is today work from home status of <PERSON>?,today_wfh
+Give me 5 days status of <PERSON>.,status_number
+What is attendance of <PERSON>?,attendance
+What is work from home status of <PERSON>?,wfh
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+What is today attendance of <PERSON>?,today_attendance
+What is attendance of <PERSON>?,attendance
+What is today leave status of <PERSON>?,today_leave
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+Show today attendance of all employees.,all_today_attendance
+What is attendance of <PERSON>?,attendance
+What is today attendance of <PERSON>?,today_attendance
+What is yesterday status of <PERSON>?,yesterday_status
+What is yesterday leave status of <PERSON>?,yesterday_leave
+Show tomorrow attendance of all employees.,all_tomorrow_attendance
+What is today leave status of <PERSON>?,today_leave
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+What is work from home status of <PERSON>?,wfh
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+What is work from home status of <PERSON>?,wfh
+What is today status of <PERSON>?,today_status
+Give me 15 days status of <PERSON>.,status_number
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+What is tomorrow status of <PERSON>?,tomorrow_status
+What is yesterday work from home status of <PERSON>?,yesterday_wfh
+Give me 10 days status of <PERSON>.,status_number
+What is today leave status of <PERSON>?,today_leave
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+What is today work from home status of <PERSON>?,today_wfh
+What is leave status of <PERSON>?,leave
+What is attendance of <PERSON>?,attendance
+What is yesterday leave status of <PERSON>?,yesterday_leave
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Give me 15 days status of <PERSON>.,status_number
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+What is tomorrow status of <PERSON>?,tomorrow_status
+What is today status of <PERSON>?,today_status
+Give me 7 days status of <PERSON>.,status_number
+What is today attendance of <PERSON>?,today_attendance
+What is status of <PERSON>?,status
+Give me 10 days status of <PERSON>.,status_number
+Show pending work from home requests of <PERSON>.,pending_wfh
+Give me 10 days status of <PERSON>.,status_number
+Show pending work from home requests of <PERSON>.,pending_wfh
+Show leave balance of <PERSON>.,leave_balance
+give me the leave balance of <PERSON>,leave_balance
+Show pending leave requests of <PERSON>.,pending_leave
+Provide 7 days attendance of all employees.,all_attendance_number
+Show today status of all employees.,all_today_status
+Give me 5 days status of <PERSON>.,status_number
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Provide 10 days attendance of all employees.,all_attendance_number
+Show today announcements.,today_announcement
+Show leave balance of <PERSON>.,leave_balance
+Show leave balance of <PERSON>.,leave_balance
+Show leave balance of <PERSON>.,leave_balance
+Show yesterday leave details of all employees.,all_yesterday_leave
+Show announcements for all employees.,all_announcement
+Show yesterday status of all employees.,all_yesterday_status
+What is leave status of <PERSON>?,leave
+Show today work from home details of all employees.,all_today_wfh
+What is work from home status of <PERSON>?,wfh
+Provide 7 days status of all employees.,all_status_number
+Show pending work from home requests of <PERSON>.,pending_wfh
+Show leave balance of <PERSON> ,leave_balance
+What is tomorrow status of <PERSON>?,tomorrow_status
+Show announcements.,announcement
+Show yesterday announcements.,yesterday_announcement
+What is today leave status of <PERSON>?,today_leave
+Show pending work from home requests of <PERSON>.,pending_wfh
+Show pending leave requests of <PERSON>.,pending_leave
+Provide 5 days status of all employees.,all_status_number
+Show pending leave requests of <PERSON>.,pending_leave
+Show pending work from home requests of <PERSON>.,pending_wfh
+Show leave balance of all employees.,all_leave_balance
+Show tomorrow leave details of all employees.,all_tomorrow_leave
+Give me 10 days status of <PERSON>.,status_number
+What is yesterday leave status of <PERSON>?,yesterday_leave
+Show tomorrow work from home details of all employees.,all_tomorrow_wfh
+Show work from home details of all employees.,all_wfh
+What is today attendance of <PERSON>?,today_attendance
+Show yesterday announcements for all employees.,all_yesterday_announcement
+Show today announcements for all employees.,all_today_announcement
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+What is today work from home status of <PERSON>?,today_wfh
+Show pending leave requests of <PERSON>.,pending_leave
+Give me 10 days status of <PERSON>.,status_number
+Show today leave details of all employees.,all_today_leave
+What is attendance of <PERSON>?,attendance
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Give me 7 days status of <PERSON>.,status_number
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+What is today attendance of <PERSON>?,today_attendance
+Provide 15 days attendance of all employees.,all_attendance_number
+Give me 15 days status of <PERSON>.,status_number
+Give me 10 days status of <PERSON>.,status_number
+What is leave status of <PERSON>?,leave
+Give me 5 days status of <PERSON>.,status_number
+Give me 10 days status of <PERSON>.,status_number
+Show yesterday attendance of all employees.,all_yesterday_attendance
+Show tomorrow announcements for all employees.,all_tomorrow_announcement
+Show tomorrow announcements.,tomorrow_announcement
+What is yesterday work from home status of <PERSON>?,yesterday_wfh
+What is today work from home status of <PERSON>?,today_wfh
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+Show yesterday work from home details of all employees.,all_yesterday_wfh
+Show pending work from home requests of <PERSON>.,pending_wfh
+Give me 15 days status of <PERSON>.,status_number
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+Show leave balance of <PERSON>.,leave_balance
+Show pending leave requests of <PERSON>.,pending_leave
+Give me 5 days status of <PERSON>.,status_number
+What is yesterday status of <PERSON>?,yesterday_status
+Give me 7 days status of <PERSON>.,status_number
+Show leave balance of <PERSON>.,leave_balance
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Show tomorrow status of all employees.,all_tomorrow_status
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+Show leave details of all employees.,all_leave
+What is yesterday leave status of <PERSON>?,yesterday_leave
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Show leave balance of <PERSON>.,leave_balance
+Show pending work from home requests of <PERSON>.,pending_wfh
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Give me 7 days status of <PERSON>.,status_number
+Show pending work from home requests of <PERSON>.,pending_wfh
+Show pending leave requests of <PERSON>.,pending_leave
+Show status of all employees.,all_status
+What is yesterday leave status of <PERSON>?,yesterday_leave
+Show pending leave requests of <PERSON>.,pending_leave
+What is today leave status of <PERSON>?,today_leave
+What is today attendance of <PERSON>?,today_attendance
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+Show attendance of all employees.,all_attendance
+What is yesterday status of <PERSON>?,yesterday_status
+Give me 15 days status of <PERSON>.,status_number
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+Give me 5 days status of <PERSON>.,status_number
+What is today work from home status of <PERSON>?,today_wfh
+What is tomorrow status of <PERSON>?,tomorrow_status
+Provide 5 days attendance of all employees.,all_attendance_number
+Show pending leave requests of <PERSON>.,pending_leave
+What is status of <PERSON>?,status
+Provide 10 days status of all employees.,all_status_number
+What is yesterday leave status of <PERSON>?,yesterday_leave
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+Provide 15 days status of all employees.,all_status_number
+Give me 15 days status of <PERSON>.,status_number
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+What is leave status of <PERSON>?,leave
+What is today work from home status of <PERSON>?,today_wfh
+What is leave status of <PERSON>?,leave
+What is yesterday work from home status of <PERSON>?,yesterday_wfh
+Give me 15 days status of <PERSON>.,status_number
+Give me 7 days status of <PERSON>.,status_number
+What is today leave status of <PERSON>?,today_leave
+What is attendance of <PERSON>?,attendance
+What is work from home status of <PERSON>?,wfh
+What is yesterday work from home status of <PERSON>?,yesterday_wfh
+What is today attendance of <PERSON>?,today_attendance
+Give me 7 days status of <PERSON>.,status_number
+What is work from home status of <PERSON>?,wfh
+What is tomorrow status of <PERSON>?,tomorrow_status
+What is leave status of <PERSON>?,leave
+What is today attendance of <PERSON>?,today_attendance
+Give me 10 days status of <PERSON>.,status_number
+What is work from home status of <PERSON>?,wfh
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+What is attendance of <PERSON>?,attendance
+What is today work from home status of <PERSON>?,today_wfh
+Give me 5 days status of <PERSON>.,status_number
+What is attendance of <PERSON>?,attendance
+What is work from home status of <PERSON>?,wfh
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+What is today attendance of <PERSON>?,today_attendance
+What is attendance of <PERSON>?,attendance
+What is today leave status of <PERSON>?,today_leave
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+Show today attendance of all employees.,all_today_attendance
+What is attendance of <PERSON>?,attendance
+What is today attendance of <PERSON>?,today_attendance
+What is yesterday status of <PERSON>?,yesterday_status
+What is yesterday leave status of <PERSON>?,yesterday_leave
+Show tomorrow attendance of all employees.,all_tomorrow_attendance
+What is today leave status of <PERSON>?,today_leave
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+What is work from home status of <PERSON>?,wfh
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+What is work from home status of <PERSON>?,wfh
+What is today status of <PERSON>?,today_status
+Give me 15 days status of <PERSON>.,status_number
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+What is tomorrow status of <PERSON>?,tomorrow_status
+What is yesterday work from home status of <PERSON>?,yesterday_wfh
+Give me 10 days status of <PERSON>.,status_number
+What is today leave status of <PERSON>?,today_leave
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+What is today work from home status of <PERSON>?,today_wfh
+What is leave status of <PERSON>?,leave
+What is attendance of <PERSON>?,attendance
+What is yesterday leave status of <PERSON>?,yesterday_leave
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Give me 15 days status of <PERSON>.,status_number
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+What is tomorrow status of <PERSON>?,tomorrow_status
+What is today status of <PERSON>?,today_status
+Give me 7 days status of <PERSON>.,status_number
+What is today attendance of <PERSON>?,today_attendance
+What is status of <PERSON>?,status
+Give me 10 days status of <PERSON>.,status_number
+Show pending work from home requests of <PERSON>.,pending_wfh
+Give me 10 days status of <PERSON>.,status_number
+Show pending work from home requests of <PERSON>.,pending_wfh
+Show leave balance of <PERSON>.,leave_balance
+Show pending leave requests of <PERSON>.,pending_leave
+Provide 7 days attendance of all employees.,all_attendance_number
+Show today status of all employees.,all_today_status
+Give me 5 days status of <PERSON>.,status_number
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Provide 10 days attendance of all employees.,all_attendance_number
+Show today announcements.,today_announcement
+Show leave balance of <PERSON>.,leave_balance
+Show leave balance of <PERSON>.,leave_balance
+Show leave balance of <PERSON>.,leave_balance
+Show yesterday leave details of all employees.,all_yesterday_leave
+Show announcements for all employees.,all_announcement
+Show yesterday status of all employees.,all_yesterday_status
+What is leave status of <PERSON>?,leave
+Show today work from home details of all employees.,all_today_wfh
+What is work from home status of <PERSON>?,wfh
+Provide 7 days status of all employees.,all_status_number
+Show pending work from home requests of <PERSON>.,pending_wfh
+Show leave balance of <PERSON> ,leave_balance
+What is tomorrow status of <PERSON>?,tomorrow_status
+Show announcements.,announcement
+Show yesterday announcements.,yesterday_announcement
+What is today leave status of <PERSON>?,today_leave
+Show pending work from home requests of <PERSON>.,pending_wfh
+Show pending leave requests of <PERSON>.,pending_leave
+Provide 5 days status of all employees.,all_status_number
+Show pending leave requests of <PERSON>.,pending_leave
+Show pending work from home requests of <PERSON>.,pending_wfh
+Show leave balance of all employees.,all_leave_balance
+Show tomorrow leave details of all employees.,all_tomorrow_leave
+Give me 10 days status of <PERSON>.,status_number
+What is yesterday leave status of <PERSON>?,yesterday_leave
+Show tomorrow work from home details of all employees.,all_tomorrow_wfh
+Show work from home details of all employees.,all_wfh
+What is today attendance of <PERSON>?,today_attendance
+Show yesterday announcements for all employees.,all_yesterday_announcement
+Show today announcements for all employees.,all_today_announcement
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+What is today work from home status of <PERSON>?,today_wfh
+Show pending leave requests of <PERSON>.,pending_leave
+Give me 10 days status of <PERSON>.,status_number
+Show today leave details of all employees.,all_today_leave
+What is attendance of <PERSON>?,attendance
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Give me 7 days status of <PERSON>.,status_number
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+What is today attendance of <PERSON>?,today_attendance
+Provide 15 days attendance of all employees.,all_attendance_number
+Give me 15 days status of <PERSON>.,status_number
+Give me 10 days status of <PERSON>.,status_number
+What is leave status of <PERSON>?,leave
+Give me 5 days status of <PERSON>.,status_number
+Give me 10 days status of <PERSON>.,status_number
+Show yesterday attendance of all employees.,all_yesterday_attendance
+Show tomorrow announcements for all employees.,all_tomorrow_announcement
+Show tomorrow announcements.,tomorrow_announcement
+What is yesterday work from home status of <PERSON>?,yesterday_wfh
+What is today work from home status of <PERSON>?,today_wfh
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+Show yesterday work from home details of all employees.,all_yesterday_wfh
+Show pending work from home requests of <PERSON>.,pending_wfh
+Give me 15 days status of <PERSON>.,status_number
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+Show leave balance of <PERSON>.,leave_balance
+Show pending leave requests of <PERSON>.,pending_leave
+Give me 5 days status of <PERSON>.,status_number
+What is yesterday status of <PERSON>?,yesterday_status
+Give me 7 days status of <PERSON>.,status_number
+Show leave balance of <PERSON>.,leave_balance
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Show tomorrow status of all employees.,all_tomorrow_status
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+Show leave details of all employees.,all_leave
+What is yesterday leave status of <PERSON>?,yesterday_leave
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Show leave balance of <PERSON>.,leave_balance
+Show pending work from home requests of <PERSON>.,pending_wfh
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Give me 7 days status of <PERSON>.,status_number
+Show pending work from home requests of <PERSON>.,pending_wfh
+Show pending leave requests of <PERSON>.,pending_leave
+Show status of all employees.,all_status
+What is yesterday leave status of <PERSON>?,yesterday_leave
+Show pending leave requests of <PERSON>.,pending_leave
+What is today leave status of <PERSON>?,today_leave
+What is today attendance of <PERSON>?,today_attendance
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+Show attendance of all employees.,all_attendance
+What is yesterday status of <PERSON>?,yesterday_status
+Give me 15 days status of <PERSON>.,status_number
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+Give me 5 days status of <PERSON>.,status_number
+What is today work from home status of <PERSON>?,today_wfh
+What is tomorrow status of <PERSON>?,tomorrow_status
+Provide 5 days attendance of all employees.,all_attendance_number
+Show pending leave requests of <PERSON>.,pending_leave
+What is status of <PERSON>?,status
+Provide 10 days status of all employees.,all_status_number
+What is yesterday leave status of <PERSON>?,yesterday_leave
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+Provide 15 days status of all employees.,all_status_number
+Give me 15 days status of <PERSON>.,status_number
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+What is leave status of <PERSON>?,leave
+What is today work from home status of <PERSON>?,today_wfh
+What is leave status of <PERSON>?,leave
+What is yesterday work from home status of <PERSON>?,yesterday_wfh
+Give me 15 days status of <PERSON>.,status_number
+Give me 7 days status of <PERSON>.,status_number
+What is today leave status of <PERSON>?,today_leave
+What is attendance of <PERSON>?,attendance
+What is work from home status of <PERSON>?,wfh
+What is yesterday work from home status of <PERSON>?,yesterday_wfh
+What is today attendance of <PERSON>?,today_attendance
+Give me 7 days status of <PERSON>.,status_number
+What is work from home status of <PERSON>?,wfh
+What is tomorrow status of <PERSON>?,tomorrow_status
+What is leave status of <PERSON>?,leave
+What is today attendance of <PERSON>?,today_attendance
+Give me 10 days status of <PERSON>.,status_number
+What is work from home status of <PERSON>?,wfh
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+What is attendance of <PERSON>?,attendance
+What is today work from home status of <PERSON>?,today_wfh
+Give me 5 days status of <PERSON>.,status_number
+What is attendance of <PERSON>?,attendance
+What is work from home status of <PERSON>?,wfh
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+What is today attendance of <PERSON>?,today_attendance
+What is attendance of <PERSON>?,attendance
+What is today leave status of <PERSON>?,today_leave
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+Show today attendance of all employees.,all_today_attendance
+What is attendance of <PERSON>?,attendance
+What is today attendance of <PERSON>?,today_attendance
+What is yesterday status of <PERSON>?,yesterday_status
+What is yesterday leave status of <PERSON>?,yesterday_leave
+Show tomorrow attendance of all employees.,all_tomorrow_attendance
+What is today leave status of <PERSON>?,today_leave
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+What is work from home status of <PERSON>?,wfh
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+What is work from home status of <PERSON>?,wfh
+What is today status of <PERSON>?,today_status
+Give me 15 days status of <PERSON>.,status_number
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+What is tomorrow status of <PERSON>?,tomorrow_status
+What is yesterday work from home status of <PERSON>?,yesterday_wfh
+Give me 10 days status of <PERSON>.,status_number
+What is today leave status of <PERSON>?,today_leave
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+What is today work from home status of <PERSON>?,today_wfh
+What is leave status of <PERSON>?,leave
+What is attendance of <PERSON>?,attendance
+What is yesterday leave status of <PERSON>?,yesterday_leave
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Give me 15 days status of <PERSON>.,status_number
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+What is tomorrow status of <PERSON>?,tomorrow_status
+What is today status of <PERSON>?,today_status
+Give me 7 days status of <PERSON>.,status_number
+What is today attendance of <PERSON>?,today_attendance
+What is status of <PERSON>?,status
+Give me 10 days status of <PERSON>.,status_number
+Show pending work from home requests of <PERSON>.,pending_wfh
+Give me 10 days status of <PERSON>.,status_number
+Show pending work from home requests of <PERSON>.,pending_wfh
+Show leave balance of <PERSON>.,leave_balance
+Show pending leave requests of <PERSON>.,pending_leave
+Provide 7 days attendance of all employees.,all_attendance_number
+Show today status of all employees.,all_today_status
+Give me 5 days status of <PERSON>.,status_number
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Provide 10 days attendance of all employees.,all_attendance_number
+Show today announcements.,today_announcement
+Show leave balance of <PERSON>.,leave_balance
+Show leave balance of <PERSON>.,leave_balance
+Show leave balance of <PERSON>.,leave_balance
+Show yesterday leave details of all employees.,all_yesterday_leave
+Show announcements for all employees.,all_announcement
+Show yesterday status of all employees.,all_yesterday_status
+What is leave status of <PERSON>?,leave
+Show today work from home details of all employees.,all_today_wfh
+What is work from home status of <PERSON>?,wfh
+Provide 7 days status of all employees.,all_status_number
+Show pending work from home requests of <PERSON>.,pending_wfh
+Show leave balance of <PERSON> ,leave_balance
+What is tomorrow status of <PERSON>?,tomorrow_status
+Show announcements.,announcement
+Show yesterday announcements.,yesterday_announcement
+What is today leave status of <PERSON>?,today_leave
+Show pending work from home requests of <PERSON>.,pending_wfh
+Show pending leave requests of <PERSON>.,pending_leave
+Provide 5 days status of all employees.,all_status_number
+Show pending leave requests of <PERSON>.,pending_leave
+Show pending work from home requests of <PERSON>.,pending_wfh
+Show leave balance of all employees.,all_leave_balance
+Show tomorrow leave details of all employees.,all_tomorrow_leave
+Give me 10 days status of <PERSON>.,status_number
+What is yesterday leave status of <PERSON>?,yesterday_leave
+Show tomorrow work from home details of all employees.,all_tomorrow_wfh
+Show work from home details of all employees.,all_wfh
+What is today attendance of <PERSON>?,today_attendance
+Show yesterday announcements for all employees.,all_yesterday_announcement
+Show today announcements for all employees.,all_today_announcement
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+What is today work from home status of <PERSON>?,today_wfh
+Show pending leave requests of <PERSON>.,pending_leave
+Give me 10 days status of <PERSON>.,status_number
+Show today leave details of all employees.,all_today_leave
+What is attendance of <PERSON>?,attendance
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Give me 7 days status of <PERSON>.,status_number
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+What is today attendance of <PERSON>?,today_attendance
+Provide 15 days attendance of all employees.,all_attendance_number
+Give me 15 days status of <PERSON>.,status_number
+Give me 10 days status of <PERSON>.,status_number
+What is leave status of <PERSON>?,leave
+Give me 5 days status of <PERSON>.,status_number
+Give me 10 days status of <PERSON>.,status_number
+Show yesterday attendance of all employees.,all_yesterday_attendance
+Show tomorrow announcements for all employees.,all_tomorrow_announcement
+Show tomorrow announcements.,tomorrow_announcement
+What is yesterday work from home status of <PERSON>?,yesterday_wfh
+What is today work from home status of <PERSON>?,today_wfh
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+Show yesterday work from home details of all employees.,all_yesterday_wfh
+Show pending work from home requests of <PERSON>.,pending_wfh
+Give me 15 days status of <PERSON>.,status_number
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+Show leave balance of <PERSON>.,leave_balance
+Show pending leave requests of <PERSON>.,pending_leave
+Give me 5 days status of <PERSON>.,status_number
+What is yesterday status of <PERSON>?,yesterday_status
+Give me 7 days status of <PERSON>.,status_number
+Show leave balance of <PERSON>.,leave_balance
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Show tomorrow status of all employees.,all_tomorrow_status
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+Show leave details of all employees.,all_leave
+What is yesterday leave status of <PERSON>?,yesterday_leave
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Show leave balance of <PERSON>.,leave_balance
+Show pending work from home requests of <PERSON>.,pending_wfh
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Give me 7 days status of <PERSON>.,status_number
+Show pending work from home requests of <PERSON>.,pending_wfh
+Show pending leave requests of <PERSON>.,pending_leave
+Show status of all employees.,all_status
+What is yesterday leave status of <PERSON>?,yesterday_leave
+Show pending leave requests of <PERSON>.,pending_leave
+What is today leave status of <PERSON>?,today_leave
+What is today attendance of <PERSON>?,today_attendance
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+Show attendance of all employees.,all_attendance
+What is yesterday status of <PERSON>?,yesterday_status
+Give me 15 days status of <PERSON>.,status_number
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+Give me 5 days status of <PERSON>.,status_number
+What is today work from home status of <PERSON>?,today_wfh
+What is tomorrow status of <PERSON>?,tomorrow_status
+Provide 5 days attendance of all employees.,all_attendance_number
+Show pending leave requests of <PERSON>.,pending_leave
+What is status of <PERSON>?,status
+Provide 10 days status of all employees.,all_status_number
+What is yesterday leave status of <PERSON>?,yesterday_leave
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+Provide 15 days status of all employees.,all_status_number
+Give me 15 days status of <PERSON>.,status_number
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+What is leave status of <PERSON>?,leave
+What is today work from home status of <PERSON>?,today_wfh
+What is leave status of <PERSON>?,leave
+What is yesterday work from home status of <PERSON>?,yesterday_wfh
+Give me 15 days status of <PERSON>.,status_number
+Give me 7 days status of <PERSON>.,status_number
+What is today leave status of <PERSON>?,today_leave
+What is attendance of <PERSON>?,attendance
+What is work from home status of <PERSON>?,wfh
+What is yesterday work from home status of <PERSON>?,yesterday_wfh
+What is today attendance of <PERSON>?,today_attendance
+Give me 7 days status of <PERSON>.,status_number
+What is work from home status of <PERSON>?,wfh
+What is tomorrow status of <PERSON>?,tomorrow_status
+What is leave status of <PERSON>?,leave
+What is today attendance of <PERSON>?,today_attendance
+Give me 10 days status of <PERSON>.,status_number
+What is work from home status of <PERSON>?,wfh
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+What is attendance of <PERSON>?,attendance
+What is today work from home status of <PERSON>?,today_wfh
+Give me 5 days status of <PERSON>.,status_number
+What is attendance of <PERSON>?,attendance
+What is work from home status of <PERSON>?,wfh
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+What is today attendance of <PERSON>?,today_attendance
+What is attendance of <PERSON>?,attendance
+What is today leave status of <PERSON>?,today_leave
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+Show today attendance of all employees.,all_today_attendance
+What is attendance of <PERSON>?,attendance
+What is today attendance of <PERSON>?,today_attendance
+What is yesterday status of <PERSON>?,yesterday_status
+What is yesterday leave status of <PERSON>?,yesterday_leave
+Show tomorrow attendance of all employees.,all_tomorrow_attendance
+What is today leave status of <PERSON>?,today_leave
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+What is work from home status of <PERSON>?,wfh
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+What is work from home status of <PERSON>?,wfh
+What is today status of <PERSON>?,today_status
+Give me 15 days status of <PERSON>.,status_number
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+What is tomorrow status of <PERSON>?,tomorrow_status
+What is yesterday work from home status of <PERSON>?,yesterday_wfh
+Give me 10 days status of <PERSON>.,status_number
+What is today leave status of <PERSON>?,today_leave
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+What is today work from home status of <PERSON>?,today_wfh
+What is leave status of <PERSON>?,leave
+What is attendance of <PERSON>?,attendance
+What is yesterday leave status of <PERSON>?,yesterday_leave
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Give me 15 days status of <PERSON>.,status_number
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+What is tomorrow status of <PERSON>?,tomorrow_status
+What is today status of <PERSON>?,today_status
+Give me 7 days status of <PERSON>.,status_number
+What is today attendance of <PERSON>?,today_attendance
+What is status of <PERSON>?,status
+Give me 10 days status of <PERSON>.,status_number
+Show pending work from home requests of <PERSON>.,pending_wfh
+Give me 10 days status of <PERSON>.,status_number
+Show pending work from home requests of <PERSON>.,pending_wfh
+Show leave balance of <PERSON>.,leave_balance
+Show pending leave requests of <PERSON>.,pending_leave
+Provide 7 days attendance of all employees.,all_attendance_number
+Show today status of all employees.,all_today_status
+Give me 5 days status of <PERSON>.,status_number
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Provide 10 days attendance of all employees.,all_attendance_number
+Show today announcements.,today_announcement
+Show leave balance of <PERSON>.,leave_balance
+Show leave balance of <PERSON>.,leave_balance
+Show leave balance of <PERSON>.,leave_balance
+Show yesterday leave details of all employees.,all_yesterday_leave
+Show announcements for all employees.,all_announcement
+Show yesterday status of all employees.,all_yesterday_status
+What is leave status of <PERSON>?,leave
+Show today work from home details of all employees.,all_today_wfh
+What is work from home status of <PERSON>?,wfh
+Provide 7 days status of all employees.,all_status_number
+Show pending work from home requests of <PERSON>.,pending_wfh
+Show leave balance of <PERSON> ,leave_balance
+What is tomorrow status of <PERSON>?,tomorrow_status
+Show announcements.,announcement
+Show yesterday announcements.,yesterday_announcement
+What is today leave status of <PERSON>?,today_leave
+Show pending work from home requests of <PERSON>.,pending_wfh
+Show pending leave requests of <PERSON>.,pending_leave
+Provide 5 days status of all employees.,all_status_number
+Show pending leave requests of <PERSON>.,pending_leave
+Show pending work from home requests of <PERSON>.,pending_wfh
+Show leave balance of all employees.,all_leave_balance
+Show tomorrow leave details of all employees.,all_tomorrow_leave
+Give me 10 days status of <PERSON>.,status_number
+What is yesterday leave status of <PERSON>?,yesterday_leave
+Show tomorrow work from home details of all employees.,all_tomorrow_wfh
+Show work from home details of all employees.,all_wfh
+What is today attendance of <PERSON>?,today_attendance
+Show yesterday announcements for all employees.,all_yesterday_announcement
+Show today announcements for all employees.,all_today_announcement
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+What is today work from home status of <PERSON>?,today_wfh
+Show pending leave requests of <PERSON>.,pending_leave
+Give me 10 days status of <PERSON>.,status_number
+Show today leave details of all employees.,all_today_leave
+What is attendance of <PERSON>?,attendance
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Give me 7 days status of <PERSON>.,status_number
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+What is today attendance of <PERSON>?,today_attendance
+Provide 15 days attendance of all employees.,all_attendance_number
+Give me 15 days status of <PERSON>.,status_number
+Give me 10 days status of <PERSON>.,status_number
+What is leave status of <PERSON>?,leave
+Give me 5 days status of <PERSON>.,status_number
+Give me 10 days status of <PERSON>.,status_number
+Show yesterday attendance of all employees.,all_yesterday_attendance
+Show tomorrow announcements for all employees.,all_tomorrow_announcement
+Show tomorrow announcements.,tomorrow_announcement
+What is yesterday work from home status of <PERSON>?,yesterday_wfh
+What is today work from home status of <PERSON>?,today_wfh
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+Show yesterday work from home details of all employees.,all_yesterday_wfh
+Show pending work from home requests of <PERSON>.,pending_wfh
+Give me 15 days status of <PERSON>.,status_number
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+Show leave balance of <PERSON>.,leave_balance
+Show pending leave requests of <PERSON>.,pending_leave
+Give me 5 days status of <PERSON>.,status_number
+What is yesterday status of <PERSON>?,yesterday_status
+Give me 7 days status of <PERSON>.,status_number
+Show leave balance of <PERSON>.,leave_balance
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Show tomorrow status of all employees.,all_tomorrow_status
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+Show leave details of all employees.,all_leave
+What is yesterday leave status of <PERSON>?,yesterday_leave
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Show leave balance of <PERSON>.,leave_balance
+Show pending work from home requests of <PERSON>.,pending_wfh
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Give me 7 days status of <PERSON>.,status_number
+Show pending work from home requests of <PERSON>.,pending_wfh
+Show pending leave requests of <PERSON>.,pending_leave
+Show status of all employees.,all_status
+What is yesterday leave status of <PERSON>?,yesterday_leave
+Show pending leave requests of <PERSON>.,pending_leave
+What is today leave status of <PERSON>?,today_leave
+What is today attendance of <PERSON>?,today_attendance
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+Show attendance of all employees.,all_attendance
+What is yesterday status of <PERSON>?,yesterday_status
+Give me 15 days status of <PERSON>.,status_number
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+Give me 5 days status of <PERSON>.,status_number
+What is today work from home status of <PERSON>?,today_wfh
+What is tomorrow status of <PERSON>?,tomorrow_status
+Provide 5 days attendance of all employees.,all_attendance_number
+Show pending leave requests of <PERSON>.,pending_leave
+What is status of <PERSON>?,status
+Provide 10 days status of all employees.,all_status_number
+What is yesterday leave status of <PERSON>?,yesterday_leave
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+Provide 15 days status of all employees.,all_status_number
+Give me 15 days status of <PERSON>.,status_number
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+What is leave status of <PERSON>?,leave
+What is today work from home status of <PERSON>?,today_wfh
+What is leave status of <PERSON>?,leave
+What is yesterday work from home status of <PERSON>?,yesterday_wfh
+Give me 15 days status of <PERSON>.,status_number
+Give me 7 days status of <PERSON>.,status_number
+What is today leave status of <PERSON>?,today_leave
+What is attendance of <PERSON>?,attendance
+What is work from home status of <PERSON>?,wfh
+What is yesterday work from home status of <PERSON>?,yesterday_wfh
+What is today attendance of <PERSON>?,today_attendance
+Give me 7 days status of <PERSON>.,status_number
+What is work from home status of <PERSON>?,wfh
+What is tomorrow status of <PERSON>?,tomorrow_status
+What is leave status of <PERSON>?,leave
+What is today attendance of <PERSON>?,today_attendance
+Give me 10 days status of <PERSON>.,status_number
+What is work from home status of <PERSON>?,wfh
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+What is attendance of <PERSON>?,attendance
+What is today work from home status of <PERSON>?,today_wfh
+Give me 5 days status of <PERSON>.,status_number
+What is attendance of <PERSON>?,attendance
+What is work from home status of <PERSON>?,wfh
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+What is today attendance of <PERSON>?,today_attendance
+What is attendance of <PERSON>?,attendance
+What is today leave status of <PERSON>?,today_leave
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+Show today attendance of all employees.,all_today_attendance
+What is attendance of <PERSON>?,attendance
+What is today attendance of <PERSON>?,today_attendance
+What is yesterday status of <PERSON>?,yesterday_status
+What is yesterday leave status of <PERSON>?,yesterday_leave
+Show tomorrow attendance of all employees.,all_tomorrow_attendance
+What is today leave status of <PERSON>?,today_leave
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+What is work from home status of <PERSON>?,wfh
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+What is work from home status of <PERSON>?,wfh
+What is today status of <PERSON>?,today_status
+Give me 15 days status of <PERSON>.,status_number
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+What is tomorrow status of <PERSON>?,tomorrow_status
+What is yesterday work from home status of <PERSON>?,yesterday_wfh
+Give me 10 days status of <PERSON>.,status_number
+What is today leave status of <PERSON>?,today_leave
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+What is today work from home status of <PERSON>?,today_wfh
+What is leave status of <PERSON>?,leave
+What is attendance of <PERSON>?,attendance
+What is yesterday leave status of <PERSON>?,yesterday_leave
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Give me 15 days status of <PERSON>.,status_number
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+What is tomorrow status of <PERSON>?,tomorrow_status
+What is today status of <PERSON>?,today_status
+Give me 7 days status of <PERSON>.,status_number
+What is today attendance of <PERSON>?,today_attendance
+What is status of <PERSON>?,status
+Give me 10 days status of <PERSON>.,status_number
+Show pending work from home requests of <PERSON>.,pending_wfh
+Give me 10 days status of <PERSON>.,status_number
+Show pending work from home requests of <PERSON>.,pending_wfh
+Show leave balance of <PERSON>.,leave_balance
+Show pending leave requests of <PERSON>.,pending_leave
+Provide 7 days attendance of all employees.,all_attendance_number
+Show today status of all employees.,all_today_status
+Give me 5 days status of <PERSON>.,status_number
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Provide 10 days attendance of all employees.,all_attendance_number
+Show today announcements.,today_announcement
+Show leave balance of <PERSON>.,leave_balance
+Show leave balance of <PERSON>.,leave_balance
+Show leave balance of <PERSON>.,leave_balance
+Show yesterday leave details of all employees.,all_yesterday_leave
+Show announcements for all employees.,all_announcement
+Show yesterday status of all employees.,all_yesterday_status
+What is leave status of <PERSON>?,leave
+Show today work from home details of all employees.,all_today_wfh
+What is work from home status of <PERSON>?,wfh
+Provide 7 days status of all employees.,all_status_number
+Show pending work from home requests of <PERSON>.,pending_wfh
+Show leave balance of <PERSON> ,leave_balance
+What is tomorrow status of <PERSON>?,tomorrow_status
+Show announcements.,announcement
+Show yesterday announcements.,yesterday_announcement
+What is today leave status of <PERSON>?,today_leave
+give me the leave balance of <PERSON>,leave_balance
+Show pending work from home requests of <PERSON>.,pending_wfh
+Show pending leave requests of <PERSON>.,pending_leave
+Provide 5 days status of all employees.,all_status_number
+Show pending leave requests of <PERSON>.,pending_leave
+Show pending work from home requests of <PERSON>.,pending_wfh
+Show leave balance of all employees.,all_leave_balance
+Show tomorrow leave details of all employees.,all_tomorrow_leave
+Give me 10 days status of <PERSON>.,status_number
+What is yesterday leave status of <PERSON>?,yesterday_leave
+Show tomorrow work from home details of all employees.,all_tomorrow_wfh
+Show work from home details of all employees.,all_wfh
+What is today attendance of <PERSON>?,today_attendance
+Show yesterday announcements for all employees.,all_yesterday_announcement
+Show today announcements for all employees.,all_today_announcement
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+What is today work from home status of <PERSON>?,today_wfh
+Show pending leave requests of <PERSON>.,pending_leave
+Give me 10 days status of <PERSON>.,status_number
+Show today leave details of all employees.,all_today_leave
+What is attendance of <PERSON>?,attendance
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Give me 7 days status of <PERSON>.,status_number
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+What is today attendance of <PERSON>?,today_attendance
+Provide 15 days attendance of all employees.,all_attendance_number
+Give me 15 days status of <PERSON>.,status_number
+Give me 10 days status of <PERSON>.,status_number
+What is leave status of <PERSON>?,leave
+Give me 5 days status of <PERSON>.,status_number
+Give me 10 days status of <PERSON>.,status_number
+Show yesterday attendance of all employees.,all_yesterday_attendance
+give me the leave balance of <PERSON>,leave_balance
+Show tomorrow announcements for all employees.,all_tomorrow_announcement
+Show tomorrow announcements.,tomorrow_announcement
+What is yesterday work from home status of <PERSON>?,yesterday_wfh
+What is today work from home status of <PERSON>?,today_wfh
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+Show yesterday work from home details of all employees.,all_yesterday_wfh
+Show pending work from home requests of <PERSON>.,pending_wfh
+Give me 15 days status of <PERSON>.,status_number
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+Show leave balance of <PERSON>.,leave_balance
+Show pending leave requests of <PERSON>.,pending_leave
+Give me 5 days status of <PERSON>.,status_number
+What is yesterday status of <PERSON>?,yesterday_status
+Give me 7 days status of <PERSON>.,status_number
+Show leave balance of <PERSON>.,leave_balance
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Show tomorrow status of all employees.,all_tomorrow_status
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+Show leave details of all employees.,all_leave
+What is yesterday leave status of <PERSON>?,yesterday_leave
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Show leave balance of <PERSON>.,leave_balance
+Show pending work from home requests of <PERSON>.,pending_wfh
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Give me 7 days status of <PERSON>.,status_number
+Show pending work from home requests of <PERSON>.,pending_wfh
+Show pending leave requests of <PERSON>.,pending_leave
+Show status of all employees.,all_status
+What is yesterday leave status of <PERSON>?,yesterday_leave
+Show pending leave requests of <PERSON>.,pending_leave
+give me the leave balance of <PERSON>,leave_balance
+What is today leave status of <PERSON>?,today_leave
+What is today attendance of <PERSON>?,today_attendance
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+Show attendance of all employees.,all_attendance
+What is yesterday status of <PERSON>?,yesterday_status
+Give me 15 days status of <PERSON>.,status_number
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+Give me 5 days status of <PERSON>.,status_number
+What is today work from home status of <PERSON>?,today_wfh
+What is tomorrow status of <PERSON>?,tomorrow_status
+Provide 5 days attendance of all employees.,all_attendance_number
+Show pending leave requests of <PERSON>.,pending_leave
+What is status of <PERSON>?,status
+Provide 10 days status of all employees.,all_status_number
+What is yesterday leave status of <PERSON>?,yesterday_leave
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+Provide 15 days status of all employees.,all_status_number
+Give me 15 days status of <PERSON>.,status_number
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+give me the leave balance of <PERSON>,leave_balance
+What is leave status of <PERSON>?,leave
+What is today work from home status of <PERSON>?,today_wfh
+What is leave status of <PERSON>?,leave
+What is yesterday work from home status of <PERSON>?,yesterday_wfh
+Give me 15 days status of <PERSON>.,status_number
+Give me 7 days status of <PERSON>.,status_number
+What is today leave status of <PERSON>?,today_leave
+What is attendance of <PERSON>?,attendance
+What is work from home status of <PERSON>?,wfh
+What is yesterday work from home status of <PERSON>?,yesterday_wfh
+What is today attendance of <PERSON>?,today_attendance
+Give me 7 days status of <PERSON>.,status_number
+What is work from home status of <PERSON>?,wfh
+What is tomorrow status of <PERSON>?,tomorrow_status
+What is leave status of <PERSON>?,leave
+What is today attendance of <PERSON>?,today_attendance
+Give me 10 days status of <PERSON>.,status_number
+What is work from home status of <PERSON>?,wfh
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+What is attendance of <PERSON>?,attendance
+What is today work from home status of <PERSON>?,today_wfh
+Give me 5 days status of <PERSON>.,status_number
+What is attendance of <PERSON>?,attendance
+give me the leave balance of <PERSON>,leave_balance
+What is work from home status of <PERSON>?,wfh
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+What is today attendance of <PERSON>?,today_attendance
+What is attendance of <PERSON>?,attendance
+What is today leave status of <PERSON>?,today_leave
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+Show today attendance of all employees.,all_today_attendance
+What is attendance of <PERSON>?,attendance
+What is today attendance of <PERSON>?,today_attendance
+What is yesterday status of <PERSON>?,yesterday_status
+What is yesterday leave status of <PERSON>?,yesterday_leave
+Show tomorrow attendance of all employees.,all_tomorrow_attendance
+What is today leave status of <PERSON>?,today_leave
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+What is work from home status of <PERSON>?,wfh
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+What is work from home status of <PERSON>?,wfh
+What is today status of <PERSON>?,today_status
+Give me 15 days status of <PERSON>.,status_number
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+What is tomorrow status of <PERSON>?,tomorrow_status
+What is yesterday work from home status of <PERSON>?,yesterday_wfh
+Give me 10 days status of <PERSON>.,status_number
+What is today leave status of <PERSON>?,today_leave
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+What is today work from home status of <PERSON>?,today_wfh
+What is leave status of <PERSON>?,leave
+What is attendance of <PERSON>?,attendance
+What is yesterday leave status of <PERSON>?,yesterday_leave
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Give me 15 days status of <PERSON>.,status_number
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+give me the leave balance of <PERSON>,leave_balance
+What is tomorrow status of <PERSON>?,tomorrow_status
+What is today status of <PERSON>?,today_status
+Give me 7 days status of <PERSON>.,status_number
+What is today attendance of <PERSON>?,today_attendance
+What is status of <PERSON>?,status
+Give me 10 days status of <PERSON>.,status_number
+Show pending work from home requests of <PERSON>.,pending_wfh
+Give me 10 days status of <PERSON>.,status_number
+Show pending work from home requests of <PERSON>.,pending_wfh
+give me the leave balance of <PERSON>,leave_balance
+Show leave balance of <PERSON>.,leave_balance
+Show pending leave requests of <PERSON>.,pending_leave
+Provide 7 days attendance of all employees.,all_attendance_number
+Show today status of all employees.,all_today_status
+Give me 5 days status of <PERSON>.,status_number
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Provide 10 days attendance of all employees.,all_attendance_number
+Show today announcements.,today_announcement
+Show leave balance of <PERSON>.,leave_balance
+give me the leave balance of <PERSON>,leave_balance
+Show leave balance of <PERSON>.,leave_balance
+Show leave balance of <PERSON>.,leave_balance
+Show yesterday leave details of all employees.,all_yesterday_leave
+Show announcements for all employees.,all_announcement
+Show yesterday status of all employees.,all_yesterday_status
+What is leave status of <PERSON>?,leave
+Show today work from home details of all employees.,all_today_wfh
+What is work from home status of <PERSON>?,wfh
+Provide 7 days status of all employees.,all_status_number
+Show pending work from home requests of <PERSON>.,pending_wfh
+Show leave balance of <PERSON> ,leave_balance
+give me the leave balance of <PERSON>,leave_balance
+What is tomorrow status of <PERSON>?,tomorrow_status
+Show announcements.,announcement
+Show yesterday announcements.,yesterday_announcement
+What is today leave status of <PERSON>?,today_leave
+Show pending work from home requests of <PERSON>.,pending_wfh
+Show pending leave requests of <PERSON>.,pending_leave
+Provide 5 days status of all employees.,all_status_number
+Show pending leave requests of <PERSON>.,pending_leave
+Show pending work from home requests of <PERSON>.,pending_wfh
+give me the leave balance of <PERSON>,leave_balance
+Show leave balance of all employees.,all_leave_balance
+Show tomorrow leave details of all employees.,all_tomorrow_leave
+Give me 10 days status of <PERSON>.,status_number
+What is yesterday leave status of <PERSON>?,yesterday_leave
+Show tomorrow work from home details of all employees.,all_tomorrow_wfh
+Show work from home details of all employees.,all_wfh
+What is today attendance of <PERSON>?,today_attendance
+Show yesterday announcements for all employees.,all_yesterday_announcement
+Show today announcements for all employees.,all_today_announcement
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+What is today work from home status of <PERSON>?,today_wfh
+Show pending leave requests of <PERSON>.,pending_leave
+give me the leave balance of <PERSON>,leave_balance
+Give me 10 days status of <PERSON>.,status_number
+Show today leave details of all employees.,all_today_leave
+What is attendance of <PERSON>?,attendance
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Give me 7 days status of <PERSON>.,status_number
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+What is today attendance of <PERSON>?,today_attendance
+Provide 15 days attendance of all employees.,all_attendance_number
+Give me 15 days status of <PERSON>.,status_number
+Give me 10 days status of <PERSON>.,status_number
+What is leave status of <PERSON>?,leave
+Give me 5 days status of <PERSON>.,status_number
+Give me 10 days status of <PERSON>.,status_number
+give me the leave balance of <PERSON>,leave_balance
+Show yesterday attendance of all employees.,all_yesterday_attendance
+Show tomorrow announcements for all employees.,all_tomorrow_announcement
+Show tomorrow announcements.,tomorrow_announcement
+What is yesterday work from home status of <PERSON>?,yesterday_wfh
+What is today work from home status of <PERSON>?,today_wfh
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+Show yesterday work from home details of all employees.,all_yesterday_wfh
+Show pending work from home requests of <PERSON>.,pending_wfh
+Give me 15 days status of <PERSON>.,status_number
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+Show leave balance of <PERSON>.,leave_balance
+Show pending leave requests of <PERSON>.,pending_leave
+Give me 5 days status of <PERSON>.,status_number
+give me the leave balance of <PERSON>,leave_balance
+What is yesterday status of <PERSON>?,yesterday_status
+Give me 7 days status of <PERSON>.,status_number
+Show leave balance of <PERSON>.,leave_balance
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Show tomorrow status of all employees.,all_tomorrow_status
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+Show leave details of all employees.,all_leave
+What is yesterday leave status of <PERSON>?,yesterday_leave
+give me the leave balance of <PERSON>,leave_balance
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Show leave balance of <PERSON>.,leave_balance
+Show pending work from home requests of <PERSON>.,pending_wfh
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Give me 7 days status of <PERSON>.,status_number
+Show pending work from home requests of <PERSON>.,pending_wfh
+Show pending leave requests of <PERSON>.,pending_leave
+Show status of all employees.,all_status
+What is yesterday leave status of <PERSON>?,yesterday_leave
+Show pending leave requests of <PERSON>.,pending_leave
+What is today leave status of <PERSON>?,today_leave
+What is today attendance of <PERSON>?,today_attendance
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+give me the leave balance of <PERSON>,leave_balance
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+Show attendance of all employees.,all_attendance
+What is yesterday status of <PERSON>?,yesterday_status
+Give me 15 days status of <PERSON>.,status_number
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+Give me 5 days status of <PERSON>.,status_number
+What is today work from home status of <PERSON>?,today_wfh
+What is tomorrow status of <PERSON>?,tomorrow_status
+Provide 5 days attendance of all employees.,all_attendance_number
+Show pending leave requests of <PERSON>.,pending_leave
+give me the leave balance of <PERSON>,leave_balance
+What is status of <PERSON>?,status
+Provide 10 days status of all employees.,all_status_number
+What is yesterday leave status of <PERSON>?,yesterday_leave
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+Provide 15 days status of all employees.,all_status_number
+Give me 15 days status of <PERSON>.,status_number
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+What is leave status of <PERSON>?,leave
+What is today work from home status of <PERSON>?,today_wfh
+What is leave status of <PERSON>?,leave
+give me the leave balance of <PERSON>,leave_balance
+What is yesterday work from home status of <PERSON>?,yesterday_wfh
+Give me 15 days status of <PERSON>.,status_number
+Give me 7 days status of <PERSON>.,status_number
+What is today leave status of <PERSON>?,today_leave
+What is attendance of <PERSON>?,attendance
+What is work from home status of <PERSON>?,wfh
+What is yesterday work from home status of <PERSON>?,yesterday_wfh
+What is today attendance of <PERSON>?,today_attendance
+Give me 7 days status of <PERSON>.,status_number
+What is work from home status of <PERSON>?,wfh
+What is tomorrow status of <PERSON>?,tomorrow_status
+give me the leave balance of <PERSON>,leave_balance
+What is leave status of <PERSON>?,leave
+What is today attendance of <PERSON>?,today_attendance
+Give me 10 days status of <PERSON>.,status_number
+What is work from home status of <PERSON>?,wfh
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+What is attendance of <PERSON>?,attendance
+What is today work from home status of <PERSON>?,today_wfh
+Give me 5 days status of <PERSON>.,status_number
+What is attendance of <PERSON>?,attendance
+give me the leave balance of <PERSON>,leave_balance
+What is work from home status of <PERSON>?,wfh
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+What is today attendance of <PERSON>?,today_attendance
+What is attendance of <PERSON>?,attendance
+What is today leave status of <PERSON>?,today_leave
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+Show today attendance of all employees.,all_today_attendance
+What is attendance of <PERSON>?,attendance
+What is today attendance of <PERSON>?,today_attendance
+What is yesterday status of <PERSON>?,yesterday_status
+What is yesterday leave status of <PERSON>?,yesterday_leave
+Show tomorrow attendance of all employees.,all_tomorrow_attendance
+What is today leave status of <PERSON>?,today_leave
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+What is work from home status of <PERSON>?,wfh
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+What is work from home status of <PERSON>?,wfh
+What is today status of <PERSON>?,today_status
+Give me 15 days status of <PERSON>.,status_number
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+What is tomorrow leave status of <PERSON>?,tomorrow_leave
+What is tomorrow status of <PERSON>?,tomorrow_status
+What is yesterday work from home status of <PERSON>?,yesterday_wfh
+Give me 10 days status of <PERSON>.,status_number
+What is today leave status of <PERSON>?,today_leave
+What is tomorrow attendance of <PERSON>?,tomorrow_attendance
+What is today work from home status of <PERSON>?,today_wfh
+What is leave status of <PERSON>?,leave
+What is attendance of <PERSON>?,attendance
+What is yesterday leave status of <PERSON>?,yesterday_leave
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+Give me 15 days status of <PERSON>.,status_number
+What is yesterday attendance of <PERSON>?,yesterday_attendance
+What is tomorrow work from home status of <PERSON>?,tomorrow_wfh
+What is tomorrow status of <PERSON>?,tomorrow_status
+What is today status of <PERSON>?,today_status
+Give me 7 days status of <PERSON>.,status_number
+What is today attendance of <PERSON>?,today_attendance
+What is status of <PERSON>?,status
+give me the leave balance of <PERSON>,leave_balance

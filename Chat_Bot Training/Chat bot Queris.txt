@@ -1,0 +1,25 @@
+Sanity tests ──
+  ✅  'Show leave balance of Ravi'
+      expected=leave_balance  got=leave_balance
+  ✅  'Show pending WFH requests of Priya'
+      expected=pending_wfh  got=pending_wfh
+  ✅  'Show pending leave requests of Kumar'
+      expected=pending_leave  got=pending_leave
+  ✅  'Give me 7 days status of Anjali'
+      expected=status_number  got=status_number
+  ✅  'What is today attendance of Suresh'
+      expected=today_attendance  got=today_attendance
+  ✅  'Show today status of all employees'
+      expected=all_today_status  got=all_today_status
+  ❌  'Show leave balance of all employees'
+      expected=all_leave_balance  got=leave_balance
+  ✅  'Provide 10 days attendance of all employees'
+      expected=all_attendance_number  got=all_attendance_number
+  ✅  'Show today announcements'
+      expected=today_announcement  got=today_announcement
+  ❌  'What is yesterday leave status of Ravi'
+      expected=yesterday_leave  got=leave
+  ❌  'What is tomorrow WFH status of Priya'
+      expected=tomorrow_wfh  got=all_tomorrow_wfh
+  ❌  'Show attendance of all employees'
+      expected=all_attendance  got=all_attendance_number

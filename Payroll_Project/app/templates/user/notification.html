@@ -1,0 +1,58 @@
+{% extends 'navAside.html' %}
+{% block title %}<title>Birthday Wishes</title>{% endblock %}
+{% block content %}
+<div class="ps-page">
+  <div class="ps-sub-topbar">
+    <div class="ps-breadcrumb">
+      <a href="{% url 'clock' %}">Dashboard</a>
+      <span class="ps-breadcrumb-sep">›</span>
+      <span class="ps-breadcrumb-cur">🎂 Birthday Wishes</span>
+    </div>
+  </div>
+  <div class="ps-content">
+    <h1 style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--text)">Birthday Wishes Received</h1>
+    <div class="ps-card" style="padding:0;overflow:hidden">
+      <div style="overflow-x:auto">
+        <table class="ps-table">
+          <thead><tr>
+            <th>Employee ID</th><th>From</th><th>Wished On</th><th>Message</th>
+          </tr></thead>
+          <tbody>
+            {% for i in Birthday_Info %}
+            <tr>
+              <td style="font-family:'Syne',sans-serif;font-weight:600;color:var(--brand)">{{i.Employee_id}}</td>
+              <td style="font-weight:500">{{i.From_Employee_name}}</td>
+              <td style="color:var(--muted)">{{i.Wished_On}}</td>
+              <td style="max-width:320px">{{i.Wish}}</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="4" class="ps-empty">No birthday wishes yet. 🎂</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+body{overflow-x:hidden;}
+:root{--brand:#1e40af;--brand-light:#3b82f6;--brand-dark:#1e3a8a;--surface2:#e8eef7;--border:rgba(30,64,175,0.14);--text:#0c1a2e;--muted:#476080;--sidebar-w:240px;--topbar-h:58px;}
+.ps-page{margin-left:var(--sidebar-w);margin-top:var(--topbar-h);min-height:calc(100vh - var(--topbar-h));display:flex;flex-direction:column;}
+@media(max-width:768px){.ps-page{margin-left:0;}}
+.ps-sub-topbar{position:sticky;top:var(--topbar-h);z-index:20;background:rgba(255,255,255,0.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 28px;height:44px;display:flex;align-items:center;gap:12px;}
+.ps-breadcrumb{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);}
+.ps-breadcrumb a{color:var(--muted);text-decoration:none;}
+.ps-breadcrumb a:hover{color:var(--brand);}
+.ps-breadcrumb-sep{opacity:.4;}
+.ps-breadcrumb-cur{color:var(--brand);font-weight:600;}
+.ps-content{padding:24px 28px;display:flex;flex-direction:column;gap:20px;}
+.ps-card{background:rgba(255,255,255,0.88);backdrop-filter:blur(16px);border:1px solid var(--border);border-radius:14px;box-shadow:0 4px 24px rgba(30,64,175,0.07);}
+.ps-table{width:100%;border-collapse:collapse;font-size:13px;}
+.ps-table thead tr{background:var(--surface2);}
+.ps-table thead th{padding:11px 16px;text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);border-bottom:1px solid var(--border);white-space:nowrap;}
+.ps-table tbody tr{border-bottom:1px solid rgba(30,64,175,0.06);transition:background .12s;}
+.ps-table tbody tr:hover{background:#f0f6ff;}
+.ps-table tbody td{padding:11px 16px;color:var(--text);vertical-align:middle;}
+.ps-empty{text-align:center!important;padding:48px 16px!important;color:var(--muted);font-size:13px;}
+</style>
+{% endblock %}

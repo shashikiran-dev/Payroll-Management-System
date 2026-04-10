@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Forgot Password — Payroll</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  </head>
+  <style>
+    :root {
+      --brand: #1e40af;
+      --brand-light: #3b82f6;
+      --brand-dark: #1e3a8a;
+      --accent: #38bdf8;
+      --bg: #dde6f0;
+      --surface: #ffffff;
+      --surface2: #e8eef7;
+      --border: rgba(30, 64, 175, 0.16);
+      --text: #0c1a2e;
+      --muted: #476080;
+      --success: #10b981;
+      --danger: #ef4444;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      width: 100%; height: 100%;
+      overflow: hidden;
+      background: var(--bg);
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text);
+    }
+
+    /* Background */
+    .bg-canvas { position: fixed; inset: 0; z-index: 0; overflow: hidden; }
+    .bg-orb {
+      position: absolute; border-radius: 50%;
+      filter: blur(90px); opacity: 0.3;
+      animation: drift 14s ease-in-out infinite alternate;
+    }
+    .bg-orb-1 { width: 600px; height: 600px; background: #93c5fd; top: -220px; right: -200px; animation-delay: 0s; }
+    .bg-orb-2 { width: 400px; height: 400px; background: #1e3a8a; bottom: -180px; left: -120px; animation-delay: -5s; }
+    .bg-orb-3 { width: 280px; height: 280px; background: #60a5fa; top: 50%; left: 30%; animation-delay: -9s; }
+
+    @keyframes drift {
+      from { transform: translate(0,0) scale(1); }
+      to { transform: translate(25px, 18px) scale(1.05); }
+    }
+
+    .bg-grid {
+      position: fixed; inset: 0; z-index: 0;
+      background-image:
+        linear-gradient(rgba(30,64,175,0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(30,64,175,0.08) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+
+    /* Layout */
+    .main {
+      position: relative; z-index: 1;
+      width: 100dvw; height: 100dvh;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* Wide card with two columns */
+    .card {
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(24px);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      width: 780px;
+      max-height: 92vh;
+      overflow-y: auto;
+      box-shadow: 0 0 0 1px rgba(13,148,136,0.06), 0 40px 100px rgba(13,148,136,0.14), inset 0 1px 0 rgba(255,255,255,0.9);
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      animation: cardIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    .card::-webkit-scrollbar { width: 4px; }
+    .card::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Left sidebar */
+    .card-sidebar {
+      background: linear-gradient(160deg, rgba(124,58,237,0.1), rgba(6,182,212,0.06));
+      border-right: 1px solid var(--border);
+      border-radius: 22px 0 0 22px;
+      padding: 36px 28px;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .logo-area { display: flex; align-items: center; gap: 10px; margin-bottom: 36px; }
+    .logo-icon {
+      width: 34px; height: 34px;
+      background: linear-gradient(135deg, var(--brand), var(--accent));
+      border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Syne', sans-serif; font-weight: 800; font-size: 15px;
+      color: white; box-shadow: 0 4px 14px rgba(124,58,237,0.4);
+    }
+    .logo-text { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 17px; }
+    .logo-text span { color: var(--brand-light); }
+
+    .sidebar-heading {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700; font-size: 22px; line-height: 1.3;
+      color: var(--text); margin-bottom: 10px;
+    }
+    .sidebar-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    .step-list { margin-top: 28px; display: flex; flex-direction: column; gap: 14px; }
+    .step-item { display: flex; align-items: flex-start; gap: 12px; }
+    .step-dot {
+      width: 24px; height: 24px; border-radius: 50%;
+      background: #ede9fe;
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 700; color: var(--brand);
+      flex-shrink: 0; margin-top: 1px;
+    }
+    .step-dot.active {
+      background: linear-gradient(135deg, var(--brand), #9333ea);
+      border-color: transparent;
+      color: white;
+    }
+    .step-info p { font-size: 13px; font-weight: 500; color: var(--text); }
+    .step-info span { font-size: 11.5px; color: var(--muted); }
+
+    .sidebar-footer { font-size: 11.5px; color: var(--muted); margin-top: 24px; }
+
+    /* Right content */
+    .card-content { padding: 36px 38px; }
+
+    .section-header { margin-bottom: 24px; }
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700; font-size: 19px;
+    }
+    .section-subtitle { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+    .divider-line {
+      border: none; border-top: 1px solid var(--border);
+      margin: 24px 0;
+    }
+
+    /* Fields */
+    .field { margin-bottom: 16px; }
+    .field label {
+      display: block;
+      font-size: 12.5px; font-weight: 500; color: var(--muted);
+      margin-bottom: 6px; letter-spacing: 0.2px;
+    }
+    .field input {
+      width: 100%;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14.5px;
+      padding: 10px 13px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .field input:focus {
+      outline: none;
+      border-color: var(--brand);
+      box-shadow: 0 0 0 3px rgba(124,58,237,0.12);
+    }
+    .field input::placeholder { color: rgba(107,95,160,0.35); }
+
+    /* Password grid */
+    .pass-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    /* Buttons */
+    .btn-primary {
+      background: linear-gradient(135deg, var(--brand), #9333ea);
+      border: none; border-radius: 10px;
+      color: white; font-family: 'Syne', sans-serif;
+      font-weight: 600; font-size: 14px;
+      padding: 10px 24px; cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 4px 16px rgba(124,58,237,0.4);
+      letter-spacing: 0.2px;
+    }
+    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(124,58,237,0.5); }
+    .btn-primary:active { transform: translateY(0); }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--muted); font-family: 'DM Sans', sans-serif;
+      font-size: 14px; padding: 10px 24px; cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--brand-light); color: var(--text); }
+
+    .btn-row { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
+    .btn-row-center { display: flex; justify-content: center; margin-top: 16px; }
+
+    /* OTP input special style */
+    .otp-hint {
+      font-size: 11.5px; color: var(--muted);
+      margin-top: 5px;
+    }
+
+    /* Toast notifications */
+    .toast {
+      position: fixed; top: -60px; left: 50%; transform: translateX(-50%);
+      padding: 10px 26px; border-radius: 8px;
+      font-size: 13.5px; font-family: 'DM Sans', sans-serif;
+      z-index: 100; transition: top 0.4s cubic-bezier(0.22,1,0.36,1);
+      white-space: nowrap;
+    }
+    .toast.show { top: 16px; }
+    .toast.success { background: #064e3b; border: 1px solid var(--success); color: #6ee7b7; }
+    .toast.danger  { background: #7f1d1d; border: 1px solid var(--danger);  color: #fca5a5; }
+    .toast.info    { background: #1e3a5f; border: 1px solid var(--accent);  color: #67e8f9; }
+
+    /* User display */
+    .user-chip {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #dbeafe; border: 1px solid var(--border);
+      border-radius: 8px; padding: 6px 12px;
+      font-size: 13px; color: var(--text);
+      margin-bottom: 18px;
+    }
+    .user-chip .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--brand); }
+
+    /* Back link */
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 13px; color: var(--muted);
+      text-decoration: none; margin-top: 8px;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--brand); }
+
+    @media (max-width: 700px) {
+      .card { grid-template-columns: 1fr; width: 90vw; }
+      .card-sidebar { border-radius: 22px 22px 0 0; border-right: none; border-bottom: 1px solid var(--border); }
+      .step-list { display: none; }
+    }
+  </style>
+  <body>
+    <div class="bg-canvas">
+      <div class="bg-orb bg-orb-1"></div>
+      <div class="bg-orb bg-orb-2"></div>
+      <div class="bg-orb bg-orb-3"></div>
+    </div>
+    <div class="bg-grid"></div>
+
+    <!-- Toast -->
+    <div id="toast" class="toast"></div>
+
+    <div class="main">
+      <div class="card">
+        <!-- Sidebar -->
+        <div class="card-sidebar">
+          <div>
+            <div class="logo-area">
+              <div class="logo-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="12" cy="12" r="9" stroke="white" stroke-width="1.8"/>
+                  <path d="M12 6v1.5M12 16.5V18" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+                  <path d="M9.5 9.5C9.5 8.4 10.6 7.5 12 7.5s2.5.9 2.5 2c0 1-1.1 1.8-2.5 1.8S9.5 12.1 9.5 13c0 1.1 1.1 2 2.5 2s2.5-.9 2.5-2" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="logo-text">Payroll <span>Management</span></div>
+            </div>
+            <div class="sidebar-heading">Password Recovery</div>
+            <div class="sidebar-desc">Follow the steps to securely reset your account password.</div>
+
+            <div class="step-list">
+              <div class="step-item">
+                <div class="step-dot active">1</div>
+                <div class="step-info">
+                  <p>Enter Email</p>
+                  <span>We'll send an OTP to verify</span>
+                </div>
+              </div>
+              <div class="step-item">
+                <div class="step-dot">2</div>
+                <div class="step-info">
+                  <p>Verify OTP</p>
+                  <span>Enter the code from your email</span>
+                </div>
+              </div>
+              <div class="step-item">
+                <div class="step-dot">3</div>
+                <div class="step-info">
+                  <p>New Password</p>
+                  <span>Create a strong new password</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="sidebar-footer">
+            Keep your credentials secure.<br />Never share your password.
+          </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="card-content">
+
+          <!-- Section 1: Email -->
+          <div class="section-header">
+            <div class="section-title">Forgot Password</div>
+            <div class="section-subtitle">Enter your registered email to receive a one-time password</div>
+          </div>
+
+          {% if name %}
+          <div class="user-chip"><div class="dot"></div> {{ name }}</div>
+          {% endif %}
+
+          <form action="{% url 'forgot_password' %}" method="post">
+            {% csrf_token %}
+            <div class="field">
+              <label for="email">Email Address</label>
+              <input type="text" id="email" name="email" value="{{email}}" placeholder="you@company.com" />
+            </div>
+            <div class="btn-row-center">
+              <button type="submit" class="btn-primary">Send OTP →</button>
+            </div>
+          </form>
+
+          <hr class="divider-line" />
+
+          <!-- Section 2: Change Password -->
+          <div class="section-header">
+            <div class="section-title">Change Password</div>
+            <div class="section-subtitle">
+              {% if email %}
+              Changing password for <strong style="color:var(--brand-light)">{{ email }}</strong>
+              {% else %}
+              Enter the OTP sent to your email and set a new password
+              {% endif %}
+            </div>
+          </div>
+
+          <div>
+            <div class="field">
+              <label for="otp">One-Time Password (OTP)</label>
+              <input type="text" name="otp" id="otp" placeholder="Enter 6-digit OTP" />
+              <div class="otp-hint">Check your inbox — the OTP is valid for 10 minutes</div>
+            </div>
+
+            <div class="pass-grid">
+              <div class="field">
+                <label for="new_password">New Password</label>
+                <input type="text" name="new_password" id="new_password" placeholder="Min. 8 characters" />
+              </div>
+              <div class="field">
+                <label for="confirm_password">Confirm Password</label>
+                <input type="text" name="confirm_password" id="confirm_password" placeholder="Repeat password" />
+              </div>
+            </div>
+
+            <div class="btn-row">
+              <form action="{% url 'login' %}">
+                <button type="submit" class="btn-outline">Cancel</button>
+              </form>
+              <button type="button" class="btn-primary" onclick="getdata()">Update Password</button>
+            </div>
+          </div>
+
+          <a href="{% url 'login' %}" class="back-link">← Back to Sign In</a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function showToast(msg, type) {
+        const t = document.getElementById("toast");
+        t.textContent = msg;
+        t.className = "toast " + type + " show";
+        setTimeout(function() { t.classList.remove("show"); }, 3200);
+      }
+
+      function getdata() {
+        const email = "{{email}}";
+        const otp = document.getElementById("otp").value;
+        const new_password = document.getElementById("new_password").value;
+        const confirm_password = document.getElementById("confirm_password").value;
+
+        if (!otp || !new_password || !confirm_password) {
+          showToast("Please fill in all fields", "danger"); return;
+        }
+        if (new_password !== confirm_password) {
+          showToast("Passwords do not match", "danger"); return;
+        }
+
+        $.ajax({
+          type: "POST",
+          url: "/validate_password/otpvalidate/email/",
+          data: { input1: otp, input2: new_password, input3: confirm_password, email: email },
+          success: function(response) {
+            showToast("Password updated successfully!", "success");
+            setTimeout(function() { window.location.href = "{% url 'login' %}"; }, 2000);
+          },
+          error: function(xhr, errmsg, err) {
+            showToast("Failed to update password. Check your OTP.", "danger");
+          }
+        });
+      }
+
+      // Django message display
+      const msgSuccess = "{{ messages.success }}";
+      const msgError   = "{{ messages.error }}";
+      if (msgSuccess) showToast(msgSuccess, "success");
+      if (msgError)   showToast(msgError, "danger");
+    </script>
+  </body>
+</html>

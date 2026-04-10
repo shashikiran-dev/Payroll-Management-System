@@ -1,0 +1,227 @@
+{% extends 'navAside.html' %}
+{% block title %}<title>Holiday Info</title>{% endblock %}
+{% block content %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<span id="username1" class="hidden">{{ username }}</span>
+<span id="userid1"   class="hidden">{{ user_id }}</span>
+
+<div class="ps-page">
+
+  <div class="ps-sub-topbar">
+    <div class="ps-breadcrumb">
+      <a href="{% url 'clock' %}">Dashboard</a>
+      <span class="ps-breadcrumb-sep">›</span>
+      <span class="ps-breadcrumb-cur">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Holidays &amp; Info
+      </span>
+    </div>
+    <div class="ps-tab-nav">
+      <a href="{% url 'check' %}"          class="ps-tab">Leave</a>
+      <a href="{% url 'clock' %}"          class="ps-tab">Attendance</a>
+      <a href="{% url 'work_from_home' %}" class="ps-tab">WFH</a>
+      <a href="{% url 'status' %}"         class="ps-tab">Daily Status</a>
+    </div>
+  </div>
+
+  <div class="ps-content">
+
+    <!-- KPI strip -->
+    <div style="display:flex;gap:16px;flex-wrap:wrap">
+      <div class="ps-kpi-mini"><span class="ps-kpi-mini-label">Holidays</span><span class="ps-kpi-mini-val">{{flask_data|length}}</span></div>
+      <div class="ps-kpi-mini"><span class="ps-kpi-mini-label">Announcements</span><span class="ps-kpi-mini-val">{{announcement_info|length}}</span></div>
+      <div class="ps-kpi-mini"><span class="ps-kpi-mini-label">On Leave Now</span><span class="ps-kpi-mini-val">{{leaves_info|length}}</span></div>
+    </div>
+
+    <!-- Two-col: Festivals + Announcements -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+
+      <div class="ps-card" style="padding:0;overflow:hidden">
+        <div style="padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px">
+          <span style="font-size:16px">🎉</span>
+          <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:var(--text)">Festival Information</span>
+        </div>
+        <table class="ps-table">
+          <thead><tr><th>Festival Name</th><th>Holiday Date</th></tr></thead>
+          <tbody>
+            {% for i in flask_data %}
+            <tr>
+              <td style="font-weight:500">{{i.Festival_name}}</td>
+              <td><span class="ps-badge ps-badge-green">{{i.Holiday_date}}</span></td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="2" class="ps-empty">No festivals listed.</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="ps-card" style="padding:0;overflow:hidden">
+        <div style="padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px">
+          <span style="font-size:16px">📣</span>
+          <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:var(--text)">Announcements</span>
+        </div>
+        <table class="ps-table">
+          <thead><tr><th>Announcement</th><th>Date</th></tr></thead>
+          <tbody>
+            {% for i in announcement_info %}
+            <tr>
+              <td style="max-width:240px">{{i.Announcement}}</td>
+              <td><span class="ps-badge ps-badge-purple">{{i.Announcement_date}}</span></td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="2" class="ps-empty">No announcements.</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Leave balance -->
+    <div class="ps-card" style="padding:0;overflow:hidden">
+      <div style="padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px">
+        <span style="font-size:16px">📊</span>
+        <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:var(--text)">Leave Balance</span>
+      </div>
+      <div style="overflow-x:auto">
+        <table class="ps-table">
+          <thead><tr>
+            <th>Employee</th><th>Sick</th><th>Maternity</th><th>Paternity</th><th>Wedding</th><th>Taken</th><th>Pending</th><th>Total</th>
+          </tr></thead>
+          <tbody>
+            {% for i in balance_info %}
+            <tr>
+              <td style="font-weight:500">{{i.Employee_Name}}</td>
+              <td style="text-align:center">{{i.Sick_Leave}}</td>
+              <td style="text-align:center">{{i.Maternity_Leave}}</td>
+              <td style="text-align:center">{{i.Paternity_Leave}}</td>
+              <td style="text-align:center">{{i.Wedding_Leave}}</td>
+              <td style="text-align:center;color:#dc2626;font-weight:600">{{i.Taken_leaves}}</td>
+              <td style="text-align:center"><span class="ps-badge ps-badge-yellow">{{i.Pending_leaves}}</span></td>
+              <td style="text-align:center;font-weight:700;color:var(--brand)">{{i.No_of_leaves}}</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="8" class="ps-empty">No leave balance data.</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Upcoming leaves + birthdays -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+
+      <div class="ps-card" style="padding:0;overflow:hidden">
+        <div style="padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px">
+          <span style="font-size:16px">🏖️</span>
+          <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:var(--text)">Upcoming Leaves</span>
+        </div>
+        <table class="ps-table">
+          <thead><tr><th>Name</th><th>From</th><th>To</th></tr></thead>
+          <tbody>
+            {% for i in leaves_info %}
+            <tr>
+              <td style="font-weight:500">{{i.Employee_Name}}</td>
+              <td style="color:var(--muted)">{{i.Start_date}}</td>
+              <td style="color:var(--muted)">{{i.End_date}}</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="3" class="ps-empty">No upcoming leaves.</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Birthdays -->
+      <div class="ps-card" style="padding:0;overflow:hidden">
+        <div style="padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px">
+          <span style="font-size:16px">🎂</span>
+          <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:var(--text)">Upcoming Birthdays</span>
+        </div>
+        <div style="padding:12px 18px;display:flex;flex-direction:column;gap:10px;max-height:300px;overflow-y:auto">
+          {% for i in date_of_births %}
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-radius:10px;background:var(--surface2)">
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--brand-dark),var(--brand-light));display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:white;flex-shrink:0">
+                {{i.Employee_Name|slice:":1"|upper}}
+              </div>
+              <span style="font-weight:500;font-size:13px">{{i.Employee_Name}}</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px">
+              <span class="ps-badge ps-badge-yellow">{{i.Date_of_birth}}</span>
+              <button onclick="toggleWishInput('{{i.Employee_Name}}')" class="ps-btn-secondary" style="padding:4px 10px;font-size:11px">Wish 🎉</button>
+            </div>
+          </div>
+          <div id="wish-input-{{i.Employee_Name}}" style="display:none;padding:6px 10px;background:var(--surface2);border-radius:8px">
+            <div style="display:flex;gap:8px">
+              <input type="text" id="wish-text-{{i.Employee_Name}}" placeholder="Type your wish…" class="ps-input" style="flex:1" />
+              <button onclick="submitWish('{{i.Employee_Name}}')" class="ps-btn-primary" style="padding:6px 12px;font-size:12px">Send</button>
+            </div>
+          </div>
+          {% empty %}
+          <div style="text-align:center;color:var(--muted);padding:32px;font-size:13px">No upcoming birthdays.</div>
+          {% endfor %}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<style>
+body{overflow-x:hidden;}
+:root{--brand:#1e40af;--brand-light:#3b82f6;--brand-dark:#1e3a8a;--surface2:#e8eef7;--border:rgba(30,64,175,0.14);--text:#0c1a2e;--muted:#476080;--sidebar-w:240px;--topbar-h:58px;}
+.ps-page{margin-left:var(--sidebar-w);margin-top:var(--topbar-h);min-height:calc(100vh - var(--topbar-h));display:flex;flex-direction:column;}
+@media(max-width:768px){.ps-page{margin-left:0;}.ps-two-col{grid-template-columns:1fr!important;}}
+.ps-sub-topbar{position:sticky;top:var(--topbar-h);z-index:20;background:rgba(255,255,255,0.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 28px;height:44px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.ps-breadcrumb{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);}
+.ps-breadcrumb a{color:var(--muted);text-decoration:none;}
+.ps-breadcrumb a:hover{color:var(--brand);}
+.ps-breadcrumb-sep{opacity:.4;}
+.ps-breadcrumb-cur{display:flex;align-items:center;gap:6px;color:var(--brand);font-weight:600;font-size:12px;}
+.ps-tab-nav{display:flex;gap:2px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:3px;}
+.ps-tab{font-size:12px;font-weight:500;color:var(--muted);text-decoration:none;padding:5px 14px;border-radius:7px;transition:background .15s,color .15s;white-space:nowrap;}
+.ps-tab:hover{background:#dbeafe;color:var(--brand);}
+.ps-tab.active{background:white;color:var(--brand);font-weight:600;box-shadow:0 1px 4px rgba(30,64,175,0.12);}
+.ps-content{padding:24px 28px;display:flex;flex-direction:column;gap:20px;}
+.ps-card{background:rgba(255,255,255,0.88);backdrop-filter:blur(16px);border:1px solid var(--border);border-radius:14px;padding:20px 22px;box-shadow:0 4px 24px rgba(30,64,175,0.07);}
+.ps-kpi-mini{background:rgba(255,255,255,0.88);backdrop-filter:blur(16px);border:1px solid var(--border);border-radius:12px;padding:14px 20px;flex:1;min-width:120px;box-shadow:0 4px 24px rgba(30,64,175,0.07);display:flex;flex-direction:column;gap:4px;}
+.ps-kpi-mini-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);}
+.ps-kpi-mini-val{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:var(--text);line-height:1;}
+.ps-table{width:100%;border-collapse:collapse;font-size:13px;}
+.ps-table thead tr{background:var(--surface2);}
+.ps-table thead th{padding:10px 16px;text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);border-bottom:1px solid var(--border);white-space:nowrap;}
+.ps-table tbody tr{border-bottom:1px solid rgba(30,64,175,0.06);transition:background .12s;}
+.ps-table tbody tr:hover{background:#f0f6ff;}
+.ps-table tbody td{padding:10px 16px;color:var(--text);vertical-align:middle;}
+.ps-empty{text-align:center!important;padding:32px 16px!important;color:var(--muted);font-size:13px;}
+.ps-badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;}
+.ps-badge-green{background:#dcfce7;color:#166534;}
+.ps-badge-yellow{background:#fef9c3;color:#854d0e;}
+.ps-badge-purple{background:#f3e8ff;color:#6b21a8;}
+.ps-btn-primary{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,var(--brand-dark),var(--brand-light));color:white;font-family:'Syne',sans-serif;font-size:13px;font-weight:600;border:none;border-radius:9px;padding:9px 18px;cursor:pointer;box-shadow:0 3px 12px rgba(30,64,175,0.3);text-decoration:none;transition:transform .15s,box-shadow .15s;}
+.ps-btn-primary:hover{transform:translateY(-1px);}
+.ps-btn-secondary{display:inline-flex;align-items:center;gap:6px;background:var(--surface2);color:var(--brand);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;border:1.5px solid var(--border);border-radius:8px;padding:7px 14px;cursor:pointer;transition:background .15s;text-decoration:none;}
+.ps-btn-secondary:hover{background:#dbeafe;}
+.ps-input{width:100%;background:var(--surface2);border:1.5px solid var(--border);border-radius:9px;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--text);padding:8px 12px;outline:none;transition:border-color .2s;box-sizing:border-box;}
+.ps-input:focus{border-color:var(--brand-light);box-shadow:0 0 0 3px rgba(59,130,246,0.1);}
+.hidden{display:none!important;}
+@media(max-width:768px){[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important;}}
+</style>
+<script>
+function toggleWishInput(name){
+  const el=document.getElementById('wish-input-'+name);
+  el.style.display=el.style.display==='none'||!el.style.display?'block':'none';
+}
+function submitWish(employeeName){
+  const wishText=document.getElementById('wish-text-'+employeeName).value;
+  if(!wishText.trim()){alert('Please enter a wish.');return;}
+  const username=document.getElementById("username1").innerText.trim();
+  const userid=document.getElementById("userid1").innerText.trim();
+  $.ajax({url:"/Birthday_Data/",type:"POST",data:{username,userid,employee_name:employeeName,wish:wishText},
+    success:r=>{if(r.status==='success'){alert(`Wish sent for ${employeeName}!`);document.getElementById('wish-input-'+employeeName).style.display='none';}},
+    error:()=>{alert('An error occurred.');}});
+}
+</script>
+{% endblock %}

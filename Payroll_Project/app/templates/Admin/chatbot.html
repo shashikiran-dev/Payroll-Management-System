@@ -1,0 +1,256 @@
+{% extends 'navAside.html' %}
+{% block title %}<title>Admin Chatbot</title>{% endblock %}
+
+{% block content %}
+
+<div class="ps-page">
+
+  <!-- Top bar -->
+  <div class="ps-sub-topbar">
+    <div class="ps-breadcrumb">
+      <a href="{% url 'search' %}">Home</a>
+      <span class="ps-breadcrumb-sep">›</span>
+      <span class="ps-breadcrumb-cur">💬 Chatbot</span>
+    </div>
+  </div>
+
+  <div class="ps-content">
+
+    <div class="ps-page-header">
+      <h1 class="ps-page-title">Admin Chat Panel</h1>
+    </div>
+
+    <!-- Chat Card -->
+    <div class="ps-card chat-card">
+
+      <!-- Chat messages -->
+      <div class="chat-box" id="chatBox">
+
+        <!-- Employee -->
+        <div class="chat-row left">
+          <div class="chat-bubble employee">
+            <div class="chat-name">Pavan</div>
+            <div>Sir, I have an issue with my task.</div>
+          </div>
+        </div>
+
+        <!-- Admin -->
+        <div class="chat-row right">
+          <div class="chat-bubble admin">
+            <div class="chat-name">Admin</div>
+            <div>Okay, please explain the issue.</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Input -->
+      <div class="chat-input">
+        <input type="text" id="msgInput" placeholder="Type message..." />
+        <button onclick="sendMessage()">Send</button>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<style>
+/* ===== Layout (same as your system) ===== */
+.ps-page{
+  margin-left:var(--sidebar-w);
+  margin-top:var(--topbar-h);
+  min-height:calc(100vh - var(--topbar-h));
+  display:flex;
+  flex-direction:column;
+}
+@media(max-width:768px){.ps-page{margin-left:0;}}
+
+.ps-sub-topbar{
+  position:sticky;
+  top:var(--topbar-h);
+  z-index:20;
+  background:rgba(255,255,255,0.9);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  padding:0 28px;
+  height:44px;
+  display:flex;
+  align-items:center;
+}
+
+.ps-breadcrumb{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-size:12px;
+  color:var(--muted);
+}
+
+.ps-breadcrumb a{
+  color:var(--muted);
+  text-decoration:none;
+}
+
+.ps-breadcrumb-cur{
+  color:var(--brand);
+  font-weight:600;
+}
+
+.ps-content{
+  padding:24px 28px;
+}
+
+.ps-page-title{
+  font-family:'Syne',sans-serif;
+  font-size:20px;
+  font-weight:800;
+  height: 600;
+  color:var(--text);
+}
+
+/* ===== Card ===== */
+.ps-card{
+  background:rgba(255,255,255,0.88);
+  backdrop-filter:blur(16px);
+  border:1px solid var(--border);
+  border-radius:14px;
+  box-shadow:0 4px 24px rgba(30,64,175,0.07);
+}
+
+/* ===== Chat Styles ===== */
+.chat-card{
+  display:flex;
+  flex-direction:column;
+  height:70vh;
+  overflow:hidden;
+}
+
+/* Chat area */
+.chat-box{
+  flex:1;
+  padding:18px;
+  overflow-y:auto;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  background:var(--surface2);
+}
+
+/* Message rows */
+.chat-row{
+  display:flex;
+}
+
+.chat-row.left{
+  justify-content:flex-start;
+}
+
+.chat-row.right{
+  justify-content:flex-end;
+}
+
+/* Bubbles */
+.chat-bubble{
+  max-width:55%;
+  padding:10px 14px;
+  border-radius:12px;
+  font-size:13px;
+  line-height:1.4;
+}
+
+.chat-bubble.employee{
+  background:#e8eef7;
+  color:var(--text);
+}
+
+.chat-bubble.admin{
+  background:var(--brand);
+  color:white;
+}
+
+/* Name */
+.chat-name{
+  font-size:11px;
+  font-weight:600;
+  margin-bottom:4px;
+  opacity:.8;
+}
+
+/* Input */
+.chat-input{
+  display:flex;
+  gap:10px;
+  padding:12px;
+  border-top:1px solid var(--border);
+  background:white;
+}
+
+.chat-input input{
+  flex:1;
+  padding:10px;
+  border-radius:10px;
+  border:1px solid var(--border);
+  font-size:13px;
+}
+
+.chat-input button{
+  padding:10px 18px;
+  background:var(--brand);
+  color:white;
+  border:none;
+  border-radius:10px;
+  font-weight:600;
+  cursor:pointer;
+}
+
+.chat-input button:hover{
+  background:var(--brand-dark);
+}
+</style>
+
+<script>
+async function sendMessage() {
+  let input = document.getElementById("msgInput");
+  let message = input.value.trim();
+  if (!message) return;
+
+  let chatBox = document.getElementById("chatBox");
+
+  // 1. Show the admin's message immediately
+  appendBubble(chatBox, "Admin", message, "admin");
+  input.value = "";
+
+  // 2. Show a loading indicator
+  let loader = appendBubble(chatBox, "Bot", "...", "employee");
+
+  // 3. Send to backend
+  const res = await fetch("{% url 'chatbot_api' %}", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "X-CSRFToken": getCookie("csrftoken") },
+    body: JSON.stringify({ message })
+  });
+
+  const data = await res.json();
+
+  // 4. Replace loader with actual reply
+  loader.querySelector("div:last-child").textContent = data.reply;
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+function appendBubble(chatBox, name, text, cls) {
+  let row = document.createElement("div");
+  row.className = `chat-row ${cls === "admin" ? "right" : "left"}`;
+  row.innerHTML = `<div class="chat-bubble ${cls}"><div class="chat-name">${name}</div><div>${text}</div></div>`;
+  chatBox.appendChild(row);
+  chatBox.scrollTop = chatBox.scrollHeight;
+  return row;
+}
+
+function getCookie(name) {
+  return document.cookie.split(';').map(c => c.trim()).find(c => c.startsWith(name + '='))?.split('=')[1];
+}
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,126 @@
+{% extends 'navAside.html' %}
+{% block title %}<title>My Team</title>{% endblock %}
+{% block content %}
+
+<div class="ps-page">
+
+  <div class="ps-sub-topbar">
+    <div class="ps-breadcrumb">
+      <a href="{% url 'search' %}">Home</a>
+      <span class="ps-breadcrumb-sep">›</span>
+      <span class="ps-breadcrumb-cur">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        My Team
+      </span>
+    </div>
+    <div style="font-size:12px;color:var(--muted)">
+      <span style="font-weight:600;color:var(--brand)">{{MyTeam_Info|length}}</span> members
+    </div>
+  </div>
+
+  <div class="ps-content">
+
+    <!-- KPI strip -->
+    <div style="display:flex;gap:16px;flex-wrap:wrap">
+      <div class="ps-kpi-card">
+        <span class="ps-kpi-label">Team Size</span>
+        <div class="ps-kpi-body">
+          <div class="ps-kpi-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <span class="ps-kpi-value">{{MyTeam_Info|length}}</span>
+        </div>
+        <span class="ps-kpi-sub">Team members</span>
+      </div>
+    </div>
+
+    <div class="ps-page-header">
+      <h1 class="ps-page-title">Team Overview</h1>
+    </div>
+
+    <!-- Team grid view (cards) -->
+    <div class="ps-team-grid">
+      {% for i in MyTeam_Info reversed %}
+      <div class="ps-team-card">
+        <div class="ps-team-avatar">{{i.Employee_Name|slice:":1"|upper}}</div>
+        <div class="ps-team-name">{{i.Employee_Name}}</div>
+        <div class="ps-team-role">
+          <span class="ps-badge ps-badge-blue">{{i.Position}}</span>
+        </div>
+      </div>
+      {% empty %}
+      <div style="color:var(--muted);font-size:13px;padding:48px;text-align:center;grid-column:1/-1">No team members found.</div>
+      {% endfor %}
+    </div>
+
+    <!-- Also show table view -->
+    <div class="ps-page-header" style="margin-top:8px">
+      <h2 style="font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--text)">Member List</h2>
+    </div>
+    <div class="ps-card" style="padding:0;overflow:hidden">
+      <div style="overflow-x:auto">
+        <table class="ps-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Employee Name</th>
+              <th>Designation</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for i in MyTeam_Info reversed %}
+            <tr>
+              <td style="color:var(--muted);font-size:12px">{{forloop.counter}}</td>
+              <td style="font-weight:500">{{i.Employee_Name}}</td>
+              <td><span class="ps-badge ps-badge-blue">{{i.Position}}</span></td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="3" class="ps-empty">No team members found.</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<style>
+:root{--brand:#1e40af;--brand-light:#3b82f6;--brand-dark:#1e3a8a;--bg:#dde6f0;--surface:#fff;--surface2:#e8eef7;--border:rgba(30,64,175,0.14);--text:#0c1a2e;--muted:#476080;--sidebar-w:240px;--topbar-h:58px;}
+.ps-page{margin-left:var(--sidebar-w);margin-top:var(--topbar-h);min-height:calc(100vh - var(--topbar-h));display:flex;flex-direction:column;}
+@media(max-width:768px){.ps-page{margin-left:0;}}
+.ps-sub-topbar{position:sticky;top:var(--topbar-h);z-index:20;background:rgba(255,255,255,0.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 28px;height:44px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.ps-breadcrumb{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);}
+.ps-breadcrumb a{color:var(--muted);text-decoration:none;}
+.ps-breadcrumb a:hover{color:var(--brand);}
+.ps-breadcrumb-sep{opacity:.4;}
+.ps-breadcrumb-cur{display:flex;align-items:center;gap:6px;color:var(--brand);font-weight:600;font-size:12px;}
+.ps-content{padding:24px 28px;display:flex;flex-direction:column;gap:20px;}
+.ps-page-header{margin-bottom:4px;}
+.ps-page-title{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--text);}
+.ps-kpi-card{background:rgba(255,255,255,0.88);backdrop-filter:blur(16px);border:1px solid var(--border);border-radius:14px;padding:20px 22px;min-width:160px;flex-shrink:0;box-shadow:0 4px 24px rgba(30,64,175,0.07);display:flex;flex-direction:column;gap:6px;}
+.ps-kpi-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);}
+.ps-kpi-body{display:flex;align-items:center;gap:12px;}
+.ps-kpi-icon{width:44px;height:44px;border-radius:12px;flex-shrink:0;background:linear-gradient(135deg,var(--brand-dark),var(--brand-light));display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(30,64,175,0.3);}
+.ps-kpi-value{font-family:'Syne',sans-serif;font-size:36px;font-weight:800;color:var(--text);line-height:1;}
+.ps-kpi-sub{font-size:11px;color:var(--brand);font-weight:500;}
+.ps-card{background:rgba(255,255,255,0.88);backdrop-filter:blur(16px);border:1px solid var(--border);border-radius:14px;padding:20px 22px;box-shadow:0 4px 24px rgba(30,64,175,0.07);}
+.ps-table{width:100%;border-collapse:collapse;font-size:13px;}
+.ps-table thead tr{background:var(--surface2);}
+.ps-table thead th{padding:11px 16px;text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);border-bottom:1px solid var(--border);white-space:nowrap;}
+.ps-table tbody tr{border-bottom:1px solid rgba(30,64,175,0.06);transition:background .12s;}
+.ps-table tbody tr:hover{background:#f0f6ff;}
+.ps-table tbody td{padding:11px 16px;color:var(--text);vertical-align:middle;}
+.ps-empty{text-align:center!important;padding:48px 16px!important;color:var(--muted);font-size:13px;}
+.ps-badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;}
+.ps-badge-blue{background:#dbeafe;color:#1e40af;}
+/* Team grid */
+.ps-team-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:16px;}
+.ps-team-card{background:rgba(255,255,255,0.88);backdrop-filter:blur(16px);border:1px solid var(--border);border-radius:14px;padding:24px 16px;display:flex;flex-direction:column;align-items:center;gap:10px;box-shadow:0 4px 24px rgba(30,64,175,0.07);transition:transform .18s,box-shadow .18s;}
+.ps-team-card:hover{transform:translateY(-3px);box-shadow:0 10px 32px rgba(30,64,175,0.13);}
+.ps-team-avatar{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--brand-dark),var(--brand-light));display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:white;box-shadow:0 4px 12px rgba(30,64,175,0.3);}
+.ps-team-name{font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:var(--text);text-align:center;}
+.ps-team-role{text-align:center;}
+</style>
+
+{% endblock %}

@@ -1,0 +1,141 @@
+{% extends 'navAside.html' %}
+
+{% block title %}
+<title>Delete Announcement</title>
+{% endblock %}
+
+<!-- Laptop View -->
+{% block emp1_id %}
+<p id="userid1" class="userid m-0 text-[14px]">{{user_id}}</p>
+{% endblock %}
+
+{% block emp1_email %}
+<p id="email1" class="email text-[8px] m-0">{{email}}</p>
+{% endblock %}
+
+{% block emp1_name %}
+<p id="username1" class="username m-0 text-[14px] font-semibold">
+  {{username}}
+</p>
+{% endblock %}
+
+{% block emp1_type %}
+<p class="text-[14px] font-semibold m-0">{{user_type}}</p>
+{% endblock %}
+
+{% block dash1 %}
+<a href="{% url 'search'  %}" class="decoration-none">Dashboard</a>
+{% endblock %}
+
+{% block org1 %}
+<a href="{% url 'org' username user_type email user_id %}" class="decoration-none">Organization</a>
+{% endblock %}
+
+{% block myteam1 %}
+<a href="" class="decoration-none">My Team</a>
+{% endblock %}
+
+{% block hol1 %}
+<a href="{% url 'Admin_Holiday_Info' username user_type email user_id %}" class="decoration-none">Holiday Info</a>
+{% endblock %}
+
+{% block Anouncement %}
+<a href="{% url 'Announcements_Data' %}" class="decoration-none">Announcements</a>
+{% endblock %}
+
+<!-- Mobile View -->
+{% block emp2_name %}
+<p id="username1" class="username m-0 text-[14px] font-semibold">
+  {{username}}
+</p>
+{% endblock %}
+
+{% block emp2_id %}
+<p id="userid1" class="userid m-0 text-[14px]">{{user_id}}</p>
+{% endblock %}
+
+{% block emp2_email %}
+<p id="email1" class="email text-[8px] m-0">{{email}}</p>
+{% endblock %}
+
+{% block emp2_type %}
+<p class="text-[14px] font-semibold m-0">{{user_type}}</p>
+{% endblock %}
+
+{% block dash2 %}
+<a href="{% url 'search' %}" class="decoration-none">Dashboard</a>
+{% endblock %}
+
+{% block org2 %}
+<a href="{% url 'org' username user_type email user_id %}" class="decoration-none">Organization</a>
+{% endblock %}
+
+{% block Anouncement2 %}
+<a href="{% url 'Announcements_Data'  %}" class="decoration-none">Announcements</a>
+{% endblock %}
+
+{% block myteam2 %}
+<a href="" class="decoration-none">My Team</a>
+{% endblock %}
+
+{% block content %}
+<div
+  class="block z-10 absolute top-[11vh] left-[0vw] md:left-[13vw] text-justify w-[100%] md:w-[calc(100%-180px)] overflow-hidden"
+>
+  <div
+    class="block-content flex flex-col gap-[20px] pl-[5vw] mt-[5vh] md:mt-[10vh] items-end"
+  >
+    <div
+      class="delAnn z-50 fixed px-[20px] py-[5px] left-[58%] top-[55%] transform -translate-x-1/2 -translate-y-1/2 h-fit text-white text-[12px] bg-[#1e1e1e] rounded-[20px] w-[40%]"
+    >
+      <form
+        class="content flex flex-col justify-between px-[10px] py-[20px] gap-[10px]"
+        action="{% url 'Announcement_Delete' username user_type email user_id %}"
+        method="post"
+      >
+        {% csrf_token %}
+        
+        <div class="flex justify-between items-center">
+          <h3 class="font-normal text-[20px] mx-[0px] my-[5px]">Delete Announcement</h3>
+        </div>
+
+        <div class="mt-[3px]">
+          <p class="mb-[4px] text-[16px]">Selected Date: {{ Date }}</p>
+          <input
+            class="rounded-md px-2 py-1 bg-transparent border-2 border-white"
+            type="text"
+            name="Announcement_date"
+            id="Announcement_date"
+            value="{{ Date }}"
+            readonly
+          />
+        </div>
+
+        <div class="mt-[8px]">
+          <p class="mb-[4px] text-[16px]">Announcement Details</p>
+          <textarea
+            class="rounded-md px-2 py-1 bg-transparent border-2 border-white"
+            name="Announcement"
+            id="Announcement"
+            rows="3"
+            readonly
+          >{{ Announcement }}</textarea>
+        </div>
+
+        <div class="flex items-end w-[100%] justify-between">
+          <a href="{% url 'delete_announcement_view'  %}" class="text-white bg-red-500 border-2 rounded-md w-fit h-fit px-4 py-1 text-lg" style="float: left; margin-right: 10px;">
+            BACK
+          </a>
+          <button
+            type="submit"
+            class="decoration-none w-fit mt-[15px] cursor-pointer px-[25px] py-[10px] bg-red-600 text-[14px] rounded-[10px] text-white border-none"
+          >
+            Delete
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

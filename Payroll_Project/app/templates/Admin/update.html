@@ -1,0 +1,179 @@
+{% extends 'navAside.html' %}
+{% block title %}<title>Update Employee</title>{% endblock %}
+{% block content %}
+
+<div class="ps-page">
+
+  <div class="ps-sub-topbar">
+    <div class="ps-breadcrumb">
+      <a href="{% url 'search' %}">Home</a>
+      <span class="ps-breadcrumb-sep">›</span>
+      <a href="{% url 'org' %}">Organization</a>
+      <span class="ps-breadcrumb-sep">›</span>
+      <span class="ps-breadcrumb-cur">Update Employee</span>
+    </div>
+    <a href="{% url 'org' %}" class="ps-btn-danger" style="padding:6px 14px;font-size:12px">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+      Back
+    </a>
+  </div>
+
+  <div class="ps-content">
+    <div class="ps-page-header">
+      <h1 class="ps-page-title">Update Employee Details</h1>
+    </div>
+
+    <form action="{% url 'submit_employee_data' 'update' %}" method="post">
+      {% csrf_token %}
+
+      <!-- Section: Personal Info -->
+      <div class="ps-card" style="margin-bottom:16px">
+        <div class="ps-card-title">Personal Information</div>
+        <div class="ps-form-grid">
+          <div class="ps-field">
+            <label class="ps-label">Employee Name</label>
+            <input class="ps-input" type="text" name="employee_name" value="{{Complete_Employee_Details.Employee_Name}}" placeholder="Full name" pattern="[a-zA-Z ]{1,30}" title="Characters only, max 30" />
+          </div>
+          <div class="ps-field">
+            <label class="ps-label">Employee ID</label>
+            <input class="ps-input" type="text" name="employee_id" value="{{Complete_Employee_Details.Employee_id}}" placeholder="e.g. EMP001" pattern="[A-Z0-9]{1,15}" title="Uppercase alphanumeric, max 15" />
+          </div>
+          <div class="ps-field">
+            <label class="ps-label">Date of Birth</label>
+            <input class="ps-input" type="date" name="Date_of_birth" value="{{Complete_Employee_Details.Date_of_birth}}" />
+          </div>
+          <div class="ps-field">
+            <label class="ps-label">Gender</label>
+            <input class="ps-input" type="text" name="Gender" value="{{Complete_Employee_Details.Gender}}" placeholder="Male / Female / Other" />
+          </div>
+          <div class="ps-field">
+            <label class="ps-label">Phone Number</label>
+            <input class="ps-input" type="text" name="Phone_Number" value="{{Complete_Employee_Details.Phone_Number}}" placeholder="10-digit number" pattern="[0-9]{10}" />
+          </div>
+          <div class="ps-field">
+            <label class="ps-label">Emergency Contact</label>
+            <input class="ps-input" type="text" name="Emergency_contact" value="{{Complete_Employee_Details.Emergency_contact}}" placeholder="10-digit number" pattern="[0-9]{10}" />
+          </div>
+          <div class="ps-field" style="grid-column:1/-1">
+            <label class="ps-label">Address</label>
+            <textarea class="ps-input" name="Address" rows="2" style="height:60px;resize:vertical" placeholder="Full address">{{Complete_Employee_Details.Address}}</textarea>
+          </div>
+          <div class="ps-field" style="grid-column:1/-1">
+            <label class="ps-label">Skills</label>
+            <textarea class="ps-input" name="Skills" rows="2" style="height:60px;resize:vertical" placeholder="e.g. Python, Django, SQL">{{Complete_Employee_Details.Skills}}</textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section: Account -->
+      <div class="ps-card" style="margin-bottom:16px">
+        <div class="ps-card-title">Account & Access</div>
+        <div class="ps-form-grid">
+          <div class="ps-field">
+            <label class="ps-label">Email Address</label>
+            <input class="ps-input" type="text" name="employee_email" value="{{Complete_Employee_Details.Employee_email}}" placeholder="name@company.com" />
+          </div>
+          <div class="ps-field">
+            <label class="ps-label">Username</label>
+            <input class="ps-input" type="text" name="Username" value="{{Complete_Employee_Details.Username}}" placeholder="Username" pattern="[a-zA-Z0-9]{1,30}" />
+          </div>
+          <div class="ps-field">
+            <label class="ps-label">Password</label>
+            <input class="ps-input" type="password" name="Password" value="{{Complete_Employee_Details.Password}}" placeholder="Min. 4 characters" pattern="^.{4,}$" />
+          </div>
+          <div class="ps-field">
+            <label class="ps-label">User Type</label>
+            <input class="ps-input" type="text" name="usertype" value="{{Complete_Employee_Details.usertype}}" placeholder="admin / employee" pattern="[a-zA-Z ]{1,30}" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Section: Work -->
+      <div class="ps-card" style="margin-bottom:16px">
+        <div class="ps-card-title">Work Details</div>
+        <div class="ps-form-grid">
+          <div class="ps-field">
+            <label class="ps-label">Department</label>
+            <input class="ps-input" type="text" name="Department" value="{{Complete_Employee_Details.Department}}" placeholder="e.g. Engineering" pattern="[a-zA-Z]{1,15}" />
+          </div>
+          <div class="ps-field">
+            <label class="ps-label">Position</label>
+            <input class="ps-input" type="text" name="Position" value="{{Complete_Employee_Details.Position}}" placeholder="Job title" pattern="[a-zA-Z ]{1,50}" />
+          </div>
+          <div class="ps-field">
+            <label class="ps-label">Hire Date</label>
+            <input class="ps-input" type="date" name="Hire_date" value="{{Complete_Employee_Details.Hire_date}}" />
+          </div>
+          <div class="ps-field">
+            <label class="ps-label">Work Date</label>
+            <input class="ps-input" type="date" name="Date" value="{{Complete_Employee_Details.Date}}" />
+          </div>
+          <div class="ps-field">
+            <label class="ps-label">Work Location</label>
+            <input class="ps-input" type="text" name="Work_location" value="{{Complete_Employee_Details.Work_location}}" placeholder="City / Office" pattern="[a-zA-Z ]{1,30}" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Section: Manager -->
+      <div class="ps-card" style="margin-bottom:20px">
+        <div class="ps-card-title">Reporting Structure</div>
+        <div class="ps-form-grid">
+          <div class="ps-field">
+            <label class="ps-label">Manager Name</label>
+            <input class="ps-input" type="text" name="Manager_name" value="{{Complete_Employee_Details.Manager_name}}" placeholder="Manager full name" pattern="[a-zA-Z]{1,30}" />
+          </div>
+          <div class="ps-field">
+            <label class="ps-label">Manager Email</label>
+            <input class="ps-input" type="text" name="Manager_email" value="{{Complete_Employee_Details.Manager_email}}" placeholder="manager@company.com" />
+          </div>
+          <div class="ps-field">
+            <label class="ps-label">Team Lead</label>
+            <input class="ps-input" type="text" name="Team_lead" value="{{Complete_Employee_Details.Team_lead}}" placeholder="Team lead name" pattern="[a-zA-Z ]{1,30}" />
+          </div>
+          <div class="ps-field">
+            <label class="ps-label">Team Lead Email</label>
+            <input class="ps-input" type="text" name="Team_lead_email" value="{{Complete_Employee_Details.Team_lead_email}}" placeholder="teamlead@company.com" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Submit -->
+      <div style="display:flex;justify-content:flex-end">
+        <button type="submit" class="ps-btn-primary" style="padding:11px 28px;font-size:14px">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Save Changes
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<style>
+:root{--brand:#1e40af;--brand-light:#3b82f6;--brand-dark:#1e3a8a;--bg:#dde6f0;--surface:#fff;--surface2:#e8eef7;--border:rgba(30,64,175,0.14);--text:#0c1a2e;--muted:#476080;--sidebar-w:240px;--topbar-h:58px;}
+.ps-page{margin-left:var(--sidebar-w);margin-top:var(--topbar-h);min-height:calc(100vh - var(--topbar-h));display:flex;flex-direction:column;}
+@media(max-width:768px){.ps-page{margin-left:0;}}
+.ps-sub-topbar{position:sticky;top:var(--topbar-h);z-index:20;background:rgba(255,255,255,0.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 28px;height:44px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.ps-breadcrumb{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);}
+.ps-breadcrumb a{color:var(--muted);text-decoration:none;}
+.ps-breadcrumb a:hover{color:var(--brand);}
+.ps-breadcrumb-sep{opacity:.4;}
+.ps-breadcrumb-cur{color:var(--brand);font-weight:600;}
+.ps-content{padding:24px 28px;display:flex;flex-direction:column;gap:4px;}
+.ps-page-header{margin-bottom:16px;}
+.ps-page-title{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--text);}
+.ps-card{background:rgba(255,255,255,0.88);backdrop-filter:blur(16px);border:1px solid var(--border);border-radius:14px;padding:20px 22px;box-shadow:0 4px 24px rgba(30,64,175,0.07);}
+.ps-card-title{font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:var(--text);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+.ps-form-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;}
+.ps-field{margin-bottom:0;}
+.ps-label{display:block;font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:5px;}
+.ps-input{width:100%;background:var(--surface2);border:1.5px solid var(--border);border-radius:9px;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--text);padding:8px 12px;outline:none;transition:border-color .2s,box-shadow .2s;box-sizing:border-box;}
+.ps-input:focus{border-color:var(--brand-light);box-shadow:0 0 0 3px rgba(59,130,246,0.1);}
+.ps-btn-primary{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,var(--brand-dark),var(--brand-light));color:white;font-family:'Syne',sans-serif;font-size:13px;font-weight:600;border:none;border-radius:9px;padding:9px 18px;cursor:pointer;box-shadow:0 3px 12px rgba(30,64,175,0.3);text-decoration:none;transition:transform .15s,box-shadow .15s;}
+.ps-btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(30,64,175,0.4);}
+.ps-btn-danger{display:inline-flex;align-items:center;gap:6px;background:#fef2f2;color:#dc2626;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;border:1.5px solid #fecaca;border-radius:8px;padding:7px 14px;cursor:pointer;transition:background .15s;text-decoration:none;}
+.ps-btn-danger:hover{background:#fee2e2;}
+</style>
+
+{% endblock %}

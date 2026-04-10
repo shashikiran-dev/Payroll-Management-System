@@ -1,0 +1,183 @@
+{% extends 'navAside.html' %} {% block title %}
+<title>Work From Home Dashboard</title>
+{% endblock %}
+{% block content %}
+<div class="white-block bg-white absolute h-[100vh] w-[100%] opacity-75 z-40 hidden" onclick="removeHol()"></div>
+<div class="popup z-50 hidden absolute px-[20px] py-[15px] left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 h-fit text-white text-[12px] bg-[#1e1e1e] rounded-[20px] w-[400px]">
+  <form class="content flex flex-col justify-between px-[10px] py-[20px] gap-[10px]" action="{% url 'festival_data' %}" method="post">
+    {% csrf_token %}
+    <h3 class="font-normal text-[20px] mx-[0px] my-[5px]">Enter Festival</h3>
+    <div class="fes-date flex flex-col gap-[5px]">
+      <p>Festival Date</p>
+      <input type="date" name="festival_date" class="bg-[#1e1e1e] border-2 border-gray-400 outline-none p-[15px] rounded-[5px] text-[12px] h-[1vh] text-white"/>
+    </div>
+    <div class="fes-name flex flex-col gap-[5px]">
+      <p>Festival Name</p>
+      <input type="text" name="festival_name" placeholder="Enter Festival Name" class="bg-[#1e1e1e] border-2 border-gray-400 outline-none p-[15px] rounded-[5px] text-[12px] h-[1vh] text-white"/>
+    </div>
+    <button type="submit" class="decoration-none w-fit mt-[15px] cursor-pointer px-[25px] py-[10px] bg-[#319131] text-[14px] rounded-[10px] text-white border-none">Submit</button>
+  </form>
+</div>
+
+<div class="block z-10 absolute top-[11vh] left-[0vw] md:left-[13vw] text-justify w-[100%] md:w-[calc(100%-180px)] overflow-hidden">
+  <div class="block-nav fixed w-[100%] flex flex-row items-center gap-[40px] md:gap-[50px] bg-[#F1F9FF] pl-[5vw] h-[5vh]">
+    <h1 class="font-semibold text-sm md:text-base text-blue-400">Dashboard</h1>
+  </div>
+
+  <div class="block-content flex flex-col md:flex-row gap-[20px] md:gap-[30px] pl-[5vw] mt-[5vh] md:mt-[10vh] flex-wrap">
+
+    <!-- Total Employees Card -->
+    <div class="left bg-white h-[150px] w-fit flex flex-col items-center justify-center py-[20px] px-[40px] rounded-[10px] gap-[10px]">
+      <p class="text-gray-400">Total Employees</p>
+      <div class="flex flex-row gap-[10px] items-center">
+        <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="25" cy="25" r="25" fill="#0275D8"/>
+          <path d="M28.6875 27.4997C28.621 27.4845 28.5513 27.4925 28.49 27.5223C28.4286 27.552 28.3793 27.6018 28.35 27.6634L25.875 34.7322V32.4997L25.5156 29.9865C25.6304 29.9624 25.736 29.9064 25.8204 29.8251C25.9048 29.7437 25.9647 29.6403 25.9931 29.5265L26.3056 28.2765C26.3287 28.1844 26.3305 28.0883 26.3108 27.9954C26.2912 27.9025 26.2507 27.8153 26.1923 27.7404C26.1339 27.6655 26.0592 27.6049 25.9739 27.5632C25.8886 27.5215 25.795 27.4998 25.7 27.4997H23.5512C23.4563 27.4997 23.3626 27.5213 23.2773 27.563C23.192 27.6046 23.1173 27.6651 23.0588 27.74C23.0004 27.8148 22.9598 27.9019 22.9401 27.9948C22.9203 28.0877 22.922 28.1838 22.945 28.2759L23.2575 29.5259C23.2858 29.6398 23.3456 29.7434 23.4301 29.8248C23.5145 29.9063 23.6202 29.9623 23.735 29.9865L23.375 32.4997V34.1847L20.9 27.6634C20.8707 27.6018 20.8214 27.552 20.76 27.5223C20.6987 27.4925 20.629 27.4845 20.5625 27.4997C20.3236 27.5573 20.0844 27.614 19.845 27.6697C18.4312 28.0009 16.6837 28.4097 15.755 29.0197C14.6531 29.7428 14 30.5953 14 31.5622V35.6247H35.25V31.5622C35.25 30.5953 34.5969 29.7434 33.495 29.0197C32.5663 28.4097 30.8188 28.0009 29.405 27.6697C29.1531 27.6109 28.9113 27.5547 28.6875 27.4997Z" fill="white"/>
+          <circle cx="24.875" cy="20.25" r="6.25" fill="white"/>
+        </svg>
+        <p class="font-semibold text-4xl">{{Employee_Count}}</p>
+      </div>
+    </div>
+
+    <!-- Search Form -->
+    <div class="flex flex-col gap-[10px]">
+      <form action="{% url 'get_Employee_WFHInfo' %}" method="post">
+        {% csrf_token %}
+        <div class="bg-white rounded-[10px] py-[15px] px-[25px] flex flex-col gap-[12px]">
+          <p class="font-semibold text-[14px]">Search Employee WFH Records</p>
+
+          <div class="relative">
+            <p class="text-[12px] text-gray-500 mb-1">Employee Name</p>
+            <div class="flex items-center border-2 border-gray-300 justify-between px-[10px] py-[6px] rounded-[10px]">
+              <input id="nameInput" type="text" name="nameInput" value="{{Employee_ID}} {{Employee_Name}}"
+                class="nameInput border-none outline-none w-[250px] md:w-[320px] text-[13px]"
+                placeholder="Type employee name..." oninput="myFunction()" autocomplete="off"/>
+              <button type="submit">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M20.0313 20.7905C20.4913 21.2505 21.2013 20.5405 20.7413 20.0905L16.9913 16.3305C18.3068 14.8751 19.0339 12.9824 19.0313 11.0205C19.0313 6.63055 15.4613 3.06055 11.0713 3.06055C6.68133 3.06055 3.11133 6.63055 3.11133 11.0205C3.11133 15.4105 6.68133 18.9805 11.0713 18.9805C13.0513 18.9805 14.8813 18.2505 16.2813 17.0405L20.0313 20.7905ZM4.11033 11.0205C4.11033 7.18055 7.24033 4.06055 11.0703 4.06055C14.9103 4.06055 18.0303 7.18055 18.0303 11.0205C18.0303 14.8605 14.9103 17.9805 11.0703 17.9805C7.24033 17.9805 4.11033 14.8605 4.11033 11.0205Z" fill="black"/>
+                </svg>
+              </button>
+            </div>
+            <ul id="myUL" class="hidden absolute bg-white border border-gray-200 shadow-lg overflow-y-auto max-h-[160px] w-full rounded-[8px] mt-1 z-20">
+              {% for i in All_Names_Ids %}
+              <li onclick="listname(this)" class="px-3 py-2 cursor-pointer hover:bg-blue-50 text-[13px]">
+                <a href="#" class="o1">{{i.Employee_id}} {{i.Employee_Name}}</a>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+
+          <div>
+            <p class="text-[12px] text-gray-500 mb-1">Filter by Date <span class="text-gray-400">(optional)</span></p>
+            <div class="flex items-center gap-[10px]">
+              <input type="date" name="dateFilter" value="{{date_filter}}"
+                class="border-2 border-gray-300 rounded-[8px] px-[10px] py-[6px] text-[13px] outline-none focus:border-blue-400"/>
+              {% if date_filter %}
+              <a href="{% url 'get_Employee_WFHInfo' %}" class="text-[12px] text-red-400 hover:underline">Clear</a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="flex items-center">
+      <button class="px-8 py-3 text-white bg-[#A00BFB] rounded-[10px] text-[14px]" onclick="showHol()">Enter Holidays</button>
+    </div>
+  </div>
+
+  <!-- Tab nav -->
+  <div class="block-nav2 flex flex-row items-center gap-[30px] md:gap-[50px] bg-[#F1F9FF] h-[5vh] pl-[5vw] mt-[2vh]">
+    <a href="{% url 'get_Employee_Leaves' %}" class="font-semibold text-sm md:text-base">Leave Stats</a>
+    <a href="{% url 'get_Employee_Attendance' %}" class="font-semibold text-sm md:text-base">Attendance Stats</a>
+    <a href="{% url 'get_Employee_WFHInfo' %}" class="font-semibold text-sm md:text-base text-blue-500 border-b-2 border-blue-500 pb-[2px]">Work From Home</a>
+    <a href="{% url 'AdminStatusInfo' %}" class="font-semibold text-sm md:text-base">Daily Status</a>
+  </div>
+
+  {% if Employee_ID %}
+  <div class="pl-[5vw] mt-[2vh]">
+    <p class="text-[13px] text-gray-500">Employee: <span class="font-semibold text-black">{{Employee_Name}}</span> &nbsp;|&nbsp; ID: <span class="font-semibold text-black">{{Employee_ID}}</span>
+      {% if date_filter %}&nbsp;|&nbsp; Date: <span class="font-semibold text-blue-500">{{date_filter}}</span>{% endif %}
+    </p>
+    <p class="text-[12px] text-gray-400 mt-[2px]">{{Work_From_Home_Info|length}} record(s) found</p>
+  </div>
+  {% endif %}
+
+  <!-- WFH Table -->
+  <div class="overflow-x-auto pl-[5vw] pr-[5vw] mt-[2vh] mb-[5vh]">
+    <table class="w-full bg-white rounded-[10px] overflow-hidden shadow-sm">
+      <thead>
+        <tr class="bg-blue-50 border-b-2 border-b-gray-200 text-center text-[13px] font-semibold text-gray-600">
+          <th class="px-4 py-3 border-r border-gray-200">Applied On</th>
+          <th class="px-4 py-3 border-r border-gray-200">Start Date</th>
+          <th class="px-4 py-3 border-r border-gray-200">End Date</th>
+          <th class="px-4 py-3 border-r border-gray-200">Reason</th>
+          <th class="px-4 py-3">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in Work_From_Home_Info %}
+        <tr class="border-b border-gray-100 hover:bg-gray-50 text-[13px] text-center">
+          <td class="px-4 py-3 border-r border-gray-100">{{i.Applied_on|default:i.Date}}</td>
+          <td class="px-4 py-3 border-r border-gray-100">{{i.Start_date|default:i.Date}}</td>
+          <td class="px-4 py-3 border-r border-gray-100">{{i.End_date|default:"—"}}</td>
+          <td class="px-4 py-3 border-r border-gray-100 text-left">{{i.Reason|default:"—"}}</td>
+          <td class="px-4 py-3">
+            <span class="px-2 py-1 rounded-full text-[11px] font-semibold
+              {% if i.Status == 'Approved' %}bg-green-100 text-green-700
+              {% elif i.Status == 'Rejected' %}bg-red-100 text-red-700
+              {% else %}bg-yellow-100 text-yellow-700{% endif %}">
+              {{i.Status|default:"Pending"}}
+            </span>
+          </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="5" class="text-center py-8 text-gray-400">
+          {% if Employee_ID %}No WFH records found{% if date_filter %} for {{date_filter}}{% endif %}.
+          {% else %}Search for an employee above to view WFH records.{% endif %}
+        </td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<style>
+  body { overflow-x: hidden; overflow-y: auto; }
+  .block { transition: 0.2s ease-in-out; }
+  .blockToggle { left: 0; transition: 0.2s ease-in-out; right: 0; width: 100%; }
+</style>
+
+<script>
+  const pop  = document.querySelector(".popup");
+  const menu = document.querySelector(".white-block");
+  const body = document.querySelector("#body");
+  function showHol()   { menu.classList.replace("hidden","block"); pop.classList.replace("hidden","block"); body.classList.add("overflow-hidden"); }
+  function removeHol() { menu.classList.replace("block","hidden"); pop.classList.replace("block","hidden"); body.classList.remove("overflow-hidden"); }
+
+  const aside = document.querySelector(".aside");
+  const block = document.querySelector(".block");
+  function handleAside() { aside.classList.toggle("asideToggle"); block.classList.toggle("blockToggle"); }
+
+  const input = document.getElementById("nameInput");
+  const list  = document.getElementById("myUL");
+  input.addEventListener("focus", () => list.classList.remove("hidden"));
+  document.addEventListener("click", (e) => { if (!input.contains(e.target) && !list.contains(e.target)) list.classList.add("hidden"); });
+  function myFunction() {
+    const filter = input.value.toUpperCase();
+    list.classList.remove("hidden");
+    document.querySelectorAll("#myUL li").forEach(li => {
+      li.classList.toggle("hidden", li.querySelector("a").textContent.toUpperCase().indexOf(filter) === -1);
+    });
+  }
+  function listname(el) { input.value = el.innerText.trim(); list.classList.add("hidden"); }
+
+  function droplogout() {
+    var logoutblock = document.querySelector(".logout-block");
+    if (logoutblock.classList.contains("-translate-y-[500px]")) {
+      logoutblock.classList.replace("-translate-y-[500px]","translate-y-[0px]");
+      logoutblock.classList.add("z-20");
+    } else { logoutblock.classList.replace("translate-y-[0px]","-translate-y-[500px]"); }
+  }
+</script>
+{% endblock %}

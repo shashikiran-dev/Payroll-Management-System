@@ -1,0 +1,41 @@
+<html>
+  <style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th, td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    td {
+        border-right: 1px solid black; /* Adjust the border-right property */
+    }
+</style>
+    <body>
+        <div class="relative">
+            <table class="w-[70%] ml-[0.05vw] mb-[5vw] mt-[4vh] bg-white">
+              <tr class="border-b-2 border-b-gray-400 text-center text-xl">
+                <th class="border-r-2 border-r-gray-400 w-16 md:w-80 px-2 py-4 ">Date</th>
+                <th class="border-r-2 border-r-gray-400 w-16 md:w-36 px-2 py-4 ">StatusUpdate</th>
+                <th class="border-r-2 border-r-gray-400 w-16 md:w-36 px-2 py-4 ">Issues</th>
+                <th class="border-r-2 border-r-gray-400 w-16 md:w-36 px-2 py-4 ">CompletedTasks</th>
+                <th class="border-r-2 border-r-gray-400 w-16 md:w-36 px-2 py-4 ">FeatureTargets</th> 
+              </tr>
+              {% for i in my_variable %}
+              <tr class="border-b-2 border-b-zinc-400 ">  
+                <td class="border-r-2 border-r-gray-400 w-16 md:w-80 px-2 py-4 ">{{i.Date}}</td>
+                <td class="border-r-2 border-r-gray-400 w-16 md:w-36 px-2 py-4 text-center">{{i.Status_Update}}</td>
+                <td class="border-r-2 border-r-gray-400 w-16 md:w-36 px-2 py-4 text-center">{{i.Issues}}</td>
+                <td class="border-r-2 border-r-gray-400 w-16 md:w-36 px-2 py-4 text-center">{{i.Completed_Task}}</td>
+                <td class="border-r-2 border-r-gray-400 w-16 md:w-36 px-2 py-4 text-center">{{i.Feature_Targets}}</td>
+              </tr>
+              {%endfor%}    
+            </table>
+          
+    </body>
+</html>

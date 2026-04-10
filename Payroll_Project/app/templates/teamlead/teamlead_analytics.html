@@ -1,0 +1,911 @@
+{% extends 'navAside.html' %}
+{% block title %}<title>Analytics Dashboard</title>{% endblock %}
+
+{% block dash1 %}Dashboard{% endblock %}
+{% block analytics1 %}Analytics{% endblock %}
+
+{% block content %}
+
+<!-- Inject Django → JS -->
+<script>
+const DJANGO = {
+  totalEmployees:    {{ total_employees|default:0 }},
+  allEmployees:      {{ all_employees_json|default:"[]"|safe }},
+  leaveRequests:     {{ leave_requests_json|default:"[]"|safe }},
+  attendanceSummary: {{ attendance_summary_json|default:"[]"|safe }},
+  dailyAttendance:   {{ daily_attendance_json|default:"[]"|safe }},
+  wfhSummary:        {{ wfh_summary_json|default:"[]"|safe }},
+  wfhRequests:       {{ wfh_requests_json|default:"[]"|safe }},
+  wfhStatus:         {{ wfh_status_json|default:"{}"|safe }},
+  wfhToday:          {{ wfh_today|default:0 }},
+  leaveStatus:       {{ leave_status_json|default:"{}"|safe }},
+  period:            {{ period|default:30 }},
+  monthlyTop:        {{ monthly_top_json|default:"[]"|safe }},
+  monthlyBottom:     {{ monthly_bottom_json|default:"[]"|safe }},
+};
+</script>
+
+<!-- ══════════════ PAGE SHELL ══════════════ -->
+<div class="ps-page">
+
+  <!-- ── Period selector bar ── -->
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 26px 0;flex-wrap:wrap;gap:10px;">
+    <div style="display:flex;align-items:center;gap:8px;">
+      <div style="width:26px;height:26px;background:#eff6ff;border-radius:7px;display:flex;align-items:center;justify-content:center;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/>
+          <line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/>
+        </svg>
+      </div>
+      <span style="font-weight:700;font-size:13px;color:#0f172a;">Analytics</span>
+      <span style="color:#cbd5e1;font-size:12px;">›</span>
+      <a href="{% url 'search' %}" style="font-size:12px;color:#64748b;text-decoration:none;">Dashboard</a>
+      <span style="color:#cbd5e1;font-size:11px;">›</span>
+      <span style="font-size:12px;color:#2563eb;font-weight:600;">Reports</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:2px;background:#e8eef7;border:1px solid rgba(30,64,175,0.12);border-radius:10px;padding:3px;">
+      <button onclick="setPeriod(7)"   id="p7"   class="period-btn" style="font-size:11px;font-weight:500;padding:5px 12px;border-radius:7px;border:none;background:none;cursor:pointer;color:#64748b;transition:all .15s">7d</button>
+      <button onclick="setPeriod(30)"  id="p30"  class="period-btn" style="font-size:11px;font-weight:500;padding:5px 12px;border-radius:7px;border:none;background:none;cursor:pointer;color:#64748b;transition:all .15s">30d</button>
+      <button onclick="setPeriod(90)"  id="p90"  class="period-btn" style="font-size:11px;font-weight:500;padding:5px 12px;border-radius:7px;border:none;background:none;cursor:pointer;color:#64748b;transition:all .15s">90d</button>
+      <button onclick="setPeriod(365)" id="p365" class="period-btn" style="font-size:11px;font-weight:500;padding:5px 12px;border-radius:7px;border:none;background:none;cursor:pointer;color:#64748b;transition:all .15s">1yr</button>
+    </div>
+  </div>
+
+  <div style="padding:16px 26px 56px;box-sizing:border-box;">
+
+    <!-- ══ KPI STRIP ══ -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-[14px] mb-[18px]">
+
+      <div class="kpi bg-white rounded-[12px] p-4 shadow-sm border border-gray-100 flex items-center gap-3 relative overflow-hidden group">
+        <div class="absolute -right-3 -top-3 w-16 h-16 rounded-full bg-blue-50 group-hover:scale-150 transition-transform duration-300"></div>
+        <div style="width:38px;height:38px;background:#eff6ff;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div style="z-index:1;min-width:0">
+          <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-0.5">Total Staff</p>
+          <p id="kpiTotal" class="text-[30px] font-black leading-none" style="color:#1d4ed8">—</p>
+          <p class="text-[11px] text-gray-400 mt-0.5">Active employees</p>
+        </div>
+      </div>
+
+      <div class="kpi bg-white rounded-[12px] p-4 shadow-sm border border-gray-100 flex items-center gap-3 relative overflow-hidden group">
+        <div class="absolute -right-3 -top-3 w-16 h-16 rounded-full bg-green-50 group-hover:scale-150 transition-transform duration-300"></div>
+        <div style="width:38px;height:38px;background:#f0fdf4;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div style="z-index:1;min-width:0">
+          <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-0.5">Avg Attendance</p>
+          <p id="kpiAtt" class="text-[30px] font-black leading-none text-green-600">—</p>
+          <p class="text-[11px] text-gray-400 mt-0.5">Last <span id="periodLabelKPI">30</span> days</p>
+        </div>
+      </div>
+
+      <div class="kpi bg-white rounded-[12px] p-4 shadow-sm border border-gray-100 flex items-center gap-3 relative overflow-hidden group">
+        <div class="absolute -right-3 -top-3 w-16 h-16 rounded-full bg-yellow-50 group-hover:scale-150 transition-transform duration-300"></div>
+        <div style="width:38px;height:38px;background:#fffbeb;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
+        <div style="z-index:1;min-width:0">
+          <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-0.5">Leave Requests</p>
+          <p id="kpiLeaves" class="text-[30px] font-black leading-none text-yellow-600">—</p>
+          <p class="text-[11px] text-gray-400 mt-0.5"><span id="kpiPending" class="font-semibold text-yellow-600">0</span> pending approval</p>
+        </div>
+      </div>
+
+      <div class="kpi bg-white rounded-[12px] p-4 shadow-sm border border-gray-100 flex items-center gap-3 relative overflow-hidden group">
+        <div class="absolute -right-3 -top-3 w-16 h-16 rounded-full bg-purple-50 group-hover:scale-150 transition-transform duration-300"></div>
+        <div style="width:38px;height:38px;background:#f5f3ff;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div style="z-index:1;min-width:0">
+          <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-0.5">WFH Today</p>
+          <p id="kpiWFH" class="text-[30px] font-black leading-none text-purple-600">—</p>
+          <p class="text-[11px] text-gray-400 mt-0.5">Employees remote now</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ══ ROW A: Trend + Leave Doughnut ══ -->
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-[16px] mb-[16px]">
+
+      <div class="md:col-span-3 bg-white rounded-[12px] p-5 shadow-sm border border-gray-100">
+        <div class="flex items-start justify-between mb-4">
+          <div>
+            <h2 class="text-[14px] font-bold text-gray-800">Daily Attendance Trend</h2>
+            <p class="text-[11px] text-gray-400 mt-0.5">Employees clocked-in per day</p>
+          </div>
+          <span class="flex items-center gap-1.5 text-[10px] bg-green-100 text-green-700 font-bold px-2.5 py-1 rounded-full">
+            <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span> LIVE
+          </span>
+        </div>
+        <canvas id="chartTrend" height="160"></canvas>
+      </div>
+
+      <div class="md:col-span-2 bg-white rounded-[12px] p-5 shadow-sm border border-gray-100 flex flex-col">
+        <h2 class="text-[14px] font-bold text-gray-800 mb-0.5">Leave Breakdown</h2>
+        <p class="text-[11px] text-gray-400 mb-4">Requests by type</p>
+        <div class="flex-1 flex flex-col items-center justify-center gap-3">
+          <div class="relative">
+            <canvas id="chartDough" width="150" height="150" style="max-width:150px"></canvas>
+            <div id="doughCenter" class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+              <p id="doughTotal" class="text-[22px] font-black text-gray-800 leading-none">0</p>
+              <p class="text-[10px] text-gray-400">total</p>
+            </div>
+          </div>
+          <div id="doughLegend" class="w-full flex flex-col gap-1.5 text-[11px]"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ Attendance Summary Table ══ -->
+    <div class="bg-white rounded-[12px] shadow-sm border border-gray-100 mb-[16px] overflow-hidden">
+      <div class="flex items-center justify-between px-5 py-4 border-b border-gray-50">
+        <div>
+          <h2 class="text-[14px] font-bold text-gray-800">Employee Attendance Summary</h2>
+          <p class="text-[11px] text-gray-400 mt-0.5">Present days vs working days, per employee</p>
+        </div>
+        <div class="flex items-center gap-3 text-[11px] text-gray-500">
+          <span class="flex items-center gap-1"><span class="inline-block w-2.5 h-2.5 rounded bg-green-500"></span>≥90%</span>
+          <span class="flex items-center gap-1"><span class="inline-block w-2.5 h-2.5 rounded bg-yellow-400"></span>70–89%</span>
+          <span class="flex items-center gap-1"><span class="inline-block w-2.5 h-2.5 rounded bg-red-400"></span>&lt;70%</span>
+        </div>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-[12px]">
+          <thead>
+            <tr class="bg-gray-50 text-gray-400 text-[10.5px] uppercase tracking-wide">
+              <th class="px-5 py-3 text-left font-semibold">Employee</th>
+              <th class="px-3 py-3 text-center font-semibold">Present</th>
+              <th class="px-3 py-3 text-center font-semibold">Absent</th>
+              <th class="px-3 py-3 text-center font-semibold">On Leave</th>
+              <th class="px-3 py-3 text-center font-semibold">WFH</th>
+              <th class="px-5 py-3 text-left font-semibold min-w-[160px]">Attendance %</th>
+            </tr>
+          </thead>
+          <tbody id="tbodySummary">
+            <tr><td colspan="6" class="text-center py-10 text-gray-300">Loading summary…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ══ ROW C: WFH Bar + Leave Status Bar ══ -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-[16px] mb-[16px]">
+      <div class="bg-white rounded-[12px] p-5 shadow-sm border border-gray-100">
+        <h2 class="text-[14px] font-bold text-gray-800 mb-0.5">WFH vs Office Days</h2>
+        <p class="text-[11px] text-gray-400 mb-4">Per employee this period</p>
+        <div style="position:relative;height:220px;width:100%;">
+          <canvas id="chartWFH"></canvas>
+        </div>
+      </div>
+      <div class="bg-white rounded-[12px] p-5 shadow-sm border border-gray-100">
+        <h2 class="text-[14px] font-bold text-gray-800 mb-0.5">Leave Status Split</h2>
+        <p class="text-[11px] text-gray-400 mb-4">Approved · Pending · Rejected</p>
+        <canvas id="chartLeaveStatus" height="210"></canvas>
+      </div>
+    </div>
+
+    <!-- ══ ROW D: Recent Requests + 4 Insight Cards ══ -->
+    <div class="an-row-d">
+
+      <!-- Recent leave table -->
+      <div class="an-row-d-left bg-white rounded-[12px] shadow-sm border border-gray-100 overflow-hidden">
+        <div class="flex items-center justify-between px-5 py-4 border-b border-gray-50">
+          <div>
+            <h2 class="text-[14px] font-bold text-gray-800">Recent Leave Requests</h2>
+            <p class="text-[11px] text-gray-400 mt-0.5">Latest across all employees</p>
+          </div>
+          <a href="{% url 'get_Employee_Leaves' %}" class="text-[11px] text-blue-500 font-semibold hover:underline">View all →</a>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-[12px]">
+            <thead>
+              <tr class="bg-gray-50 text-gray-400 text-[10.5px] uppercase tracking-wide">
+                <th class="px-5 py-2 text-left font-semibold">Employee</th>
+                <th class="px-3 py-2 text-left font-semibold">Type</th>
+                <th class="px-3 py-2 text-left font-semibold">From</th>
+                <th class="px-3 py-2 text-left font-semibold">To</th>
+                <th class="px-3 py-2 text-center font-semibold">Days</th>
+                <th class="px-5 py-2 text-left font-semibold">Status</th>
+              </tr>
+            </thead>
+            <tbody id="tbodyLeaves">
+              <tr><td colspan="6" class="text-center py-8 text-gray-300">No data</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ══ 4 Insight Cards — 2×2 grid ══ -->
+      <div class="an-row-d-right">
+
+        <!-- Most Present -->
+        <div class="ap-stat-card ap-card-green" onclick="openModal('top')" title="Click to see rankings">
+          <div class="ap-stat-emoji">🏆</div>
+          <div class="ap-stat-label">MOST PRESENT</div>
+          <div class="ap-stat-metric" id="mpMetric">—</div>
+          <div class="ap-stat-sub" id="mpSub">days · highest</div>
+          <div class="ap-card-hint">Click to see full list</div>
+        </div>
+
+        <!-- Needs Attention -->
+        <div class="ap-stat-card ap-card-red" onclick="openModal('bottom')" title="Click to see rankings">
+          <div class="ap-stat-emoji">⚠️</div>
+          <div class="ap-stat-label">NEEDS ATTENTION</div>
+          <div class="ap-stat-metric" id="naMetric">—</div>
+          <div class="ap-stat-sub" id="naSub">days · lowest</div>
+          <div class="ap-card-hint">Click to see full list</div>
+        </div>
+
+        <!-- Pending Actions -->
+        <div class="ap-stat-card ap-card-amber" onclick="openModal('pending')" title="Click to see pending requests">
+          <div class="ap-stat-emoji">📋</div>
+          <div class="ap-stat-label">PENDING ACTIONS</div>
+          <div class="ap-stat-metric" id="insightPending">—</div>
+          <div class="ap-stat-sub">Need approval</div>
+          <div class="ap-card-hint">Click to see full list</div>
+        </div>
+
+        <!-- Remote Right Now -->
+        <div class="ap-stat-card ap-card-purple" onclick="openModal('wfh')" title="Click to see WFH employees">
+          <div class="ap-stat-emoji">🏠</div>
+          <div class="ap-stat-label">REMOTE RIGHT NOW</div>
+          <div class="ap-stat-metric" id="insightWFH">—</div>
+          <div class="ap-stat-sub">On WFH today</div>
+          <div class="ap-card-hint">Click to see full list</div>
+        </div>
+
+      </div><!-- /insight 2x2 -->
+    </div><!-- /row D -->
+
+  </div><!-- /padding wrapper -->
+</div><!-- /ps-page -->
+
+<!-- ══ MODAL POPUP ══ -->
+<div class="pm-overlay" id="pmOverlay" onclick="closeModal()"></div>
+<div class="pm-modal" id="pmModal">
+  <div class="pm-modal-header" id="pmModalHeader">
+    <div class="pm-modal-title-wrap">
+      <span class="pm-modal-icon" id="pmModalIcon"></span>
+      <div>
+        <div class="pm-modal-title" id="pmModalTitle">Details</div>
+        <div class="pm-modal-sub"   id="pmModalSub"></div>
+      </div>
+    </div>
+    <button class="pm-close-btn" onclick="closeModal()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+  </div>
+  <div class="pm-month-row" id="pmMonthRow"></div>
+  <div class="pm-list" id="pmList"></div>
+</div>
+
+<!-- ══════════════ STYLES ══════════════ -->
+<style>
+  /* ── Page layout (unchanged from original) ── */
+  /* navAside handles margin-left via .page-content */
+  .ps-page {
+    width: 100%;
+    min-height: 100%;
+    box-sizing: border-box;
+  }
+  .ps-page .grid { width:100%; box-sizing:border-box; }
+
+  /* ── KPI hover lift ── */
+  .kpi { transition:transform .18s,box-shadow .18s; cursor:default; }
+  .kpi:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,.08); }
+
+  /* ── Period btn active ── */
+  .period-btn.active { background:white!important; color:#2563eb!important; font-weight:700!important; box-shadow:0 1px 4px rgba(37,99,235,.18)!important; }
+
+  /* ── KPI stagger ── */
+  @keyframes riseUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+  .kpi { animation:riseUp .4s ease both; }
+  .kpi:nth-child(1){ animation-delay:.05s } .kpi:nth-child(2){ animation-delay:.10s }
+  .kpi:nth-child(3){ animation-delay:.15s } .kpi:nth-child(4){ animation-delay:.20s }
+
+  /* ── Table rows ── */
+  #tbodySummary tr, #tbodyLeaves tr { transition:background .12s; }
+  #tbodySummary tr:hover, #tbodyLeaves tr:hover { background:#f9fafb; }
+
+  /* ── Row D grid ── */
+  .an-row-d {
+    display: grid;
+    grid-template-columns: 1fr 220px;
+    gap: 14px;
+    align-items: start;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 0;
+  }
+  @media(max-width:900px){ .an-row-d{ grid-template-columns:1fr; } }
+  .an-row-d-left  { min-width:0; }
+  .an-row-d-right { min-width:0; width:220px; display:grid; grid-template-columns:1fr 1fr; gap:8px; align-content:start; }
+
+  /* ══ INSIGHT CARDS ══════════════════════════════════════════ */
+  .ap-stat-card {
+    position: relative;
+    border-radius: 12px;
+    padding: 11px 10px 10px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    overflow: hidden;
+    box-shadow: 0 3px 12px rgba(0,0,0,.15);
+    cursor: pointer;
+    transition: transform .18s, box-shadow .18s;
+    box-sizing: border-box;
+    user-select: none;
+    min-height: 0;
+  }
+  .ap-stat-card:hover { transform:translateY(-2px); box-shadow:0 8px 22px rgba(0,0,0,.22); }
+  .ap-stat-card:active { transform:translateY(0px); }
+  .ap-stat-card::before {
+    content:''; position:absolute; inset:0;
+    background:linear-gradient(135deg,rgba(255,255,255,.15) 0%,transparent 55%);
+    pointer-events:none;
+  }
+  .ap-card-green  { background:linear-gradient(135deg,#14532d,#22c55e); }
+  .ap-card-red    { background:linear-gradient(135deg,#7f1d1d,#ef4444); }
+  .ap-card-amber  { background:linear-gradient(135deg,#78350f,#f59e0b); }
+  .ap-card-purple { background:linear-gradient(135deg,#4c1d95,#8b5cf6); }
+
+  .ap-stat-emoji  { font-size:15px; margin-bottom:1px; }
+  .ap-stat-label  { font-size:7.5px; font-weight:700; letter-spacing:.07em; text-transform:uppercase; opacity:.8; }
+  .ap-stat-metric { font-size:26px; font-weight:800; line-height:1.1; letter-spacing:-.02em; }
+  .ap-stat-sub    { font-size:9px; opacity:.78; font-weight:500; line-height:1.3; margin-top:1px; }
+  .ap-card-hint   {
+    margin-top:6px; padding-top:6px; border-top:1px solid rgba(255,255,255,.18);
+    font-size:8.5px; opacity:.65; font-weight:600;
+    display:flex; align-items:center; gap:3px;
+  }
+  .ap-card-hint::before { content:'↗'; font-size:9px; }
+
+  /* ══ MODAL OVERLAY ══ */
+  .pm-overlay {
+    position:fixed; inset:0;
+    background:rgba(12,26,46,.52); backdrop-filter:blur(5px);
+    z-index:9000;
+    opacity:0; visibility:hidden;
+    transition:opacity .22s ease, visibility .22s ease;
+  }
+  .pm-overlay.open { opacity:1; visibility:visible; }
+
+  /* ══ MODAL BOX ══ */
+  .pm-modal {
+    position:fixed;
+    top:50%; left:50%;
+    transform:translate(-50%,-50%) scale(.92);
+    width:480px; max-width:92vw; max-height:78vh;
+    background:#fff; border-radius:20px;
+    z-index:9001;
+    display:flex; flex-direction:column;
+    box-shadow:0 24px 80px rgba(12,26,46,.32);
+    opacity:0; visibility:hidden;
+    transition:transform .26s cubic-bezier(.34,1.4,.64,1), opacity .22s ease, visibility .22s ease;
+    overflow:hidden;
+  }
+  .pm-modal.open {
+    transform:translate(-50%,-50%) scale(1);
+    opacity:1; visibility:visible;
+  }
+
+  /* Modal header */
+  .pm-modal-header {
+    display:flex; align-items:center; justify-content:space-between;
+    padding:20px 22px 16px; flex-shrink:0;
+    border-bottom:1px solid #f1f5f9;
+  }
+  .pm-modal-title-wrap { display:flex; align-items:center; gap:12px; }
+  .pm-modal-icon {
+    width:42px; height:42px; border-radius:12px; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center; font-size:20px;
+  }
+  .pm-icon-green  { background:#dcfce7; }
+  .pm-icon-red    { background:#fee2e2; }
+  .pm-icon-amber  { background:#fef3c7; }
+  .pm-icon-purple { background:#ede9fe; }
+
+  .pm-modal-title { font-size:16px; font-weight:800; color:#0f172a; }
+  .pm-modal-title.pm-green  { color:#14532d; }
+  .pm-modal-title.pm-red    { color:#7f1d1d; }
+  .pm-modal-title.pm-amber  { color:#78350f; }
+  .pm-modal-title.pm-purple { color:#4c1d95; }
+  .pm-modal-sub   { font-size:11.5px; color:#64748b; margin-top:2px; }
+
+  .pm-close-btn {
+    width:32px; height:32px; border-radius:8px; border:none; background:#f8fafc;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; color:#64748b; flex-shrink:0;
+    transition:background .14s, color .14s;
+  }
+  .pm-close-btn:hover { background:#f1f5f9; color:#0f172a; }
+
+  /* Month pills inside modal */
+  .pm-month-row {
+    display:flex; gap:6px; padding:12px 22px 8px;
+    overflow-x:auto; flex-shrink:0; scrollbar-width:none;
+    border-bottom:1px solid #f8fafc;
+  }
+  .pm-month-row.hidden { display:none !important; }
+  .pm-month-row::-webkit-scrollbar { display:none; }
+  .pm-month-pill {
+    flex-shrink:0; padding:5px 14px; border-radius:20px; font-size:12px;
+    font-weight:600; border:1.5px solid #e2e8f0; background:#f1f5f9;
+    color:#64748b; cursor:pointer; white-space:nowrap; transition:all .14s;
+  }
+  .pm-month-pill:hover { background:#dbeafe; color:#1d4ed8; border-color:#93c5fd; }
+  .pm-month-pill.pill-active-green  { background:#dcfce7; color:#14532d; border-color:#86efac; }
+  .pm-month-pill.pill-active-red    { background:#fee2e2; color:#7f1d1d; border-color:#fca5a5; }
+  .pm-month-pill.pill-active-amber  { background:#fef3c7; color:#78350f; border-color:#fcd34d; }
+  .pm-month-pill.pill-active-purple { background:#ede9fe; color:#4c1d95; border-color:#c4b5fd; }
+
+  /* List inside modal */
+  .pm-list { flex:1; overflow-y:auto; padding:4px 0 12px; }
+
+  .pm-rank-item, .pm-list-item {
+    display:flex; align-items:center; gap:14px;
+    padding:13px 22px; border-bottom:1px solid #f8fafc;
+    transition:background .1s;
+    animation:pmSlide .2s ease both;
+  }
+  .pm-rank-item:last-child, .pm-list-item:last-child { border-bottom:none; }
+  .pm-rank-item:hover, .pm-list-item:hover { background:#f8fafc; }
+  @keyframes pmSlide { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
+
+  /* Rank medal */
+  .pm-rank-num {
+    width:32px; height:32px; border-radius:50%; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+    font-size:11px; font-weight:800;
+  }
+  .pm-rank-num.r1 { background:#fef9c3; color:#854d0e; font-size:18px; }
+  .pm-rank-num.r2 { background:#f1f5f9; color:#475569; font-size:15px; }
+  .pm-rank-num.r3 { background:#fff7ed; color:#9a3412; font-size:15px; }
+  .pm-rank-num.rn { background:#f1f5f9; color:#64748b; font-size:11px; }
+
+  .pm-rank-info { flex:1; min-width:0; }
+  .pm-rank-name { font-size:13.5px; font-weight:600; color:#0f172a; }
+  .pm-rank-id   { font-size:11px; color:#94a3b8; margin-top:1px; }
+  .pm-rank-right { text-align:right; flex-shrink:0; }
+  .pm-rank-days { font-size:16px; font-weight:800; }
+  .pm-days-green  { color:#16a34a; }
+  .pm-days-red    { color:#dc2626; }
+  .pm-days-amber  { color:#d97706; }
+  .pm-days-purple { color:#7c3aed; }
+  .pm-rank-dlabel { font-size:10px; color:#94a3b8; margin-top:1px; }
+
+  /* Avatar for pending/wfh */
+  .pm-avatar {
+    width:36px; height:36px; border-radius:50%; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+    font-size:13px; font-weight:700; color:#fff;
+  }
+  .pm-list-info { flex:1; min-width:0; }
+  .pm-list-name { font-size:13.5px; font-weight:600; color:#0f172a; }
+  .pm-list-meta { font-size:11px; color:#64748b; margin-top:1px; }
+  .pm-badge {
+    flex-shrink:0; padding:3px 10px; border-radius:20px;
+    font-size:10.5px; font-weight:700;
+  }
+  .pm-badge-pending  { background:#fef9c3; color:#854d0e; }
+  .pm-badge-wfh      { background:#ede9fe; color:#4c1d95; }
+
+  .pm-empty {
+    text-align:center; padding:40px 20px;
+    color:#94a3b8; font-size:13px; line-height:1.7;
+  }
+</style>
+
+<!-- ══════════════ CHART.JS ══════════════ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+
+<script>
+// ── Colour tokens ──────────────────────────────────────────────
+const CLR = {
+  blue:'#0275D8', green:'#22c55e', yellow:'#f59e0b',
+  red:'#ef4444', purple:'#8b5cf6', orange:'#f97316',
+  teal:'#14b8a6', pink:'#ec4899', gray:'#9ca3af',
+};
+const PALETTE = Object.values(CLR);
+
+let cTrend, cDough, cWFH, cLeaveStatus;
+let activePeriod = DJANGO.period || 30;
+let _currentLeaves = [];
+
+// ── Utilities ──────────────────────────────────────────────────
+function pad(n){ return String(n).padStart(2,'0'); }
+function todayISO(){ const d=new Date(); return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`; }
+function daysAgoISO(n){ const d=new Date(); d.setDate(d.getDate()-n); return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`; }
+function genDates(n){ const arr=[],now=new Date(); for(let i=n-1;i>=0;i--){ const d=new Date(now); d.setDate(d.getDate()-i); arr.push(`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`); } return arr; }
+function dayDiff(a,b){ return Math.max(0,Math.round((new Date(b)-new Date(a))/(1000*86400))+1); }
+function statusBadge(s){
+  const map={Approved:'bg-green-100 text-green-700',Rejected:'bg-red-100 text-red-700',Pending:'bg-yellow-100 text-yellow-700'};
+  const cls=map[s]||'bg-gray-100 text-gray-600';
+  return `<span class="px-2 py-0.5 rounded-full text-[10px] font-semibold ${cls}">${s||'—'}</span>`;
+}
+function initials(name){ return (name||'?').split(' ').map(w=>w[0]).slice(0,2).join('').toUpperCase(); }
+const AVT=['#2563eb','#16a34a','#d97706','#dc2626','#7c3aed','#0891b2','#be185d','#065f46'];
+function avatarColor(str){ let h=0; for(let i=0;i<(str||'').length;i++) h=(h*31+str.charCodeAt(i))&0xffffffff; return AVT[Math.abs(h)%AVT.length]; }
+
+// ── Main render ────────────────────────────────────────────────
+function render(period){
+  activePeriod=period;
+  document.querySelectorAll('.period-btn').forEach(b=>b.classList.remove('active'));
+  const map={7:'p7',30:'p30',90:'p90',365:'p365'};
+  if(map[period]) document.getElementById(map[period])?.classList.add('active');
+  document.getElementById('periodLabelKPI').textContent=period;
+
+  const cutoff=daysAgoISO(period);
+  const leaves=DJANGO.leaveRequests.filter(l=>{ const d=l.Applied_on||l.applied_on||l.AppliedOn||''; return !d||d>=cutoff; });
+  _currentLeaves=leaves;
+  const pending=leaves.filter(l=>(l.Status||'Pending')==='Pending').length;
+
+  document.getElementById('kpiTotal').textContent   = DJANGO.totalEmployees||'—';
+  document.getElementById('kpiLeaves').textContent  = leaves.length;
+  document.getElementById('kpiPending').textContent = pending;
+  document.getElementById('kpiWFH').textContent     = DJANGO.wfhToday??'—';
+  document.getElementById('insightPending').textContent = pending;
+  document.getElementById('insightWFH').textContent     = DJANGO.wfhToday??'—';
+
+  const sumData=DJANGO.attendanceSummary;
+  if(sumData.length){
+    const totalPresent=sumData.reduce((s,e)=>s+(e.present_days||0),0);
+    let workdays=0;
+    genDates(period).forEach(d=>{ const dow=new Date(d).getDay(); if(dow>0&&dow<6) workdays++; });
+    const maxPossible=(DJANGO.totalEmployees||sumData.length)*workdays;
+    const pct=maxPossible?Math.round(totalPresent/maxPossible*100):0;
+    document.getElementById('kpiAtt').textContent=pct+'%';
+
+    const sorted=[...sumData].sort((a,b)=>(b.present_days||0)-(a.present_days||0));
+    const withDays=sorted.filter(e=>(e.present_days||0)>0);
+    const _mp=document.getElementById('mpMetric'); if(_mp) _mp.textContent=withDays.length?withDays[0].present_days:'—';
+    const _mpSub=document.getElementById('mpSub'); if(_mpSub&&withDays.length) _mpSub.textContent=`${withDays[0].employee_name||withDays[0].employee_id||'—'} · highest`;
+    const _na=document.getElementById('naMetric'); if(_na) _na.textContent=withDays.length?withDays[withDays.length-1].present_days:'—';
+    const _naSub=document.getElementById('naSub'); if(_naSub&&withDays.length) _naSub.textContent=`${withDays[withDays.length-1].employee_name||withDays[withDays.length-1].employee_id||'—'} · lowest`;
+  } else {
+    document.getElementById('kpiAtt').textContent='—';
+    const _mp=document.getElementById('mpMetric'); if(_mp) _mp.textContent='—';
+    const _na=document.getElementById('naMetric'); if(_na) _na.textContent='—';
+  }
+
+  renderTrend(period); renderDoughnut(leaves); renderSummaryTable(sumData);
+  renderWFH(); renderLeaveStatus(leaves); renderRecentLeaves(leaves);
+}
+
+// ── Trend chart ────────────────────────────────────────────────
+function renderTrend(period){
+  const dates=genDates(Math.min(period,60));
+  const dailyMap={}; DJANGO.dailyAttendance.forEach(r=>{ dailyMap[r.date]=r.count; });
+  const counts=dates.map(d=>dailyMap[d]||0);
+  const labels=dates.map(d=>{ const[,m,day]=d.split('-'); return `${day}/${m}`; });
+  const ctx=document.getElementById('chartTrend').getContext('2d');
+  if(cTrend) cTrend.destroy();
+  const grad=ctx.createLinearGradient(0,0,0,180);
+  grad.addColorStop(0,'rgba(2,117,216,.18)'); grad.addColorStop(1,'rgba(2,117,216,0)');
+  cTrend=new Chart(ctx,{ type:'line', data:{ labels, datasets:[{ label:'Present', data:counts, borderColor:CLR.blue, backgroundColor:grad, borderWidth:2.5, pointBackgroundColor:CLR.blue, pointRadius:counts.map((_,i)=>i===counts.length-1?5:2.5), pointHoverRadius:6, fill:true, tension:.42 }] }, options:{ responsive:true, plugins:{ legend:{display:false}, tooltip:{ backgroundColor:'#1e293b', titleFont:{size:11}, bodyFont:{size:12}, padding:10, callbacks:{ title:t=>`Date: ${t[0].label}`, label:t=>`  ${t.parsed.y} employees present` } } }, scales:{ x:{grid:{display:false},ticks:{font:{size:10},maxTicksLimit:12,color:'#9ca3af'}}, y:{grid:{color:'#f3f4f6'},ticks:{font:{size:10},stepSize:1,beginAtZero:true,color:'#9ca3af'},border:{display:false}} } } });
+}
+
+// ── Doughnut ───────────────────────────────────────────────────
+function renderDoughnut(leaves){
+  const counts={}; leaves.forEach(l=>{ const t=l.Leave_Type||l.Leave_type||l.leave_type||'Other'; counts[t]=(counts[t]||0)+1; });
+  const labels=Object.keys(counts), vals=Object.values(counts);
+  const total=vals.reduce((s,v)=>s+v,0);
+  document.getElementById('doughTotal').textContent=total;
+  const ctx=document.getElementById('chartDough').getContext('2d');
+  if(cDough) cDough.destroy();
+  if(!labels.length){ document.getElementById('doughLegend').innerHTML='<p class="text-gray-300 text-center text-[11px] py-2">No leave data this period</p>'; return; }
+  cDough=new Chart(ctx,{ type:'doughnut', data:{labels,datasets:[{data:vals,backgroundColor:PALETTE,borderWidth:3,borderColor:'#fff',hoverBorderWidth:0}]}, options:{ cutout:'70%', plugins:{legend:{display:false},tooltip:{backgroundColor:'#1e293b',padding:8,callbacks:{label:c=>` ${c.label}: ${c.parsed} (${Math.round(c.parsed/total*100)}%)`}}} } });
+  document.getElementById('doughLegend').innerHTML=labels.map((l,i)=>`<div class="flex items-center justify-between gap-2"><div class="flex items-center gap-1.5 min-w-0"><span class="inline-block w-2.5 h-2.5 rounded flex-shrink-0" style="background:${PALETTE[i%PALETTE.length]}"></span><span class="text-gray-600 truncate">${l}</span></div><span class="font-bold text-gray-800 flex-shrink-0">${vals[i]}</span></div>`).join('');
+}
+
+// ── Attendance summary table ───────────────────────────────────
+function renderSummaryTable(data){
+  const tb=document.getElementById('tbodySummary');
+  if(!data.length){ tb.innerHTML='<tr><td colspan="6" class="text-center py-10 text-gray-300 text-[12px]">No attendance data yet.</td></tr>'; return; }
+  const wfhMap={}; DJANGO.wfhSummary.forEach(w=>{ const id=w.Employee_id||w.employee_id||w.EmployeeId||''; if(id) wfhMap[id]=Number(w.wfh_days||w.wfhDays||w.wfh||0); });
+  const leaveMap={}; DJANGO.leaveRequests.forEach(l=>{ if((l.Status||'Pending')==='Approved'){ const id=l.Employee_id||l.employee_id; leaveMap[id]=(leaveMap[id]||0)+(l.No_of_days||dayDiff(l.Start_date,l.End_date)); } });
+  let wdip=0; genDates(activePeriod).forEach(d=>{ const dow=new Date(d).getDay(); if(dow>0&&dow<6) wdip++; }); if(!wdip) wdip=activePeriod;
+  tb.innerHTML=data.map(e=>{
+    const p=Number(e.present_days)||0, eid=e.employee_id||e.Employee_id||'';
+    const wfh=wfhMap[eid]||0, lv=leaveMap[eid]||0;
+    const pct=wdip>0?Math.min(100,Math.round(p/wdip*100)):0;
+    const barC=pct>=90?'bg-green-500':pct>=70?'bg-yellow-400':'bg-red-400';
+    const txtC=pct>=90?'text-green-600':pct>=70?'text-yellow-600':'text-red-500';
+    return `<tr class="border-b border-gray-50">
+      <td class="px-5 py-2.5 font-medium text-gray-700">${e.employee_name||e.Employee_Name||'—'}</td>
+      <td class="px-3 py-2.5 text-center font-bold text-green-600">${p}</td>
+      <td class="px-3 py-2.5 text-center text-red-400">${Math.max(0,wdip-p)}</td>
+      <td class="px-3 py-2.5 text-center text-yellow-500">${lv||'—'}</td>
+      <td class="px-3 py-2.5 text-center text-purple-500">${wfh||'—'}</td>
+      <td class="px-5 py-2.5"><div class="flex items-center gap-2"><div class="flex-1 bg-gray-100 rounded-full h-[5px] min-w-[60px]"><div class="${barC} h-[5px] rounded-full transition-all" style="width:${pct}%"></div></div><span class="font-bold text-[11px] ${txtC} w-8 text-right">${pct}%</span></div></td>
+    </tr>`;
+  }).join('');
+}
+
+// ── WFH chart ──────────────────────────────────────────────────
+function renderWFH(){
+  const ctx = document.getElementById('chartWFH').getContext('2d');
+  if(cWFH) cWFH.destroy();
+
+  // Build wfh lookup — try every possible key name
+  const wfhById = {};
+  (DJANGO.wfhSummary||[]).forEach(w => {
+    const id  = w.Employee_id || w.employee_id || w.EmployeeId || '';
+    const nm  = w.Employee_Name || w.employee_name || w.EmployeeName || '';
+    const days = Number(w.wfh_days || w.wfhDays || w.wfh || 0);
+    if(id)  wfhById[id]  = (wfhById[id]  || 0) + days;
+    if(nm)  wfhById[nm]  = (wfhById[nm]  || 0) + days;
+  });
+
+  // Build combined list from attendanceSummary
+  const rows = (DJANGO.attendanceSummary||[]).map(a => {
+    const id      = a.employee_id || a.Employee_id || a.EmployeeId || '';
+    const nm      = a.employee_name || a.Employee_Name || a.EmployeeName || '';
+    const wfhDays = wfhById[id] || wfhById[nm] || 0;
+    const present  = Number(a.present_days || 0);
+    const officeDays = Math.max(0, present - wfhDays);
+    return { name: (nm||id||'?').split(' ')[0], wfh: wfhDays, office: officeDays, total: present };
+  }).filter(e => e.total > 0).slice(0, 12);
+
+  // Fallback: use wfhSummary directly if attendanceSummary empty
+  const fallback = (DJANGO.wfhSummary||[]).slice(0, 12).map(w => ({
+    name: ((w.Employee_Name||w.employee_name||'?').split(' ')[0]),
+    wfh:  Number(w.wfh_days||w.wfhDays||w.wfh||0),
+    office: 0
+  }));
+
+  const source = rows.length ? rows : fallback;
+  const names  = source.length ? source.map(e=>e.name) : ['No data'];
+  const wfhArr = source.length ? source.map(e=>e.wfh)   : [0];
+  const offArr = source.length ? source.map(e=>e.office) : [0];
+
+  cWFH = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: names,
+      datasets: [
+        { label:'WFH Days',    data:wfhArr, backgroundColor:'rgba(139,92,246,.8)',  borderRadius:5, borderSkipped:false },
+        { label:'Office Days', data:offArr, backgroundColor:'rgba(2,117,216,.75)',   borderRadius:5, borderSkipped:false }
+      ]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position:'bottom', labels:{ font:{size:11}, boxWidth:12, padding:14 } },
+        tooltip: { backgroundColor:'#1e293b', padding:8,
+          callbacks:{ label: c => ` ${c.dataset.label}: ${c.parsed.x} days` }
+        }
+      },
+      scales: {
+        x: { grid:{color:'#f3f4f6'}, ticks:{font:{size:10},color:'#9ca3af'}, beginAtZero:true, border:{display:false} },
+        y: { grid:{display:false}, ticks:{font:{size:11},color:'#374151'} }
+      }
+    }
+  });
+}
+
+// ── Leave status chart ─────────────────────────────────────────
+function renderLeaveStatus(leaves){
+  const approved=DJANGO.leaveStatus?.Approved??leaves.filter(l=>l.Status==='Approved').length;
+  const pending=DJANGO.leaveStatus?.Pending??leaves.filter(l=>(l.Status||'Pending')==='Pending').length;
+  const rejected=DJANGO.leaveStatus?.Rejected??leaves.filter(l=>l.Status==='Rejected').length;
+  const ctx=document.getElementById('chartLeaveStatus').getContext('2d');
+  if(cLeaveStatus) cLeaveStatus.destroy();
+  cLeaveStatus=new Chart(ctx,{ type:'bar', data:{ labels:['Approved','Pending','Rejected'], datasets:[{ data:[approved,pending,rejected], backgroundColor:[CLR.green,CLR.yellow,CLR.red], borderRadius:8, borderSkipped:false }] }, options:{ responsive:true, plugins:{ legend:{display:false}, tooltip:{backgroundColor:'#1e293b',padding:8,callbacks:{label:c=>` ${c.parsed.y} requests`}} }, scales:{ x:{grid:{display:false},ticks:{font:{size:11},color:'#374151'}}, y:{grid:{color:'#f3f4f6'},ticks:{font:{size:10},stepSize:1,beginAtZero:true,color:'#9ca3af'},border:{display:false}} } } });
+}
+
+// ── Recent leave table ─────────────────────────────────────────
+function renderRecentLeaves(leaves){
+  const recent=[...leaves].sort((a,b)=>(b.Applied_on||'')>(a.Applied_on||'')?1:-1).slice(0,8);
+  document.getElementById('tbodyLeaves').innerHTML=recent.length
+    ? recent.map(l=>`<tr class="border-b border-gray-50">
+        <td class="px-5 py-2.5 font-medium text-gray-700">${l.Employee_Name||l.employee_name||'—'}</td>
+        <td class="px-3 py-2.5 text-gray-500">${l.Leave_Type||l.Leave_type||l.leave_type||'—'}</td>
+        <td class="px-3 py-2.5 text-gray-500 whitespace-nowrap">${l.Start_date||'—'}</td>
+        <td class="px-3 py-2.5 text-gray-500 whitespace-nowrap">${l.End_date||'—'}</td>
+        <td class="px-3 py-2.5 text-center font-semibold text-gray-700">${l.No_of_days||'—'}</td>
+        <td class="px-5 py-2.5">${statusBadge(l.Status||'Pending')}</td>
+      </tr>`).join('')
+    : '<tr><td colspan="6" class="text-center py-8 text-gray-300 text-[11px]">No leave requests in this period.</td></tr>';
+}
+
+function setPeriod(n){ render(n); }
+function handleAside(){ document.querySelector('.aside')?.classList.toggle('asideToggle'); document.querySelector('.block')?.classList.toggle('blockToggle'); }
+function droplogout(){ const lb=document.querySelector('.logout-block'); if(!lb)return; lb.classList.contains('-translate-y-[500px]')?(lb.classList.replace('-translate-y-[500px]','translate-y-[0px]'),lb.classList.add('z-20')):lb.classList.replace('translate-y-[0px]','-translate-y-[500px]'); }
+
+document.addEventListener('DOMContentLoaded',()=>render(activePeriod));
+
+// ══════════════════════════════════════════════════════════════
+// MODAL POPUP — modes: top | bottom | pending | wfh
+// ══════════════════════════════════════════════════════════════
+
+const _monthlyTop    = DJANGO.monthlyTop    || [];
+const _monthlyBottom = DJANGO.monthlyBottom || [];
+const _attSummary    = DJANGO.attendanceSummary || [];
+
+function _getTopData(){
+  if(_monthlyTop.length) return _monthlyTop;
+  if(!_attSummary.length) return [];
+  const s=[..._attSummary].filter(e=>e.present_days>0).sort((a,b)=>(b.present_days||0)-(a.present_days||0));
+  return s.length?[{month:'All Time',list:s.map(e=>({id:e.employee_id||'',name:e.employee_name||'—',days:e.present_days||0}))}]:[];
+}
+function _getBottomData(){
+  if(_monthlyBottom.length) return _monthlyBottom;
+  if(!_attSummary.length) return [];
+  const s=[..._attSummary].filter(e=>(e.present_days||0)>0).sort((a,b)=>(a.present_days||0)-(b.present_days||0));
+  return s.length?[{month:'All Time',list:s.map(e=>({id:e.employee_id||'',name:e.employee_name||'—',days:e.present_days||0}))}]:[];
+}
+
+let _modalMode='top';
+
+function openModal(mode){
+  _modalMode = mode;
+
+  const icon  = document.getElementById('pmModalIcon');
+  const title = document.getElementById('pmModalTitle');
+  const sub   = document.getElementById('pmModalSub');
+  const pills = document.getElementById('pmMonthRow');
+  pills.innerHTML = '';
+
+  // Config per mode
+  const cfg = {
+    top:     { icon:'🏆', iconCls:'pm-icon-green',  titleCls:'pm-green',  title:'Most Present',    sub:'Top attendance ranked by month' },
+    bottom:  { icon:'⚠️', iconCls:'pm-icon-red',    titleCls:'pm-red',    title:'Needs Attention', sub:'Lowest attendance ranked by month' },
+    pending: { icon:'📋', iconCls:'pm-icon-amber',  titleCls:'pm-amber',  title:'Pending Actions', sub:'Leave requests awaiting approval' },
+    wfh:     { icon:'🏠', iconCls:'pm-icon-purple', titleCls:'pm-purple', title:'Remote Today',    sub:'Employees on approved WFH today' },
+  }[mode];
+
+  icon.className  = 'pm-modal-icon ' + cfg.iconCls;
+  icon.textContent = cfg.icon;
+  title.className  = 'pm-modal-title ' + cfg.titleCls;
+  title.textContent = cfg.title;
+  sub.textContent   = cfg.sub;
+
+  const pillsRow = document.getElementById('pmMonthRow');
+  if(mode==='top' || mode==='bottom'){
+    pillsRow.classList.remove('hidden');
+    _buildModalPills(mode);
+    _buildModalRankList(mode, 0);
+  } else {
+    pillsRow.classList.add('hidden');
+    if(mode==='pending') _buildModalPendingList();
+    else if(mode==='wfh') _buildModalWFHList();
+  }
+
+  document.getElementById('pmOverlay').classList.add('open');
+  document.getElementById('pmModal').classList.add('open');
+}
+
+function closeModal(){
+  document.getElementById('pmOverlay').classList.remove('open');
+  document.getElementById('pmModal').classList.remove('open');
+}
+
+// ── Month pills (top/bottom only) ─────────────────────────────
+function _buildModalPills(mode){
+  const data   = mode==='top' ? _getTopData() : _getBottomData();
+  const pills  = document.getElementById('pmMonthRow');
+  const aClass = mode==='top' ? 'pill-active-green' : 'pill-active-red';
+  if(!data.length){
+    pills.innerHTML = '<span style="font-size:12px;color:#94a3b8;padding:4px 0">No monthly data yet</span>';
+    return;
+  }
+  data.forEach((item, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'pm-month-pill' + (idx===0 ? ' '+aClass : '');
+    btn.textContent = item.month;
+    btn.onclick = () => {
+      pills.querySelectorAll('.pm-month-pill').forEach(p=>p.classList.remove('pill-active-green','pill-active-red','pill-active-amber','pill-active-purple'));
+      btn.classList.add(aClass);
+      _buildModalRankList(mode, idx);
+    };
+    pills.appendChild(btn);
+  });
+}
+
+// ── Ranked list (top / bottom) ────────────────────────────────
+function _buildModalRankList(mode, monthIdx){
+  const data  = mode==='top' ? _getTopData() : _getBottomData();
+  const list  = document.getElementById('pmList');
+  const dCls  = mode==='top' ? 'pm-days-green' : 'pm-days-red';
+  const items = data[monthIdx]?.list || [];
+  list.innerHTML = '';
+  if(!items.length){
+    list.innerHTML = '<div class="pm-empty">No records found.<br><small>Employees need to clock in for data to appear.</small></div>';
+    return;
+  }
+  items.forEach((emp, i) => {
+    const rank = i+1;
+    const el   = document.createElement('div');
+    el.className = 'pm-rank-item';
+    el.style.animationDelay = (i*.04)+'s';
+    let numCls='rn', rankLbl='#'+rank;
+    if(rank===1){ numCls='r1'; rankLbl='🥇'; }
+    if(rank===2){ numCls='r2'; rankLbl='🥈'; }
+    if(rank===3){ numCls='r3'; rankLbl='🥉'; }
+    el.innerHTML = `
+      <div class="pm-rank-num ${numCls}">${rankLbl}</div>
+      <div class="pm-rank-info">
+        <div class="pm-rank-name">${emp.name||'—'}</div>
+        <div class="pm-rank-id">${emp.id||''}</div>
+      </div>
+      <div class="pm-rank-right">
+        <div class="pm-rank-days ${dCls}">${emp.days}</div>
+        <div class="pm-rank-dlabel">days present</div>
+      </div>`;
+    list.appendChild(el);
+  });
+}
+
+// ── Pending leave list ────────────────────────────────────────
+function _buildModalPendingList(){
+  const list = document.getElementById('pmList');
+  list.innerHTML = '';
+  const pl = _currentLeaves
+    .filter(l => (l.Status||'Pending')==='Pending')
+    .sort((a,b) => (a.Applied_on||'').localeCompare(b.Applied_on||''));
+  if(!pl.length){
+    list.innerHTML = '<div class="pm-empty">No pending requests 🎉<br><small>All leave requests have been processed.</small></div>';
+    return;
+  }
+  pl.forEach((l, i) => {
+    const name = l.Employee_Name||l.employee_name||'—';
+    const type = (l.Leave_type||l.leave_type||'Leave').replace(/_/g,' ');
+    const from = l.Start_date||l.Applied_on||'—';
+    const days = l.No_of_days||'?';
+    const el   = document.createElement('div');
+    el.className = 'pm-list-item';
+    el.style.animationDelay = (i*.04)+'s';
+    el.innerHTML = `
+      <div class="pm-avatar" style="background:${avatarColor(name)}">${initials(name)}</div>
+      <div class="pm-list-info">
+        <div class="pm-list-name">${name}</div>
+        <div class="pm-list-meta">${type} &middot; from ${from} &middot; ${days} day${days>1?'s':''}</div>
+      </div>
+      <span class="pm-badge pm-badge-pending">Pending</span>`;
+    list.appendChild(el);
+  });
+}
+
+// ── WFH employees list ────────────────────────────────────────
+function _buildModalWFHList(){
+  const list    = document.getElementById('pmList');
+  list.innerHTML = '';
+  const wfhReqs = (DJANGO.wfhRequests||[]).filter(w=>(w.Status||w.status||'').toLowerCase()==='approved');
+  const fallback = (DJANGO.wfhSummary||[]).filter(e=>(e.wfh_days||0)>0).slice(0,20);
+  const source   = wfhReqs.length ? wfhReqs : fallback;
+  if(!source.length){
+    list.innerHTML = '<div class="pm-empty">No WFH employees today.<br><small>No approved remote work for today.</small></div>';
+    return;
+  }
+  source.forEach((w, i) => {
+    const name = w.Employee_Name||w.employee_name||'—';
+    const meta = wfhReqs.length
+      ? (w.Date||w.date||'Today')
+      : `${w.wfh_days||0} WFH day${(w.wfh_days||0)!==1?'s':''} this period`;
+    const el = document.createElement('div');
+    el.className = 'pm-list-item';
+    el.style.animationDelay = (i*.04)+'s';
+    el.innerHTML = `
+      <div class="pm-avatar" style="background:${avatarColor(name)}">${initials(name)}</div>
+      <div class="pm-list-info">
+        <div class="pm-list-name">${name}</div>
+        <div class="pm-list-meta">Remote &middot; ${meta}</div>
+      </div>
+      <span class="pm-badge pm-badge-wfh">WFH</span>`;
+    list.appendChild(el);
+  });
+}
+
+// Close on Escape
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
+</script>
+
+{% endblock %}

@@ -1,0 +1,388 @@
+{% extends 'navAside.html' %} {% block title %}
+<title>Organization</title>
+{% endblock %}
+{% block content %}
+
+<!-- Add Employee Overlay -->
+<div
+  class="white-block bg-white absolute h-[100vh] w-[100%] opacity-75 z-40 hidden"
+  onclick="removeEmp()"
+></div>
+
+<!-- Add Employee Popup -->
+<div
+  class="empDet z-50 hidden fixed px-[20px] py-[15px] left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 h-fit text-white text-[12px] bg-[#1e1e1e] rounded-[20px] w-[70%] justify-center overflow-y-auto max-h-[90vh]"
+>
+  <form
+    id="addEmployeeForm"
+    onsubmit="return validateForm()"
+    class="content flex flex-col justify-between px-[10px] py-[20px] gap-[10px]"
+    action="{% url 'submit_employee_data' 'insert' %}"
+    method="post"
+  >
+    {% csrf_token %}
+    <h3 class="font-normal text-[20px] mx-[0px] my-[5px]">Add an Employee</h3>
+    <table>
+      <tr>
+        <td><p>Employee Name</p></td>
+        <td><p>Address</p></td>
+        <td><p>Date</p></td>
+        <td><p>Skills</p></td>
+      </tr>
+      <tr>
+        <td>
+          <input class="bg-[transparent] border-2 border-[#9C9A9A] outline-none p-[5px] rounded-[5px] mb-[10px]" type="text" name="employee_name" id="employee_name" placeholder="Enter Name" pattern="[a-zA-Z ]{1,30}" title="Name should be in characters only and have a maximum length of 30" required />
+        </td>
+        <td rowspan="3">
+          <textarea class="bg-[transparent] border-2 border-[#9C9A9A] outline-none p-[5px] rounded-[5px] mb-[10px]" type="text" name="Address" id="Address" rows="4" placeholder="Enter Address" required></textarea>
+        </td>
+        <td>
+          <input class="bg-[transparent] border-2 border-[#9C9A9A] outline-none p-[5px] rounded-[5px] w-[80%] mb-[10px]" type="date" name="Date" id="Date" placeholder="Enter Date" required />
+        </td>
+        <td rowspan="3">
+          <textarea class="bg-[transparent] border-2 border-[#9C9A9A] outline-none p-[5px] rounded-[5px] mb-[10px]" type="text" name="Skills" id="Skills" rows="4" placeholder="Enter Skills" required></textarea>
+        </td>
+      </tr>
+      <tr>
+        <td><p>Employee ID</p></td>
+        <td><p>Manager Name</p></td>
+      </tr>
+      <tr>
+        <td>
+          <input class="bg-[transparent] border-2 border-[#9C9A9A] outline-none p-[5px] rounded-[5px] mb-[10px]" type="text" name="employee_id" id="employee_id" placeholder="Enter ID" pattern="[A-Z0-9]{1,15}" title="ID should be alphanumeric, in capitals, max 15 chars" required />
+        </td>
+        <td>
+          <input class="bg-[transparent] border-2 border-[#9C9A9A] outline-none p-[5px] rounded-[5px] mb-[10px]" type="text" name="Manager_name" id="Manager_name" placeholder="Enter manager name" pattern="[a-zA-Z ]{1,30}" title="Name should be in characters and have max 30 chars" required />
+        </td>
+      </tr>
+      <tr>
+        <td><p>Email address</p></td>
+        <td><p>Department</p></td>
+        <td><p>Manager Email</p></td>
+        <td><p>Username</p></td>
+      </tr>
+      <tr>
+        <td><input class="bg-[transparent] border-2 border-[#9C9A9A] outline-none p-[5px] rounded-[5px] mb-[10px]" type="text" name="employee_email" id="employee_email" placeholder="Enter email address" required /></td>
+        <td><input class="bg-[transparent] border-2 border-[#9C9A9A] outline-none p-[5px] rounded-[5px] mb-[10px]" type="text" name="Department" id="Department" placeholder="Enter department" required /></td>
+        <td><input class="bg-[transparent] border-2 border-[#9C9A9A] outline-none p-[5px] rounded-[5px] mb-[10px]" type="text" name="Manager_email" id="Manager_email" placeholder="Enter manager email" required /></td>
+        <td><input class="bg-[transparent] border-2 border-[#9C9A9A] outline-none p-[5px] rounded-[5px] mb-[10px]" type="text" name="Username" id="Username" placeholder="Enter UserName" required /></td>
+      </tr>
+      <tr>
+        <td><p>Gender</p></td>
+        <td><p>Position</p></td>
+        <td><p>Hire Date</p></td>
+        <td><p>Password</p></td>
+      </tr>
+      <tr>
+        <td><input class="bg-[transparent] border-2 border-[#9C9A9A] outline-none p-[5px] rounded-[5px] mb-[10px]" type="text" name="Gender" id="Gender" placeholder="Enter gender" required /></td>
+        <td><input class="bg-[transparent] border-2 border-[#9C9A9A] outline-none p-[5px] rounded-[5px] mb-[10px]" type="text" name="Position" id="Position" placeholder="Enter position" required /></td>
+        <td><input class="bg-[transparent] border-2 border-[#9C9A9A] outline-none p-[5px] rounded-[5px] w-[80%] mb-[10px]" type="date" name="Hire_date" id="Hire_date" required /></td>
+        <td><input class="bg-[transparent] border-2 border-[#9C9A9A] outline-none p-[5px] rounded-[5px] mb-[10px]" type="password" name="Password" id="Password" placeholder="Enter password" required /></td>
+      </tr>
+      <tr>
+        <td><p>Phone Number</p></td>
+        <td><p>Team Lead</p></td>
+        <td><p>Work Location</p></td>
+        <td><p>User Type</p></td>
+      </tr>
+      <tr>
+        <td><input class="bg-[transparent] border-2 border-[#9C9A9A] outline-none p-[5px] rounded-[5px] mb-[10px]" type="text" name="Phone_Number" id="Phone_Number" placeholder="Enter Phone Number" required /></td>
+        <td><input class="bg-[transparent] border-2 border-[#9C9A9A] outline-none p-[5px] rounded-[5px] mb-[10px]" type="text" name="Team_lead" id="Team_lead" placeholder="Enter team lead" required /></td>
+        <td><input class="bg-[transparent] border-2 border-[#9C9A9A] outline-none p-[5px] rounded-[5px] mb-[10px]" type="text" name="Work_location" id="Work_location" placeholder="Enter work location" required /></td>
+        <td><input class="bg-[transparent] border-2 border-[#9C9A9A] outline-none p-[5px] rounded-[5px] mb-[10px]" type="text" name="usertype" id="usertype" placeholder="Enter user type" required /></td>
+      </tr>
+      <tr>
+        <td><p>DOB</p></td>
+        <td><p>Team Lead Email</p></td>
+        <td><p>Emergency Contact</p></td>
+        <td><p>Sick_Leave</p></td>
+      </tr>
+      <tr>
+        <td><input class="bg-[transparent] border-2 border-[#9C9A9A] outline-none p-[5px] rounded-[5px] w-[80%] mb-[10px]" type="date" name="Date_of_birth" id="Date_of_birth" required /></td>
+        <td><input class="bg-[transparent] border-2 border-[#9C9A9A] outline-none p-[5px] rounded-[5px] mb-[10px]" type="text" name="Team_lead_email" id="Team_lead_email" placeholder="Enter team lead email" required /></td>
+        <td><input class="bg-[transparent] border-2 border-[#9C9A9A] outline-none p-[5px] rounded-[5px] mb-[10px]" type="text" name="Emergency_contact" id="Emergency_contact" placeholder="Enter emergency contact" required /></td>
+        <td><input class="bg-[transparent] border-2 border-[#9C9A9A] outline-none p-[5px] rounded-[5px] mb-[10px]" type="number" name="Sick_Leave" id="Sick_Leave" placeholder="Sick Leaves" required /></td>
+      </tr>
+      <tr>
+        <td><p>Wedding_Leave</p></td>
+        <td><p>Maternity_Leave</p></td>
+        <td><p>Paternity_Leave</p></td>
+      </tr>
+      <tr>
+        <td><input class="bg-[transparent] border-2 border-[#9C9A9A] outline-none p-[5px] rounded-[5px] w-[80%] mb-[10px]" type="text" name="Wedding_Leave" id="Wedding_Leave" placeholder="Wedding leaves" value="0" required /></td>
+        <td><input class="bg-[transparent] border-2 border-[#9C9A9A] outline-none p-[5px] rounded-[5px] mb-[10px]" type="number" name="Maternity_Leave" id="Maternity_Leave" placeholder="Maternity Leaves" required /></td>
+        <td><input class="bg-[transparent] border-2 border-[#9C9A9A] outline-none p-[5px] rounded-[5px] mb-[10px]" type="number" name="Paternity_Leave" id="Paternity_Leave" placeholder="Paternity Leaves" required /></td>
+      </tr>
+    </table>
+    <div class="buttons flex flex-row justify-between">
+      <button type="submit" class="decoration-none w-fit mt-[15px] cursor-pointer px-[25px] py-[10px] bg-[#319131] text-[14px] rounded-[10px] text-white border-none">Submit</button>
+      <a href="{% url 'org' %}" class="text-white bg-red-500 border-2 rounded-md w-fit h-fit px-5 py-1 text-lg">BACK</a>
+    </div>
+  </form>
+</div>
+
+<!-- Main Content -->
+<div class="block z-10 absolute top-[11vh] left-[0vw] md:left-[13vw] text-justify w-[100%] md:w-[calc(100%-180px)] overflow-hidden">
+
+  <!-- Top Nav Bar -->
+  <div class="block-nav fixed w-[100%] flex flex-row items-center gap-[40px] md:gap-[50px] bg-[#F1F9FF] pl-[5vw] h-[5vh] z-10">
+    <h1 class="font-semibold text-sm md:text-base text-blue-400">Organization</h1>
+  </div>
+
+  <!-- Content Area -->
+  <div class="block-content flex flex-col gap-[15px] px-[5vw] mt-[6vh] md:mt-[10vh] pb-[5vh]">
+
+    <!-- Header Row -->
+    <div class="flex flex-row justify-between items-center">
+      <h2 class="text-gray-600 font-semibold text-base md:text-lg">Team Structure</h2>
+      <button
+        onclick="showEmp()"
+        class="text-white bg-blue-600 hover:bg-blue-700 transition-colors w-fit px-[15px] py-[8px] border-none rounded-[8px] cursor-pointer text-xs md:text-sm font-medium shadow"
+      >
+        + Add Employee
+      </button>
+    </div>
+
+    <!-- Org Accordion -->
+    <div class="org-container flex flex-col gap-[12px] w-full">
+
+      {% for manager, teams in org_structure.items %}
+
+      <!-- Manager Block -->
+      <div class="manager-block rounded-[12px] overflow-hidden shadow-md border border-blue-100">
+
+        <!-- Manager Header (Clickable) -->
+        <div
+          class="manager-header flex flex-row items-center justify-between px-[20px] py-[14px] bg-blue-600 text-white cursor-pointer select-none hover:bg-blue-700 transition-colors"
+          onclick="toggleManager(this)"
+        >
+          <div class="flex items-center gap-[10px]">
+            <!-- Manager Icon -->
+            <div class="w-[34px] h-[34px] rounded-full bg-white bg-opacity-20 flex items-center justify-center font-bold text-sm">
+              {{ manager|default:"M"|first|upper }}
+            </div>
+            <div>
+              <p class="m-0 text-[11px] text-blue-200 font-medium">MANAGER</p>
+              <p class="m-0 text-[15px] font-semibold">{{ manager }}</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-[10px]">
+            <!-- Team count badge -->
+            <span class="bg-white bg-opacity-20 text-white text-xs px-[10px] py-[3px] rounded-full">
+              {{ teams|length }} team{% if teams|length != 1 %}s{% endif %}
+            </span>
+            <!-- Arrow -->
+            <svg class="arrow-icon w-[20px] h-[20px] transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Teams Container (hidden by default) -->
+        <div class="teams-container hidden bg-[#f8faff] px-[15px] py-[12px] flex-col gap-[10px]">
+
+          {% for team_lead, employees in teams.items %}
+
+          <!-- Team Lead Block -->
+          <div class="teamlead-block rounded-[10px] overflow-hidden border border-indigo-100 shadow-sm">
+
+            <!-- Team Lead Header (Clickable) -->
+            <div
+              class="teamlead-header flex flex-row items-center justify-between px-[16px] py-[11px] bg-indigo-500 text-white cursor-pointer select-none hover:bg-indigo-600 transition-colors"
+              onclick="toggleTeamLead(this)"
+            >
+              <div class="flex items-center gap-[8px]">
+                <!-- TeamLead Icon -->
+                <div class="w-[28px] h-[28px] rounded-full bg-white bg-opacity-20 flex items-center justify-center font-bold text-xs">
+                  {{ team_lead|default:"T"|first|upper }}
+                </div>
+                <div>
+                  <p class="m-0 text-[10px] text-indigo-200 font-medium">TEAM LEAD</p>
+                  <p class="m-0 text-[13px] font-semibold">{{ team_lead }}</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-[8px]">
+                <!-- Employee count badge -->
+                <span class="bg-white bg-opacity-20 text-white text-xs px-[8px] py-[2px] rounded-full">
+                  {{ employees|length }} member{% if employees|length != 1 %}s{% endif %}
+                </span>
+                <!-- Arrow -->
+                <svg class="arrow-icon w-[16px] h-[16px] transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                </svg>
+              </div>
+            </div>
+
+            <!-- Employees Table (hidden by default) -->
+            <div class="employees-container hidden bg-white">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="bg-gray-50 border-b border-gray-200">
+                    <th class="text-left px-[16px] py-[10px] text-gray-500 font-medium text-xs uppercase tracking-wide w-[40px]">#</th>
+                    <th class="text-left px-[16px] py-[10px] text-gray-500 font-medium text-xs uppercase tracking-wide">Employee ID</th>
+                    <th class="text-left px-[16px] py-[10px] text-gray-500 font-medium text-xs uppercase tracking-wide">Employee Name</th>
+                    <th class="text-center px-[16px] py-[10px] text-gray-500 font-medium text-xs uppercase tracking-wide">Edit</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for emp in employees %}
+                  <tr class="border-b border-gray-100 hover:bg-blue-50 transition-colors">
+                    <td class="px-[16px] py-[10px] text-gray-400 text-xs">{{ forloop.counter }}</td>
+                    <td class="px-[16px] py-[10px]">
+                      <span class="bg-blue-100 text-blue-700 text-xs font-mono px-[8px] py-[3px] rounded-[4px]">
+                        {{ emp.Employee_id }}
+                      </span>
+                    </td>
+                    <td class="px-[16px] py-[10px]">
+                      <div class="flex items-center gap-[8px]">
+                        <!-- Avatar -->
+                        <div class="w-[28px] h-[28px] rounded-full bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
+                          {{ emp.Employee_Name|first|upper }}
+                        </div>
+                        <span class="text-gray-700 font-medium text-sm">{{ emp.Employee_Name }}</span>
+                      </div>
+                    </td>
+                    <td class="px-[16px] py-[10px] text-center">
+                      <a
+                        href="{% url 'update' emp.Employee_id %}"
+                        class="inline-flex items-center gap-[4px] bg-blue-500 hover:bg-blue-600 text-white text-xs px-[10px] py-[5px] rounded-[6px] transition-colors no-underline"
+                      >
+                        <!-- Edit Icon -->
+                        <svg class="w-[12px] h-[12px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                        </svg>
+                        Edit
+                      </a>
+                    </td>
+                  </tr>
+                  {% empty %}
+                  <tr>
+                    <td colspan="4" class="px-[16px] py-[20px] text-center text-gray-400 text-sm">No employees in this team</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+
+          </div><!-- end teamlead-block -->
+
+          {% empty %}
+          <p class="text-gray-400 text-sm text-center py-4">No teams found under this manager</p>
+          {% endfor %}
+
+        </div><!-- end teams-container -->
+
+      </div><!-- end manager-block -->
+
+      {% empty %}
+      <div class="text-center py-[40px] text-gray-400">
+        <p class="text-lg">No organization data found</p>
+      </div>
+      {% endfor %}
+
+    </div><!-- end org-container -->
+  </div>
+</div>
+
+<!-- JavaScript for accordion toggle -->
+<script>
+  // Toggle Manager section open/close
+  function toggleManager(header) {
+    const teamsContainer = header.parentElement.querySelector(".teams-container");
+    const arrow = header.querySelector(".arrow-icon");
+    const isHidden = teamsContainer.classList.contains("hidden");
+    if (isHidden) {
+      teamsContainer.classList.remove("hidden");
+      teamsContainer.style.display = "flex";
+      arrow.style.transform = "rotate(180deg)";
+    } else {
+      teamsContainer.style.display = "none";
+      teamsContainer.classList.add("hidden");
+      arrow.style.transform = "rotate(0deg)";
+    }
+  }
+
+  // Toggle TeamLead section open/close
+  function toggleTeamLead(header) {
+
+  const employeesContainer = header.parentElement.querySelector(".employees-container");
+  const arrow = header.querySelector('.arrow-icon');
+
+  if (employeesContainer.classList.contains("hidden")) {
+
+      employeesContainer.classList.remove("hidden");
+      employeesContainer.classList.add("block");
+
+      arrow.style.transform = "rotate(180deg)";
+
+  } else {
+
+      employeesContainer.classList.remove("block");
+      employeesContainer.classList.add("hidden");
+
+      arrow.style.transform = "rotate(0deg)";
+  }
+}
+</script>
+
+<!-- Popup scripts -->
+<script>
+  const pop = document.querySelector(".empDet");
+  const menu = document.querySelector(".white-block");
+  const body = document.querySelector("#body") || document.body;
+
+  function showEmp() {
+    menu.classList.remove("hidden");
+    menu.classList.add("block");
+    pop.classList.remove("hidden");
+    pop.classList.add("block");
+    body.classList.add("overflow-hidden");
+  }
+
+  function removeEmp() {
+    menu.classList.remove("block");
+    menu.classList.add("hidden");
+    pop.classList.remove("block");
+    pop.classList.add("hidden");
+    body.classList.remove("overflow-hidden");
+  }
+</script>
+
+<script>
+  const aside = document.querySelector(".aside");
+  const block = document.querySelector(".block");
+  const drop = document.querySelector(".dropdown");
+  function handleAside() {
+    if (aside) aside.classList.toggle("asideToggle");
+    if (block) block.classList.toggle("blockToggle");
+    if (drop) drop.classList.toggle("dropToggle");
+  }
+</script>
+
+<script>
+  function droplogout() {
+    var logoutblock = document.querySelector(".logout-block");
+    if (logoutblock) {
+      if (logoutblock.classList.contains("-translate-y-[500px]")) {
+        logoutblock.classList.remove("-translate-y-[500px]");
+        logoutblock.classList.add("translate-y-[0px]", "z-20");
+      } else {
+        logoutblock.classList.remove("translate-y-[0px]");
+        logoutblock.classList.add("-translate-y-[500px]");
+      }
+    }
+  }
+</script>
+
+<style>
+  body { overflow-x: hidden; overflow-y: auto; }
+  .block { transition: 0.2s ease-in-out; }
+  .blockToggle { left: 0; transition: 0.2s ease-in-out; right: 0; width: 100%; }
+  .teams-container { flex-direction: column; }
+  .arrow-icon { transition: transform 0.3s ease; }
+  @media screen and (min-width: 320px) and (max-width: 480px) {
+    body { overflow: scroll; }
+  }
+</style>
+
+{% endblock %}

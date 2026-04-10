@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  {% block title %}<title>Payroll System</title>{% endblock %}
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Design tokens (match login.html exactly) ── */
+    :root {
+      --brand:       #059669;
+      --brand-light: #34d399;
+      --brand-dark:  #064e3b;
+      --accent:      #f59e0b;
+      --bg:          #f0f4f0;
+      --surface:     #ffffff;
+      --surface2:    #e8f0eb;
+      --border:      rgba(5,150,105,0.14);
+      --text:        #0d1f16;
+      --muted:       #4b6358;
+      --sidebar-w:   240px;
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    html, body {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      min-height: 100vh;
+    }
+
+    /* ── Subtle animated background (same orbs as login) ── */
+    body::before, body::after {
+      content: '';
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.18;
+      pointer-events: none;
+      z-index: 0;
+      animation: drift 14s ease-in-out infinite alternate;
+    }
+    body::before {
+      width: 600px; height: 600px;
+      background: #6ee7b7;
+      top: -200px; left: -200px;
+    }
+    body::after {
+      width: 500px; height: 500px;
+      background: #064e3b;
+      bottom: -200px; right: -200px;
+      animation-delay: -7s;
+    }
+
+    /* Dot grid overlay */
+    .pg-grid {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(5,150,105,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(5,150,105,0.05) 1px, transparent 1px);
+      background-size: 44px 44px;
+    }
+
+    @keyframes drift {
+      from { transform: translate(0,0) scale(1); }
+      to   { transform: translate(25px,18px) scale(1.05); }
+    }
+
+    /* ── TOPBAR ─────────────────────────────────────── */
+    .topbar {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: 58px;
+      background: rgba(255,255,255,0.93);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 20px 0 16px;
+      z-index: 100;
+      box-shadow: 0 1px 16px rgba(5,150,105,0.08);
+    }
+
+    .topbar-left {
+      display: flex; align-items: center; gap: 12px;
+    }
+
+    .hamburger {
+      width: 34px; height: 34px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface2);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: background .15s, border-color .15s;
+      flex-shrink: 0;
+    }
+    .hamburger:hover { background: #d1fae5; border-color: var(--brand-light); }
+    .hamburger svg { width: 16px; height: 16px; color: var(--brand); }
+
+    .topbar-logo {
+      display: flex; align-items: center; gap: 8px;
+      text-decoration: none;
+    }
+    .topbar-logo-icon {
+      width: 30px; height: 30px;
+      background: linear-gradient(135deg, var(--brand-dark), var(--brand-light));
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 3px 10px rgba(30,64,175,0.35);
+    }
+    .topbar-logo-text {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700; font-size: 14px;
+      letter-spacing: -0.3px;
+      color: var(--text);
+    }
+    .topbar-logo-text span { color: var(--brand); }
+
+    .topbar-right {
+      display: flex; align-items: center; gap: 10px;
+    }
+
+    .topbar-email {
+      font-size: 12px; color: var(--muted);
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 4px 12px;
+      max-width: 220px;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+
+    .topbar-logout {
+      display: flex; align-items: center; gap: 5px;
+      font-family: 'Syne', sans-serif;
+      font-size: 12px; font-weight: 600;
+      color: #dc2626;
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-radius: 8px;
+      padding: 5px 12px;
+      text-decoration: none;
+      transition: background .15s, border-color .15s;
+      cursor: pointer;
+    }
+    .topbar-logout:hover { background: #fee2e2; border-color: #f87171; }
+
+    /* ── SIDEBAR ─────────────────────────────────────── */
+    .sidebar {
+      position: fixed;
+      top: 58px; left: 0;
+      width: var(--sidebar-w);
+      height: calc(100vh - 58px);
+      background: linear-gradient(175deg, #0d2818 0%, #132d1e 50%, #0a1f13 100%);
+      border-right: 1px solid rgba(255,255,255,0.05);
+      z-index: 90;
+      display: flex; flex-direction: column;
+      transition: transform .22s cubic-bezier(.4,0,.2,1);
+      overflow-y: auto; overflow-x: hidden;
+      box-shadow: 4px 0 28px rgba(0,0,0,0.35);
+    }
+    .sidebar.collapsed { transform: translateX(calc(-1 * var(--sidebar-w))); }
+
+    /* User card inside sidebar */
+    .sidebar-user {
+      margin: 14px 12px 8px;
+      background: linear-gradient(135deg, rgba(5,150,105,0.35), rgba(52,211,153,0.18));
+      border: 1px solid rgba(52,211,153,0.2);
+      border-radius: 12px;
+      padding: 14px;
+      color: white;
+      display: block;
+      text-decoration: none;
+      transition: background .18s, transform .18s;
+      cursor: pointer;
+    }
+    .sidebar-user:hover {
+      background: linear-gradient(135deg, rgba(5,150,105,0.48), rgba(52,211,153,0.28));
+      transform: translateY(-1px);
+    }
+    .sidebar-user-view-hint {
+      font-size: 9px; opacity: 0.5; margin-top: 6px;
+      letter-spacing: 0.5px; display: flex; align-items: center; gap: 4px;
+    }
+    .sidebar-user-avatar {
+      width: 36px; height: 36px;
+      background: rgba(255,255,255,0.25);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700; font-size: 14px;
+      margin-bottom: 8px;
+    }
+    .sidebar-user-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700; font-size: 13px;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .sidebar-user-role {
+      font-size: 10px; opacity: 0.75;
+      margin-top: 2px; text-transform: uppercase; letter-spacing: 0.8px;
+    }
+    .sidebar-user-id {
+      font-size: 10px; opacity: 0.6; margin-top: 1px;
+    }
+
+    /* Nav section label */
+    .nav-section-label {
+      font-size: 9px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1.2px;
+      color: rgba(255,255,255,0.3);
+      padding: 12px 16px 4px;
+    }
+
+    /* Nav links */
+    .nav-link {
+      display: flex; align-items: center; gap: 10px;
+      padding: 9px 14px;
+      margin: 1px 8px;
+      border-radius: 9px;
+      font-size: 13px; font-weight: 500;
+      color: rgba(255,255,255,0.55);
+      text-decoration: none;
+      transition: background .15s, color .15s;
+      cursor: pointer;
+    }
+    .nav-link:hover {
+      background: rgba(52,211,153,0.1);
+      color: rgba(255,255,255,0.9);
+    }
+    .nav-link.active {
+      background: linear-gradient(135deg, rgba(5,150,105,0.28), rgba(52,211,153,0.12));
+      color: #6ee7b7;
+      font-weight: 600;
+      border-left: 2px solid #34d399;
+      padding-left: 12px;
+    }
+    .nav-link svg {
+      width: 16px; height: 16px;
+      flex-shrink: 0;
+      opacity: 0.55;
+    }
+    .nav-link:hover svg, .nav-link.active svg { opacity: 1; }
+
+    .nav-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.07);
+      margin: 8px 14px;
+    }
+
+    /* Sidebar bottom spacer */
+    .sidebar-bottom {
+      margin-top: auto;
+      padding: 12px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+    .sidebar-version {
+      font-size: 10px; color: rgba(255,255,255,0.25);
+      text-align: center;
+      font-family: 'Syne', sans-serif;
+    }
+
+    /* ── MAIN CONTENT ─────────────────────────────────── */
+    .page-content {
+      margin-left: var(--sidebar-w);
+      margin-top: 58px;
+      min-height: calc(100vh - 58px);
+      position: relative; z-index: 1;
+      transition: margin-left .22s cubic-bezier(.4,0,.2,1);
+    }
+    .page-content.expanded { margin-left: 0; }
+
+    /* ── MOBILE OVERLAY ──────────────────────────────── */
+    .sidebar-overlay {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(14,30,58,0.4);
+      backdrop-filter: blur(2px);
+      z-index: 85;
+    }
+    .sidebar-overlay.show { display: block; }
+
+    /* ── SCROLLBAR ───────────────────────────────────── */
+    .sidebar::-webkit-scrollbar { width: 3px; }
+    .sidebar::-webkit-scrollbar-track { background: transparent; }
+    .sidebar::-webkit-scrollbar-thumb { background: rgba(52,211,153,0.2); border-radius: 2px; }
+
+    /* ── RESPONSIVE ──────────────────────────────────── */
+    @media (max-width: 768px) {
+      .sidebar { transform: translateX(calc(-1 * var(--sidebar-w))); }
+      .sidebar.open { transform: translateX(0); }
+      .page-content { margin-left: 0 !important; }
+      .topbar-email { display: none; }
+    }
+
+    /* ── NOTIFICATION BADGE ──────────────────────────── */
+    .nav-badge {
+      margin-left: auto;
+      background: #f59e0b;
+      color: white;
+      font-size: 9px; font-weight: 700;
+      padding: 1px 6px;
+      border-radius: 10px;
+    }
+
+    /* ── PAGE FADE IN ────────────────────────────────── */
+    @keyframes pageIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .page-content { animation: pageIn .3s ease both; }
+
+    /* ── LEGACY LAYOUT NEUTRALISER ───────────────────────
+       Old employee/admin pages used absolute positioning
+       with top-[11vh] + left-[13vw] to manually offset for
+       the topbar and sidebar. Since page-content already
+       handles those margins, we reset the legacy inner
+       wrappers so there is no double-gap. All pages
+       (old & new ps-page shell) now sit flush.
+    ──────────────────────────────────────────────────── */
+
+    /* The old "block" wrapper used on most employee pages */
+    .page-content > .block {
+      position: static !important;
+      top: auto !important;
+      left: auto !important;
+      width: 100% !important;
+      overflow-x: hidden;
+    }
+
+    /* Old fixed sub-topbar navbars inside pages */
+    .page-content .block-nav {
+      position: sticky !important;
+      top: 0 !important;
+      left: auto !important;
+      width: 100% !important;
+      z-index: 10;
+    }
+
+    /* Content area inside old pages — remove extra top padding/margin */
+    .page-content .block-content {
+      margin-top: 0 !important;
+      padding-top: 16px;
+    }
+
+    /* Old "content" divs with inline margin-top: 100px / margin-left: 150px */
+    .page-content > .content {
+      margin-top: 0 !important;
+      margin-left: 0 !important;
+      padding: 24px 28px;
+    }
+
+    /* Any direct child div inside page-content that used the old pattern */
+    .page-content > div:not(.block):not(.ps-page):not(.content) {
+      /* leave untouched — only target known legacy wrappers */
+    }
+
+    /* ps-page (new pages) — already uses margin not absolute, no change needed */
+    .ps-page {
+      margin-left: 0 !important; /* page-content already offsets */
+      margin-top: 0 !important;
+      min-height: calc(100vh - 58px);
+      display: flex;
+      flex-direction: column;
+    }
+    /* Specific styling for the Chatbot link if you want it to stand out */
+#nl-chatbot:hover {
+  background: rgba(52,211,153,0.1);
+  color: rgba(255,255,255,0.9);
+}
+
+#nl-chatbot svg {
+  /* This ensures it matches the 16x16 size of your other icons */
+  width: 16px;
+  height: 16px;
+  transition: transform 0.2s ease;
+}
+
+#nl-chatbot:hover svg {
+  transform: scale(1.1);
+  color: var(--brand-light);
+}
+  </style>
+</head>
+
+<body>
+<div class="pg-grid"></div>
+
+<!-- ════════════════ TOPBAR ════════════════ -->
+<header class="topbar">
+  <div class="topbar-left">
+    <button class="hamburger" onclick="toggleSidebar()" aria-label="Toggle menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="6"  x2="21" y2="6"/>
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+    <a class="topbar-logo">
+      <div class="topbar-logo-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="9" stroke="white" stroke-width="1.8"/>
+          <path d="M12 6v1.5M12 16.5V18" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M9.5 9.5C9.5 8.4 10.6 7.5 12 7.5s2.5.9 2.5 2c0 1-1.1 1.8-2.5 1.8S9.5 12.1 9.5 13c0 1.1 1.1 2 2.5 2s2.5-.9 2.5-2" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <span class="topbar-logo-text">Payroll <span>System</span></span>
+    </a>
+  </div>
+
+  <div class="topbar-right">
+    <span class="topbar-email">{{ email }}</span>
+    <a href="{% url 'logout' %}" class="topbar-logout">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+        <polyline points="16,17 21,12 16,7"/>
+        <line x1="21" y1="12" x2="9" y2="12"/>
+      </svg>
+      Logout
+    </a>
+  </div>
+</header>
+
+<!-- ════════════════ SIDEBAR ════════════════ -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+<aside class="sidebar" id="sidebar">
+
+  <!-- User card — click to view profile -->
+  <a href="{% url 'profile' %}" class="sidebar-user">
+    <div class="sidebar-user-avatar" id="sidebarAvatar">?</div>
+    <div class="sidebar-user-name">{% block emp1_name %}{{ username }}{% endblock %}</div>
+    <div class="sidebar-user-role">{% block emp1_type %}{{ user_type }}{% endblock %}</div>
+    <div class="sidebar-user-id">{% block emp1_id %}{{ user_id }}{% endblock %}</div>
+    <div style="font-size:9px;opacity:.5;margin-top:1px">{% block emp1_email %}{{ email }}{% endblock %}</div>
+    <div class="sidebar-user-view-hint">
+      <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+      View Profile
+    </div>
+  </a>
+
+  <div class="nav-section-label">Navigation</div>
+
+  <!-- Dashboard — admin lands on search/attendance dashboard -->
+  <a href="{% url 'search' %}" class="nav-link" id="nl-dash">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+      <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+    </svg>
+    {% block dash1 %}Dashboard{% endblock %}
+  </a>
+
+  <!-- Analytics — dedicated analytics page -->
+  <a href="{% url 'admin_analytics' %}" class="nav-link" id="nl-analytics">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="18" y1="20" x2="18" y2="10"/>
+      <line x1="12" y1="20" x2="12" y2="4"/>
+      <line x1="6"  y1="20" x2="6"  y2="14"/>
+      <line x1="2"  y1="20" x2="22" y2="20"/>
+    </svg>
+    {% block analytics1 %}Analytics{% endblock %}
+  </a>
+
+  <!-- Organization -->
+  <a href="{% url 'org' %}" class="nav-link" id="nl-org">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2" y="7" width="6" height="14"/><rect x="9" y="3" width="6" height="18"/>
+      <rect x="16" y="10" width="6" height="11"/>
+    </svg>
+    {% block org1 %}Organization{% endblock %}
+  </a>
+
+  <!-- My Team -->
+  <a href="{% url 'Admin_MyTeam_Info' %}" class="nav-link" id="nl-team">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+      <circle cx="9" cy="7" r="4"/>
+      <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+    </svg>
+    {% block myteam1 %}My Team{% endblock %}
+  </a>
+
+  <div class="nav-divider"></div>
+  <div class="nav-section-label">Information</div>
+
+  <!-- Holidays -->
+  <a href="{% url 'festival_data' %}" class="nav-link" id="nl-hol">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+      <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/>
+      <line x1="3" y1="10" x2="21" y2="10"/>
+    </svg>
+    {% block hol1 %}Holiday Info{% endblock %}
+  </a>
+
+  <!-- Announcements -->
+  <a href="{% url 'Announcements_Data' %}" class="nav-link" id="nl-ann">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+    </svg>
+    {% block Anouncement %}Announcements{% endblock %}
+  </a>
+
+  <!-- Notifications -->
+  <a class="nav-link" id="nl-notif">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+      <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+    </svg>
+    {% block notification1 %}Notifications{% endblock %}
+  </a>
+
+  <!-- Queries -->
+  <a href="{% url 'Queries_Data' %}" class="nav-link" id="nl-query">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"/>
+      <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+      <line x1="12" y1="17" x2="12.01" y2="17"/>
+    </svg>
+    {% block Query1 %}Queries{% endblock %}
+  </a>
+  <a href="{% url 'admin_chatbot' %}" class="nav-link" id="nl-chatbot">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+  </svg>
+  Chatbot
+</a>
+  <div class="sidebar-bottom">
+    <div class="sidebar-version">Payroll System v2.0</div>
+  </div>
+</aside>
+
+<!-- ════════════════ PAGE CONTENT ════════════════ -->
+<div class="page-content" id="pageContent">
+  {% block content %}{% endblock %}
+</div>
+
+<!-- Hidden blocks for mobile/legacy compat -->
+<div style="display:none">
+  {% block emp2_name %}{% endblock %}
+  {% block emp2_id %}{% endblock %}
+  {% block emp2_email %}{% endblock %}
+  {% block emp2_type %}{% endblock %}
+  {% block dash2 %}{% endblock %}
+  {% block analytics2 %}{% endblock %}
+  {% block org2 %}{% endblock %}
+  {% block myteam2 %}{% endblock %}
+  {% block Anouncement2 %}{% endblock %}
+  {% block notification2 %}{% endblock %}
+  {% block Query2 %}{% endblock %}
+</div>
+
+<!-- Legacy class aliases — child pages reference these -->
+<div style="display:none" class="aside logout-block -translate-y-[500px]"></div>
+
+<script>
+  // ── Sidebar toggle ──────────────────────────────────
+  const sidebar  = document.getElementById('sidebar');
+  const overlay  = document.getElementById('sidebarOverlay');
+  const content  = document.getElementById('pageContent');
+  let   isOpen   = window.innerWidth >= 768;
+
+  function toggleSidebar() {
+    if (window.innerWidth >= 768) {
+      // Desktop: collapse/expand pushing content
+      isOpen = !isOpen;
+      sidebar.classList.toggle('collapsed', !isOpen);
+      content.classList.toggle('expanded', !isOpen);
+    } else {
+      // Mobile: overlay drawer
+      sidebar.classList.toggle('open');
+      overlay.classList.toggle('show');
+    }
+  }
+
+  // Legacy support — child pages call handleAside()
+  function handleAside() { toggleSidebar(); }
+
+  // Sidebar starts open on desktop
+  if (window.innerWidth < 768) {
+    sidebar.classList.remove('open');
+  }
+
+  // ── Avatar initials ─────────────────────────────────
+  const avatarEl = document.getElementById('sidebarAvatar');
+  if (avatarEl) {
+    const nameEl = document.querySelector('.sidebar-user-name');
+    const name   = nameEl ? nameEl.textContent.trim() : '';
+    avatarEl.textContent = name ? name.slice(0,1).toUpperCase() : '?';
+  }
+
+  // ── Active nav link highlighting ────────────────────
+  document.querySelectorAll('.nav-link').forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && window.location.pathname.includes(href) && href !== '/') {
+      link.classList.add('active');
+    }
+  });
+
+  // ── Legacy droplogout stub ──────────────────────────
+  function droplogout() {}
+</script>
+
+</body>
+</html>

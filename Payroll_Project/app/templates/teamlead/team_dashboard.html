@@ -1,0 +1,538 @@
+{% extends 'navAside.html' %}
+{% block title %}<title>Team Dashboard</title>{% endblock %}
+{% block content %}
+
+<style>
+body{overflow-x:hidden;}
+:root{
+  --brand:#1e40af;--brand-light:#3b82f6;--brand-dark:#1e3a8a;
+  --surface2:#e8eef7;--border:rgba(30,64,175,0.14);
+  --text:#0c1a2e;--muted:#476080;--sidebar-w:240px;--topbar-h:58px;
+}
+.ps-page{margin-left:var(--sidebar-w);margin-top:var(--topbar-h);min-height:calc(100vh - var(--topbar-h));display:flex;flex-direction:column;}
+@media(max-width:768px){.ps-page{margin-left:0;}}
+.ps-content{padding:24px 28px;display:flex;flex-direction:column;gap:20px;}
+
+/* ── Sub topbar ── */
+.ps-sub-topbar{position:sticky;top:var(--topbar-h);z-index:20;background:rgba(255,255,255,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 28px;height:52px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.ps-breadcrumb{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--text);}
+.ps-breadcrumb svg{color:var(--brand);}
+
+/* ── Tab nav ── */
+.ps-tab-strip{display:flex;gap:2px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:3px;}
+.ps-tab{font-size:12px;font-weight:500;color:var(--muted);text-decoration:none;padding:6px 18px;border-radius:7px;transition:background .15s,color .15s;white-space:nowrap;}
+.ps-tab:hover{background:#dbeafe;color:var(--brand);}
+.ps-tab.active{background:white;color:var(--brand);font-weight:700;box-shadow:0 1px 4px rgba(30,64,175,0.14);}
+
+/* ── KPI cards ── */
+.ps-kpi-row{display:flex;gap:14px;flex-wrap:wrap;}
+.ps-kpi{background:rgba(255,255,255,0.9);border:1px solid var(--border);border-radius:14px;padding:18px 22px;flex:1;min-width:150px;box-shadow:0 4px 20px rgba(30,64,175,0.07);display:flex;flex-direction:column;gap:6px;transition:transform .15s,box-shadow .15s;}
+.ps-kpi:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(30,64,175,0.13);}
+.ps-kpi-icon{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;}
+.ps-kpi-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.9px;color:var(--muted);margin-top:4px;}
+.ps-kpi-val{font-family:'Syne',sans-serif;font-size:32px;font-weight:800;line-height:1;color:var(--text);}
+.ps-kpi-sub{font-size:11px;color:var(--muted);}
+
+/* ── Card ── */
+.ps-card{background:rgba(255,255,255,0.9);border:1px solid var(--border);border-radius:14px;padding:20px 22px;box-shadow:0 4px 20px rgba(30,64,175,0.07);}
+.ps-card-title{font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:var(--text);margin-bottom:14px;}
+
+/* ── Search row ── */
+.ps-search-row{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end;}
+.ps-search-group{display:flex;flex-direction:column;gap:5px;flex:1;min-width:180px;}
+.ps-search-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--muted);}
+.ps-search-input-wrap{display:flex;gap:8px;align-items:center;}
+.ps-input{background:var(--surface2);border:1.5px solid var(--border);border-radius:9px;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--text);padding:9px 13px;outline:none;transition:border-color .2s,box-shadow .2s;width:100%;box-sizing:border-box;}
+.ps-input:focus{border-color:var(--brand-light);box-shadow:0 0 0 3px rgba(59,130,246,0.1);}
+.ps-btn-primary{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,var(--brand-dark),var(--brand-light));color:white;font-family:'Syne',sans-serif;font-size:13px;font-weight:600;border:none;border-radius:9px;padding:9px 18px;cursor:pointer;box-shadow:0 3px 12px rgba(30,64,175,0.3);text-decoration:none;transition:transform .15s;}
+.ps-btn-primary:hover{transform:translateY(-1px);}
+.ps-btn-icon{width:38px;height:38px;border-radius:9px;background:linear-gradient(135deg,var(--brand-dark),var(--brand-light));border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 3px 10px rgba(30,64,175,0.3);transition:transform .15s;}
+.ps-btn-icon:hover{transform:translateY(-1px);}
+.ps-btn-secondary{display:inline-flex;align-items:center;gap:6px;background:var(--surface2);color:var(--brand);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;border:1.5px solid var(--border);border-radius:8px;padding:7px 14px;cursor:pointer;transition:background .15s;text-decoration:none;}
+.ps-btn-secondary:hover{background:#dbeafe;}
+
+/* ── Section label ── */
+.ps-section-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);opacity:.7;margin-bottom:10px;}
+
+/* ── Table ── */
+.ps-table{width:100%;border-collapse:collapse;font-size:13px;}
+.ps-table thead tr{background:var(--surface2);}
+.ps-table thead th{padding:11px 16px;text-align:left;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--muted);border-bottom:1px solid var(--border);white-space:nowrap;}
+.ps-table tbody tr{border-bottom:1px solid rgba(30,64,175,0.05);transition:background .12s;}
+.ps-table tbody tr:hover{background:#f0f6ff;}
+.ps-table tbody td{padding:11px 16px;color:var(--text);vertical-align:middle;}
+.ps-empty{text-align:center!important;padding:48px 16px!important;color:var(--muted);font-size:13px;}
+
+/* ── Badges ── */
+.ps-badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;}
+.ps-badge-green{background:#dcfce7;color:#166534;}
+.ps-badge-red{background:#fee2e2;color:#991b1b;}
+.ps-badge-yellow{background:#fef9c3;color:#854d0e;}
+.ps-badge-blue{background:#dbeafe;color:#1e40af;}
+
+/* ── Action buttons in table ── */
+.ps-action-accept{display:inline-flex;align-items:center;padding:4px 12px;border-radius:6px;font-size:11px;font-weight:600;background:#dcfce7;color:#166534;text-decoration:none;transition:background .12s;}
+.ps-action-accept:hover{background:#bbf7d0;}
+.ps-action-reject{display:inline-flex;align-items:center;padding:4px 12px;border-radius:6px;font-size:11px;font-weight:600;background:#fee2e2;color:#991b1b;text-decoration:none;transition:background .12s;margin-left:6px;}
+.ps-action-reject:hover{background:#fecaca;}
+
+/* ── Empty state ── */
+.ps-empty-state{display:flex;flex-direction:column;align-items:center;gap:12px;padding:52px 24px;text-align:center;}
+.ps-empty-state svg{color:var(--border);}
+.ps-empty-state-title{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:var(--text);}
+.ps-empty-state-sub{font-size:13px;color:var(--muted);}
+
+/* ── Animations ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.ps-kpi{animation:fadeUp .35s ease both;}
+.ps-kpi:nth-child(1){animation-delay:.04s}.ps-kpi:nth-child(2){animation-delay:.08s}
+.ps-kpi:nth-child(3){animation-delay:.12s}.ps-kpi:nth-child(4){animation-delay:.16s}
+</style>
+
+<div class="ps-page">
+
+  <!-- ── Sub topbar ── -->
+  <div class="ps-sub-topbar">
+    <div class="ps-breadcrumb">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      Team Dashboard
+    </div>
+
+    <!-- Tab strip -->
+    <div class="ps-tab-strip">
+      <a href="?tab=leave"
+         class="ps-tab {% if tab == 'leave' or not tab %}active{% endif %}">
+        Leave Stats
+      </a>
+      <a href="?tab=attendance"
+         class="ps-tab {% if tab == 'attendance' %}active{% endif %}">
+        Attendance
+      </a>
+      <a href="?tab=wfh"
+         class="ps-tab {% if tab == 'wfh' %}active{% endif %}">
+        WFH
+      </a>
+      <a href="?tab=status"
+         class="ps-tab {% if tab == 'status' %}active{% endif %}">
+        Daily Status
+      </a>
+    </div>
+  </div>
+
+  <div class="ps-content">
+
+    <!-- ── KPI Row ── -->
+    <div class="ps-kpi-row">
+
+      <div class="ps-kpi">
+        <div class="ps-kpi-icon" style="background:#eff6ff;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1e40af" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="ps-kpi-label">Total Employees</div>
+        <div class="ps-kpi-val" style="color:#1e40af;">{{ total_team }}</div>
+        <div class="ps-kpi-sub">Active workforce</div>
+      </div>
+
+      <div class="ps-kpi">
+        <div class="ps-kpi-icon" style="background:#f0fdf4;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="ps-kpi-label">Present Today</div>
+        <div class="ps-kpi-val" style="color:#166534;">{{ present_today }}</div>
+        <div class="ps-kpi-sub">Clocked in today</div>
+      </div>
+
+      <div class="ps-kpi">
+        <div class="ps-kpi-icon" style="background:#fffbeb;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
+        <div class="ps-kpi-label">Pending Leaves</div>
+        <div class="ps-kpi-val" style="color:#d97706;">{{ pending_leaves }}</div>
+        <div class="ps-kpi-sub">Awaiting approval</div>
+      </div>
+
+      <div class="ps-kpi">
+        <div class="ps-kpi-icon" style="background:#f5f3ff;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div class="ps-kpi-label">Pending WFH</div>
+        <div class="ps-kpi-val" style="color:#7c3aed;">{{ pending_wfh }}</div>
+        <div class="ps-kpi-sub">Awaiting approval</div>
+      </div>
+
+    </div>
+
+    <!-- ══════════════ TAB: LEAVE ══════════════ -->
+    {% if tab == "leave" or not tab %}
+
+    <div class="ps-card">
+      <div class="ps-card-title">Search Leave Records</div>
+      <div class="ps-search-row">
+        <div class="ps-search-group">
+          <div class="ps-search-label">Employee Name</div>
+          <div class="ps-search-input-wrap">
+            <input type="text" id="leaveSearch" class="ps-input" placeholder="Search employee…" oninput="filterTable('leaveTable', this.value)" />
+            <button class="ps-btn-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="ps-search-group" style="flex:0 0 180px;">
+          <div class="ps-search-label">Filter by Status</div>
+          <select class="ps-input" onchange="filterByStatus('leaveTable', this.value)">
+            <option value="">All</option>
+            <option value="Waiting">Pending</option>
+            <option value="Accepted">Accepted</option>
+            <option value="Rejected">Rejected</option>
+          </select>
+        </div>
+        <a href="{% url 'teamleave_requests' %}" class="ps-btn-secondary" style="flex-shrink:0;">
+          Manage Approvals →
+        </a>
+      </div>
+    </div>
+
+    <div>
+      <div class="ps-section-label">All Leave Requests</div>
+      <div class="ps-card" style="padding:0;overflow:hidden;">
+        <div style="overflow-x:auto;">
+          <table class="ps-table" id="leaveTable">
+            <thead>
+              <tr>
+                <th>Employee</th>
+                <th>Leave Type</th>
+                <th>From</th>
+                <th>To</th>
+                <th style="text-align:center">Days</th>
+                <th>Applied On</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for lv in leave_data %}
+              <tr data-name="{{ lv.Employee_Name|lower }}" data-status="{{ lv.Status }}">
+                <td>
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <div style="width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--brand-dark),var(--brand-light));display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:11px;font-weight:700;color:white;flex-shrink:0;">
+                      {{ lv.Employee_Name|slice:":1"|upper }}
+                    </div>
+                    <span style="font-weight:600;">{{ lv.Employee_Name }}</span>
+                  </div>
+                </td>
+                <td>{{ lv.Leave_Type|default:lv.Leave_type|default:"—" }}</td>
+                <td>{{ lv.From_Date|default:lv.Start_date|default:"—" }}</td>
+                <td>{{ lv.To_Date|default:lv.End_date|default:"—" }}</td>
+                <td style="text-align:center;font-weight:700;color:var(--brand);">{{ lv.No_of_days|default:"—" }}</td>
+                <td style="color:var(--muted);font-size:12px;">{{ lv.Applied_on|default:"—" }}</td>
+                <td>
+                  {% if lv.Status == "Waiting" %}
+                    <span class="ps-badge ps-badge-yellow">Pending</span>
+                  {% elif lv.Status == "Accepted" %}
+                    <span class="ps-badge ps-badge-green">Accepted</span>
+                  {% else %}
+                    <span class="ps-badge ps-badge-red">Rejected</span>
+                  {% endif %}
+                </td>
+                <td>
+                  {% if lv.Status == "Waiting" %}
+                  <a href="{% url 'teamleave_accept' lv.Request_id lv.Employee_Name %}" class="ps-action-accept">Accept</a>
+                  <a href="{% url 'teamleave_reject' lv.Request_id lv.Employee_Name %}" class="ps-action-reject">Reject</a>
+                  {% else %}
+                  <span style="color:var(--muted);font-size:12px;">—</span>
+                  {% endif %}
+                </td>
+              </tr>
+              {% empty %}
+              <tr>
+                <td colspan="8">
+                  <div class="ps-empty-state">
+                    <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    <div class="ps-empty-state-title">No leave requests</div>
+                    <div class="ps-empty-state-sub">Your team has no leave requests at the moment.</div>
+                  </div>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    {% endif %}
+
+    <!-- ══════════════ TAB: ATTENDANCE ══════════════ -->
+    {% if tab == "attendance" %}
+
+    <div class="ps-card">
+      <div class="ps-card-title">Search Employee Attendance</div>
+      <div class="ps-search-row">
+        <div class="ps-search-group">
+          <div class="ps-search-label">Employee Name</div>
+          <div class="ps-search-input-wrap">
+            <input type="text" id="attSearch" class="ps-input" placeholder="Search employee…" oninput="filterTable('attTable', this.value)" />
+            <button class="ps-btn-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="ps-search-group" style="flex:0 0 180px;">
+          <div class="ps-search-label">Filter by Date (Optional)</div>
+          <input type="date" id="attDateFilter" class="ps-input" onchange="filterByDate('attTable', this.value)" />
+        </div>
+        <a href="{% url 'team_attendance' %}" class="ps-btn-secondary" style="flex-shrink:0;">
+          Full Attendance →
+        </a>
+      </div>
+    </div>
+
+    <div>
+      <div class="ps-section-label">All Attendance Logs</div>
+      <div class="ps-card" style="padding:0;overflow:hidden;">
+        <div style="overflow-x:auto;">
+          <table class="ps-table" id="attTable">
+            <thead>
+              <tr>
+                <th>Employee ID</th>
+                <th>Employee Name</th>
+                <th>Location</th>
+                <th>Clock In</th>
+                <th>Clock Out</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for a in attendance_data %}
+              <tr data-name="{{ a.employee_name|default:a.Employee_Name|lower }}" data-date="{{ a.Date }}">
+                <td style="font-family:'Syne',sans-serif;font-weight:600;color:var(--brand);">{{ a.employee_id|default:a.Employee_id|default:"—" }}</td>
+                <td>
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <div style="width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--brand-dark),var(--brand-light));display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:11px;font-weight:700;color:white;flex-shrink:0;">
+                      {{ a.employee_name|default:a.Employee_Name|slice:":1"|upper }}
+                    </div>
+                    <span style="font-weight:500;">{{ a.employee_name|default:a.Employee_Name|default:"—" }}</span>
+                  </div>
+                </td>
+                <td style="color:var(--muted);font-size:12px;">{{ a.Location|default:a.Work_location|default:"—" }}</td>
+                <td style="color:#166534;font-weight:600;">{{ a.Clock_In|default:"—" }}</td>
+                <td style="color:#991b1b;font-weight:600;">{{ a.Clock_Out|default:"—" }}</td>
+                <td style="color:var(--muted);">{{ a.Date }}</td>
+              </tr>
+              {% empty %}
+              <tr>
+                <td colspan="6">
+                  <div class="ps-empty-state">
+                    <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    <div class="ps-empty-state-title">Search for an employee above to view attendance.</div>
+                    <div class="ps-empty-state-sub">Attendance logs for the last 7 days are shown.</div>
+                  </div>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    {% endif %}
+
+    <!-- ══════════════ TAB: WFH ══════════════ -->
+    {% if tab == "wfh" %}
+
+    <div class="ps-card">
+      <div class="ps-card-title">Search WFH Requests</div>
+      <div class="ps-search-row">
+        <div class="ps-search-group">
+          <div class="ps-search-label">Employee Name</div>
+          <div class="ps-search-input-wrap">
+            <input type="text" id="wfhSearch" class="ps-input" placeholder="Search employee…" oninput="filterTable('wfhTable', this.value)" />
+            <button class="ps-btn-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="ps-search-group" style="flex:0 0 180px;">
+          <div class="ps-search-label">Filter by Status</div>
+          <select class="ps-input" onchange="filterByStatus('wfhTable', this.value)">
+            <option value="">All</option>
+            <option value="Waiting">Pending</option>
+            <option value="Accepted">Accepted</option>
+            <option value="Rejected">Rejected</option>
+          </select>
+        </div>
+        <a href="{% url 'team_wfh_requests' %}" class="ps-btn-secondary" style="flex-shrink:0;">
+          Manage WFH →
+        </a>
+      </div>
+    </div>
+
+    <div>
+      <div class="ps-section-label">All WFH Requests</div>
+      <div class="ps-card" style="padding:0;overflow:hidden;">
+        <div style="overflow-x:auto;">
+          <table class="ps-table" id="wfhTable">
+            <thead>
+              <tr>
+                <th>Employee</th>
+                <th>From</th>
+                <th>To</th>
+                <th style="text-align:center">Days</th>
+                <th>Reason</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for w in wfh_data %}
+              <tr data-name="{{ w.Employee_Name|lower }}" data-status="{{ w.Status }}">
+                <td>
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <div style="width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--brand-dark),var(--brand-light));display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:11px;font-weight:700;color:white;flex-shrink:0;">
+                      {{ w.Employee_Name|slice:":1"|upper }}
+                    </div>
+                    <span style="font-weight:600;">{{ w.Employee_Name }}</span>
+                  </div>
+                </td>
+                <td>{{ w.Start_Date|default:w.Date|default:"—" }}</td>
+                <td>{{ w.End_Date|default:"—" }}</td>
+                <td style="text-align:center;font-weight:700;color:var(--brand);">{{ w.No_of_Days|default:"—" }}</td>
+                <td style="color:var(--muted);font-size:12px;max-width:200px;">{{ w.Reason|default:"—" }}</td>
+                <td>
+                  {% if w.Status == "Waiting" %}
+                    <span class="ps-badge ps-badge-yellow">Pending</span>
+                  {% elif w.Status == "Accepted" %}
+                    <span class="ps-badge ps-badge-green">Accepted</span>
+                  {% else %}
+                    <span class="ps-badge ps-badge-red">Rejected</span>
+                  {% endif %}
+                </td>
+                <td>
+                  {% if w.Status == "Waiting" %}
+                  <a href="{% url 'team_wfh_update' w.Request_id 'accept' %}" class="ps-action-accept">Accept</a>
+                  <a href="{% url 'team_wfh_update' w.Request_id 'reject' %}" class="ps-action-reject">Reject</a>
+                  {% else %}
+                  <span style="color:var(--muted);font-size:12px;">—</span>
+                  {% endif %}
+                </td>
+              </tr>
+              {% empty %}
+              <tr>
+                <td colspan="7">
+                  <div class="ps-empty-state">
+                    <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    <div class="ps-empty-state-title">No WFH requests</div>
+                    <div class="ps-empty-state-sub">Your team has no WFH requests at the moment.</div>
+                  </div>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    {% endif %}
+
+    <!-- ══════════════ TAB: DAILY STATUS ══════════════ -->
+    {% if tab == "status" %}
+
+    <div class="ps-card">
+      <div class="ps-card-title">Search Daily Status</div>
+      <div class="ps-search-row">
+        <div class="ps-search-group">
+          <div class="ps-search-label">Employee Name</div>
+          <div class="ps-search-input-wrap">
+            <input type="text" id="statusSearch" class="ps-input" placeholder="Search employee…" oninput="filterTable('statusTable', this.value)" />
+            <button class="ps-btn-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </button>
+          </div>
+        </div>
+        <a href="{% url 'team_daily_status' %}" class="ps-btn-secondary" style="flex-shrink:0;align-self:flex-end;">
+          Full Status View →
+        </a>
+      </div>
+    </div>
+
+    <div>
+      <div class="ps-section-label">All Daily Status Updates</div>
+      <div class="ps-card" style="padding:0;overflow:hidden;">
+        <div style="overflow-x:auto;">
+          <table class="ps-table" id="statusTable">
+            <thead>
+              <tr>
+                <th>Employee</th>
+                <th>Date</th>
+                <th>Completed Tasks</th>
+                <th>Status Update</th>
+                <th>Issues</th>
+                <th>Targets</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for s in status_data %}
+              <tr data-name="{{ s.Employee_Name|lower }}">
+                <td>
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <div style="width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--brand-dark),var(--brand-light));display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:11px;font-weight:700;color:white;flex-shrink:0;">
+                      {{ s.Employee_Name|slice:":1"|upper }}
+                    </div>
+                    <span style="font-weight:600;">{{ s.Employee_Name }}</span>
+                  </div>
+                </td>
+                <td style="color:var(--muted);">{{ s.Date|default:"—" }}</td>
+                <td style="color:#166534;max-width:200px;">{{ s.Completed_Task|default:"—" }}</td>
+                <td style="color:var(--muted);font-size:13px;max-width:200px;">{{ s.Status_Update|default:"—" }}</td>
+                <td style="color:#dc2626;font-size:13px;max-width:160px;">{{ s.Issues|default:"—" }}</td>
+                <td style="color:var(--brand);font-size:13px;max-width:160px;">{{ s.Feature_Targets|default:"—" }}</td>
+              </tr>
+              {% empty %}
+              <tr>
+                <td colspan="6">
+                  <div class="ps-empty-state">
+                    <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/></svg>
+                    <div class="ps-empty-state-title">No status updates</div>
+                    <div class="ps-empty-state-sub">No daily status updates found for the last 7 days.</div>
+                  </div>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    {% endif %}
+
+  </div><!-- /ps-content -->
+</div><!-- /ps-page -->
+
+<script>
+// ── Live search filter by employee name ──────────────────────
+function filterTable(tableId, query) {
+  const q = query.toLowerCase().trim();
+  document.querySelectorAll('#' + tableId + ' tbody tr[data-name]').forEach(row => {
+    row.style.display = (!q || row.dataset.name.includes(q)) ? '' : 'none';
+  });
+}
+
+// ── Filter by status dropdown ──────────────────────────────
+function filterByStatus(tableId, status) {
+  document.querySelectorAll('#' + tableId + ' tbody tr[data-status]').forEach(row => {
+    row.style.display = (!status || row.dataset.status === status) ? '' : 'none';
+  });
+}
+
+// ── Filter attendance by date ──────────────────────────────
+function filterByDate(tableId, date) {
+  document.querySelectorAll('#' + tableId + ' tbody tr[data-date]').forEach(row => {
+    row.style.display = (!date || row.dataset.date === date) ? '' : 'none';
+  });
+}
+</script>
+
+{% endblock %}
